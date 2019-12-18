@@ -1,2 +1,2 @@
 # OISISI_project
-Naše rešenje prvog projektnog zadatka iz programskog jezika Java
+Naše rešenje prvog projektnog zadatka, iz programskog jezika Java

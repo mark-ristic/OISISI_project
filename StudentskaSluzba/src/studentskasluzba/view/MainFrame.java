@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -68,9 +70,12 @@ MainFrame(String naziv){
 		
 		
 		// Toolbar za studente
-		tbStudent.setLayout(new GridLayout(1,1));
-		tbStudent.add((new MyToolBarStudent(this)));
+		tbStudent.setLayout(new BoxLayout(tbStudent, BoxLayout.X_AXIS));
+		//tbStudent.add((new MyToolBarStudent(this)));
+		tbStudent.add((new MyToolbarStudent(this)));
 		
+		
+		// TODO: napraviti da se menjaju toolbarovi sa odgovarajucim tabovima + dodati searchbar u toolbarove
 	}
 	
 }

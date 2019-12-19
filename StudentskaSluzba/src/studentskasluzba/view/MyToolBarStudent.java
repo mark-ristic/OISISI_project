@@ -1,21 +1,25 @@
 package studentskasluzba.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
-public class MyToolBarStudent extends JToolBar {
+public class MyToolbarStudent extends JToolBar {
 
-	public static final JButton addStudent = new JButton("add");
-	public static final JButton editStudent = new JButton("edit");
-	public static final JButton removeStudent = new JButton("del");
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2956075730143680074L;
 	
-	public MyToolBarStudent(final JFrame parent) {
+	public static final JButton addStudent = new JButton();
+	public static final JButton editStudent = new JButton();
+	public static final JButton removeStudent = new JButton();
+	
+	public MyToolbarStudent(final JFrame parent) {
 		
 		super(JToolBar.HORIZONTAL);
 		
@@ -25,28 +29,29 @@ public class MyToolBarStudent extends JToolBar {
 		
 		// Pomocni panel za popunjavanje mesta pored buttonsa
 		CustomPanel customHelp = new CustomPanel(1440-3*55, 55, Color.CYAN);
-		
-		addStudent.setPreferredSize(new Dimension(55,55));
-		addStudent.setToolTipText("Dodaj studenta");
-		
-		editStudent.setPreferredSize(new Dimension(55, 55));
-		editStudent.setToolTipText("Izmeni studenta");
-		
-		removeStudent.setPreferredSize(new Dimension(55,55));
-		removeStudent.setToolTipText("Obrisi studenta");
-		
-		CustomPanel buttonPanel = new CustomPanel(3*55 , 55 , Color.YELLOW); 
 	
-		buttonPanel.setLayout(new GridLayout(1,3));
-		buttonPanel.add(addStudent);
-		buttonPanel.add(editStudent);
-		buttonPanel.add(removeStudent);
+		addStudent.setIcon(new ImageIcon("images\\student-add-55x55.png"));
+		addStudent.setToolTipText("Dodaj studenta");
+		addStudent.setBorderPainted(true);
+		addStudent.setFocusPainted(false);
+
+		editStudent.setIcon(new ImageIcon("images\\student-edit-55x55.png"));
+		editStudent.setToolTipText("Izmeni studenta");
+		editStudent.setBorderPainted(true);
+		editStudent.setFocusPainted(false);
 		
-		add(buttonPanel);
+		removeStudent.setIcon(new ImageIcon("images\\student-delete-55x55.png"));
+		removeStudent.setToolTipText("Obrisi studenta");
+		removeStudent.setBorderPainted(true);
+		removeStudent.setFocusPainted(false);
+		
+		add(addStudent);
+		add(editStudent);
+		add(removeStudent);
 		add(customHelp);
 		
-		//TODO: Dodati slike za buttone + search bar deo uraditi
-		
+		// TODO: Slike za JButtone mozemo naknadno zameniti po potrebi
+		// TODO: zameniti ime klase na MyToolbarStudent ( "B" -> "b" ) 
 	}
 
 }

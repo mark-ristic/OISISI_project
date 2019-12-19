@@ -68,13 +68,13 @@ public class MainFrame extends JFrame {
 		this.setJMenuBar(new MyMenu(this));
 		// StatusBar part
 		
-		
 		// Toolbar za studente
 		tbStudent.setLayout(new BoxLayout(tbStudent, BoxLayout.X_AXIS));
 		tbStudent.add((new MyToolbarStudent(this)));
 		
 		
 		// TODO: napraviti da se menjaju toolbarovi sa odgovarajucim tabovima
+
 	}
 	
 }

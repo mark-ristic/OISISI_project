@@ -1,11 +1,15 @@
 package studentskasluzba.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 public class MyToolbarStudent extends JToolBar {
@@ -48,10 +52,40 @@ public class MyToolbarStudent extends JToolBar {
 		add(addStudent);
 		add(editStudent);
 		add(removeStudent);
-		add(customHelp);
+		//add(customHelp);
 		
 		// TODO: Slike za JButtone mozemo naknadno zameniti po potrebi
-		// TODO: zameniti ime klase na MyToolbarStudent ( "B" -> "b" ) 
+		
+		JTextField search = new JTextField (15);
+		JButton magny = new JButton();
+		
+		magny.setIcon(new ImageIcon("images\\search-35x35.png"));
+		magny.setBorderPainted(false);
+		magny.setBackground(Color.CYAN);
+		magny.setToolTipText("Pretrazi");
+		
+		customHelp.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		
+		customHelp.add(search);
+		customHelp.add(magny);
+		
+		add(customHelp);
+		
+		addStudent.addActionListener(evt -> {
+			
+			MyDialog dodaj = new MyDialog(parent, "Dodaj Studenta", true,650,675,"");
+			
+			StudentPanelAdd spa = new StudentPanelAdd(dodaj, parent,650,750);
+			
+			dodaj.add(BorderLayout.CENTER, spa);
+			dodaj.setResizable(false);
+			dodaj.setMinimumSize(new Dimension(650,750));
+			dodaj.setMaximumSize(new Dimension(650,750));
+			dodaj.setVisible(true); // mora na kraj
+			
+		});
+		
+		
 	}
 
 }

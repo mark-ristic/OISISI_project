@@ -2,7 +2,6 @@ package studentskasluzba.view;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -70,6 +69,9 @@ public class MyToolbarProfesor extends JToolBar {
 		customHelp.add(magny);
 		
 		add(customHelp);
+		
+		
+		//TODO: Slike za JButtone zameniti 
 		
 	}
 	

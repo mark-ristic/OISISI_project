@@ -1,6 +1,5 @@
 package studentskasluzba.view;
 
-<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,21 +26,25 @@ public class MyToolbarStudent extends JToolBar {
 	public MyToolbarStudent(final JFrame parent) {
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
-public class MyToolBarStudent extends JToolBar {
+public class MyToolbarStudent extends JToolBar {
 
-	public static final JButton addStudent = new JButton("add");
-	public static final JButton editStudent = new JButton("edit");
-	public static final JButton removeStudent = new JButton("del");
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2956075730143680074L;
 	
-	public MyToolBarStudent(final JFrame parent) {
+	public static final JButton addStudent = new JButton();
+	public static final JButton editStudent = new JButton();
+	public static final JButton removeStudent = new JButton();
+	
+	public MyToolbarStudent(final JFrame parent) {
 		
 		super(JToolBar.HORIZONTAL);
 		
@@ -103,6 +106,14 @@ public class MyToolBarStudent extends JToolBar {
 			
 		});
 
+	}
+
+}
+
+		add(customHelp);
+		
+		// TODO: Slike za JButtone mozemo naknadno zameniti po potrebi
+		// TODO: zameniti ime klase na MyToolbarStudent ( "B" -> "b" ) 
 	}
 
 }

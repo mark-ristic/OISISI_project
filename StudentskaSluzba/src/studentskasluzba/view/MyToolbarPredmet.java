@@ -3,7 +3,6 @@ package studentskasluzba.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,8 +19,10 @@ public class MyToolbarPredmet extends JToolBar {
 
 	public static final JButton addStudPr = new JButton();
 	public static final JButton removeStudPr = new JButton();
+	
 	public static final JButton addProfPr = new JButton();
 	public static final JButton removeProfPr = new JButton();
+	
 	public static final JButton addPredmet = new JButton();
 	public static final JButton editPredmet = new JButton();
 	public static final JButton removePredmet = new JButton();
@@ -36,7 +37,7 @@ public MyToolbarPredmet(final JFrame parent) {
 		
 		// Pomocni panel za popunjavanje mesta pored buttonsa
 		CustomPanel customHelp = new CustomPanel(1440-7*55, 55, Color.CYAN);
-	
+
 		// dodaj,izmeni, brisi studenta sa predmeta buttoni
 		addStudPr.setIcon(new ImageIcon("images\\add-55x55.png"));
 		addStudPr.setToolTipText("Dodaj studenta");
@@ -78,12 +79,13 @@ public MyToolbarPredmet(final JFrame parent) {
 		//dodavanje na panel
 		add(addStudPr);
 		add(removeStudPr);
+		
 		add(addProfPr);
 		add(removeProfPr);
+		
 		add(addPredmet);
 		add(editPredmet);
 		add(removePredmet);
-	
 		
 		// TODO: Ikone promeniti! 
 		
@@ -103,7 +105,10 @@ public MyToolbarPredmet(final JFrame parent) {
 		customHelp.add(magny);
 		
 		add(customHelp);
+
 		
+		// TODO: Ikone promeniti! 
+
 		
 	}
 	

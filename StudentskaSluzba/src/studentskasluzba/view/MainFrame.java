@@ -67,6 +67,9 @@ MainFrame(String naziv){
 		// StatusBar part
 		
 		
+		// Toolbar za studente
+		tbStudent.setLayout(new GridLayout(1,1));
+		tbStudent.add((new MyToolBarStudent(this)));
 		
 	}
 	

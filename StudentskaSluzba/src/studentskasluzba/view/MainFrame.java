@@ -72,6 +72,9 @@ public class MainFrame extends JFrame {
 		tbStudent.setLayout(new BoxLayout(tbStudent, BoxLayout.X_AXIS));
 		tbStudent.add((new MyToolbarStudent(this)));
 		
+		// Toolbar za studente
+		tbStudent.setLayout(new GridLayout(1,1));
+		tbStudent.add((new MyToolBarStudent(this)));
 		
 		// TODO: napraviti da se menjaju toolbarovi sa odgovarajucim tabovima
 

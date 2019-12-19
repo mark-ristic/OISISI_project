@@ -1,5 +1,6 @@
 package studentskasluzba.view;
 
+<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,6 +25,23 @@ public class MyToolbarStudent extends JToolBar {
 	public static final JButton removeStudent = new JButton();
 	
 	public MyToolbarStudent(final JFrame parent) {
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JToolBar;
+
+public class MyToolBarStudent extends JToolBar {
+
+	public static final JButton addStudent = new JButton("add");
+	public static final JButton editStudent = new JButton("edit");
+	public static final JButton removeStudent = new JButton("del");
+	
+	public MyToolBarStudent(final JFrame parent) {
 		
 		super(JToolBar.HORIZONTAL);
 		
@@ -88,3 +106,4 @@ public class MyToolbarStudent extends JToolBar {
 	}
 
 }
+

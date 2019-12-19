@@ -3,8 +3,8 @@ package studentskasluzba.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -53,13 +53,21 @@ MainFrame(String naziv){
 		tabbedPane.addTab("Predmeti", predmetTab);
 		
 		// MainFrame ce se sastojati od 3 glavna panela
+		// promenio sam na gridlayout posto sa obicnim add-om nije hteo da stretchuje kad se maximizira
+		centerPanel.setLayout(new GridLayout(1,1));
 		centerPanel.add(tabbedPane);
 		
 		this.add(BorderLayout.NORTH, tbStudent);
 		this.add(BorderLayout.CENTER, centerPanel);
-		// Ovo ce biti mesto za statusbar kasnije
-		this.add(BorderLayout.SOUTH, new CustomPanel(1440, 45, Color.YELLOW));
+		// Ovo ce biti mesto za statusbar kasnije - StatusBar ADDED
+		this.add(BorderLayout.SOUTH, new MyStatusBar(1440, 45, Color.YELLOW));
 
+		// Menu part 
+		this.setJMenuBar(new MyMenu(this));
+		// StatusBar part
+		
+		
+		
 	}
 	
 }

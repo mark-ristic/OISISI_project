@@ -1,11 +1,13 @@
 package studentskasluzba.view;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 public class MyToolbarProfesor extends JToolBar {
@@ -48,9 +50,26 @@ public class MyToolbarProfesor extends JToolBar {
 		add(addProf);
 		add(editProf);
 		add(removeProf);
-		add(customHelp);
 		
 		//TODO: Slike za JButtone zameniti 
+		
+		
+		// searchbar
+		
+		JTextField search = new JTextField (15);
+		JButton magny = new JButton();
+		
+		magny.setIcon(new ImageIcon("images\\search-35x35.png"));
+		magny.setBorderPainted(false);
+		magny.setBackground(Color.CYAN);
+		magny.setToolTipText("Pretrazi");
+		
+		customHelp.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		
+		customHelp.add(search);
+		customHelp.add(magny);
+		
+		add(customHelp);
 		
 	}
 	

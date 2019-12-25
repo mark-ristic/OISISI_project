@@ -71,11 +71,10 @@ MainFrame(String naziv){
 		
 		// Toolbar za studente
 		tbStudent.setLayout(new BoxLayout(tbStudent, BoxLayout.X_AXIS));
-		//tbStudent.add((new MyToolBarStudent(this)));
 		tbStudent.add((new MyToolbarStudent(this)));
 		
 		
-		// TODO: napraviti da se menjaju toolbarovi sa odgovarajucim tabovima + dodati searchbar u toolbarove
+		// TODO: napraviti da se menjaju toolbarovi sa odgovarajucim tabovima
 	}
 	
 }

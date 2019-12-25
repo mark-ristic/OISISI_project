@@ -84,8 +84,7 @@ public class MyToolbarStudent extends JToolBar {
 			dodaj.setVisible(true); // mora na kraj
 			
 		});
-		
-		
+	
 	}
 
 }

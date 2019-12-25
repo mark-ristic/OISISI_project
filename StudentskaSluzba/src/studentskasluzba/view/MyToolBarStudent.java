@@ -26,11 +26,13 @@ public class MyToolbarStudent extends JToolBar {
 	public MyToolbarStudent(final JFrame parent) {
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 public class MyToolbarStudent extends JToolBar {
@@ -106,14 +108,6 @@ public class MyToolbarStudent extends JToolBar {
 			
 		});
 
-	}
-
-}
-
-		add(customHelp);
-		
-		// TODO: Slike za JButtone mozemo naknadno zameniti po potrebi
-		// TODO: zameniti ime klase na MyToolbarStudent ( "B" -> "b" ) 
 	}
 
 }

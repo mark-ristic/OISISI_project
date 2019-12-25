@@ -86,6 +86,7 @@ public MyToolbarPredmet(final JFrame parent) {
 		add(addPredmet);
 		add(editPredmet);
 		add(removePredmet);
+	
 		
 		// TODO: Ikone promeniti! 
 		
@@ -106,7 +107,6 @@ public MyToolbarPredmet(final JFrame parent) {
 		
 		add(customHelp);
 
-		
 		// TODO: Ikone promeniti! 
 
 		

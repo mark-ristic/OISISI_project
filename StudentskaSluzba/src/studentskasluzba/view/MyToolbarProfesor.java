@@ -70,9 +70,6 @@ public class MyToolbarProfesor extends JToolBar {
 		
 		add(customHelp);
 		
-		
-		//TODO: Slike za JButtone zameniti 
-		
 	}
 	
 }

@@ -48,8 +48,8 @@ public class BazaStudenata implements Serializable {
 		return null;
 	}
 	public void dodajStudenta(String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek //,
-			/* ArrayList<Predmet> predmeti  */ ) {
+			String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek ,
+			ArrayList<Predmet> predmeti  ) {
 		// TODO: CHECK
 		boolean postoji = false;
 		
@@ -60,7 +60,7 @@ public class BazaStudenata implements Serializable {
 			}
 		}
 		if (postoji == false) { 
-			this.studenti.add(new Student(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, indeks, datumUpisa, godStud, status, prosek /*,predmeti */));
+			this.studenti.add(new Student(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, indeks, datumUpisa, godStud, status, prosek ,predmeti ));
 			snimiStudente();
 			
 		}
@@ -77,8 +77,8 @@ public class BazaStudenata implements Serializable {
 	}
 	
 	public void izmeniStudenta(String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek //,
-			/*ArrayList<Predmet>  predmeti*/) {
+			String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek,
+			ArrayList<Predmet>  predmeti) {
 		for (Student i : studenti) {
 			if (i.getIndeks().equals(indeks)) {
 				i.setIme(ime);

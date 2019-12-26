@@ -24,29 +24,6 @@ public class MyToolbarStudent extends JToolBar {
 	public static final JButton removeStudent = new JButton();
 	
 	public MyToolbarStudent(final JFrame parent) {
-
-import java.awt.Color;
-import java.awt.FlowLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-
-public class MyToolbarStudent extends JToolBar {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2956075730143680074L;
-	
-	public static final JButton addStudent = new JButton();
-	public static final JButton editStudent = new JButton();
-	public static final JButton removeStudent = new JButton();
-	
-	public MyToolbarStudent(final JFrame parent) {
 		
 		super(JToolBar.HORIZONTAL);
 		
@@ -107,8 +84,8 @@ public class MyToolbarStudent extends JToolBar {
 			dodaj.setVisible(true); // mora na kraj
 			
 		});
-
+		
+		
 	}
 
 }
-

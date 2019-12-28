@@ -33,14 +33,16 @@ public class StudentPanelEdit extends JPanel{
 	public static final JButton quit1 = new JButton ();
 	public static final JTextField imetxt1 = new JTextField(50);
 	public static final JTextField prezimetxt1 = new JTextField(50);
-	public static final JTextField datetxt1 = new JTextField(50);
+	public static final JTextField datRodjtxt1 = new JTextField(50);
 	public static final JTextField adresatxt1 = new JTextField(50);
 	public static final JTextField teltxt1 = new JTextField(50);
+	public static final JTextField emailtxt1 = new JTextField(50);
 	public static final JTextField indekstxt1 = new JTextField(50);
+	public static final JTextField datumUpisatxt1 = new JTextField(50);
 	public static final JRadioButton budzet1 = new JRadioButton("Budzet");
 	public static final JRadioButton samofin1 = new JRadioButton("Samofinansiranje");
 	public static final JComboBox<String> trenGodCombo1 = new JComboBox<String>(godine);
-	public static final JButton test = new JButton("Save");
+	
 	private static final long serialVersionUID = 1034413266284921173L;
 
 		StudentPanelEdit(MyDialog md, final JFrame parent, int width, int height) {
@@ -49,25 +51,25 @@ public class StudentPanelEdit extends JPanel{
 		Vector<CustomPanel> vektor = new Vector<CustomPanel>();
 		
 		CustomPanel top_inset = new CustomPanel(650,45, Color.PINK);
-		CustomPanel left_inset = new CustomPanel(75, 645-75, new Color(255,102,255));
-		CustomPanel right_inset = new CustomPanel(75,645-75, new Color(255,102,255));
+		CustomPanel left_inset = new CustomPanel(75, 675+95, new Color(255,102,255));
+		CustomPanel right_inset = new CustomPanel(75,675+95, new Color(255,102,255));
 		CustomPanel bot_inset = new CustomPanel(650,30, Color.PINK);
-		CustomPanel top_panel = new CustomPanel(500, 400-75, new Color(255,0,255)); // gornji deo midpanela
-		CustomPanel bot_panel = new CustomPanel(500, 245, new Color(170,0,170)); // donji deo midpanela
-		CustomPanel top_panelLR = new CustomPanel(650, 645-75, Color.LIGHT_GRAY); // midpanel sa insetima
-		CustomPanel mid_panelTB = new CustomPanel(500,645-75, Color.white); // top + bot
+		CustomPanel top_panel = new CustomPanel(500, 400-75 + 95, new Color(255,0,255)); // gornji deo midpanela
+		CustomPanel bot_panel = new CustomPanel(500, 245+10, new Color(170,0,170)); // donji deo midpanela
+		CustomPanel full_panelLR = new CustomPanel(650, 400-75 + 95, Color.LIGHT_GRAY); // midpanel sa insetima
+		CustomPanel mid_panelTB = new CustomPanel(500,675+95, Color.white); // top + bot
 		Collections.addAll(vektor, top_inset,bot_inset,left_inset,right_inset,top_panel
-						 , bot_panel, top_panelLR, mid_panelTB);
+						 , bot_panel, full_panelLR, mid_panelTB);
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(top_inset);
-		add(top_panelLR); // top_panelLR = top_panel + left_inset + right_inset
+		add(full_panelLR); // top_panelLR = top_panel + left_inset + right_inset
 		add(bot_inset);
 		
-		top_panelLR.setLayout(new BoxLayout(top_panelLR, BoxLayout.X_AXIS));
-		top_panelLR.add(left_inset);
-		top_panelLR.add(mid_panelTB);
-		top_panelLR.add(right_inset);
+		full_panelLR.setLayout(new BoxLayout(full_panelLR, BoxLayout.X_AXIS));
+		full_panelLR.add(left_inset);
+		full_panelLR.add(mid_panelTB);
+		full_panelLR.add(right_inset);
 		mid_panelTB.setLayout(new BoxLayout(mid_panelTB, BoxLayout.Y_AXIS));
 		mid_panelTB.add(top_panel); 
 		mid_panelTB.add(bot_panel); 
@@ -85,14 +87,17 @@ public class StudentPanelEdit extends JPanel{
 		vektor.add(botL);
 		vektor.add(botU_topinset);
 		
-		top_panel.setLayout(new GridLayout(6,1,0,15));
+		top_panel.setLayout(new GridLayout(8,1,0,15));
 		
 		CustomPanel ime = new CustomPanel(500,54-14, Color.CYAN);			
 		CustomPanel prezime = new CustomPanel(500,54-14, Color.CYAN); 	
 		CustomPanel datRodj = new CustomPanel(500,54-14, Color.CYAN);		
 		CustomPanel adresa = new CustomPanel(500,54-14, Color.CYAN);		
 		CustomPanel brtel = new CustomPanel(500,54-14, Color.CYAN);		
-		CustomPanel indeks = new CustomPanel(500,54-14, Color.CYAN);		
+		CustomPanel indeks = new CustomPanel(500,54-14, Color.CYAN);	
+		CustomPanel email = new CustomPanel(500,54-14, Color.CYAN);
+		CustomPanel datumUpisa = new CustomPanel(500,54-14, Color.CYAN);
+		
 		
 		vektor.add(ime);
 		vektor.add(prezime);
@@ -100,6 +105,8 @@ public class StudentPanelEdit extends JPanel{
 		vektor.add(adresa);
 		vektor.add(brtel);
 		vektor.add(indeks);
+		vektor.add(email);
+		vektor.add(datumUpisa);
 		
 		ime.setLayout(new BoxLayout(ime, BoxLayout.X_AXIS));
 		prezime.setLayout(new BoxLayout(prezime, BoxLayout.X_AXIS));
@@ -107,6 +114,8 @@ public class StudentPanelEdit extends JPanel{
 		adresa.setLayout(new BoxLayout(adresa, BoxLayout.X_AXIS));
 		brtel.setLayout(new BoxLayout(brtel, BoxLayout.X_AXIS));
 		indeks.setLayout(new BoxLayout(indeks, BoxLayout.X_AXIS));
+		email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
+		datumUpisa.setLayout(new BoxLayout(datumUpisa, BoxLayout.X_AXIS));
 		
 		
 		JLabel imelab =      new JLabel("    Ime*    ");
@@ -116,6 +125,8 @@ public class StudentPanelEdit extends JPanel{
 		JLabel brtellab =    new JLabel("    Broj telefona*    ");
 		JLabel indekslab =   new JLabel("    Broj indeksa*    ");
 		JLabel trenGodlab =  new JLabel("    Trenutna godina studija:   ");
+		JLabel emaillab =      new JLabel("    E-mail adresa   ");
+		JLabel datumUpisalab = new JLabel("    Datum upisa   ");
 		
 		
 		imelab.setFont(new Font ("Consolas", Font.PLAIN, 16));
@@ -125,27 +136,35 @@ public class StudentPanelEdit extends JPanel{
 		brtellab.setFont(new Font ("Consolas", Font.PLAIN, 16));
 		indekslab.setFont(new Font ("Consolas", Font.PLAIN, 16));
 		trenGodlab.setFont(new Font ("Consolas", Font.PLAIN, 16));
+		emaillab.setFont(new Font ("Consolas", Font.PLAIN, 16));
+		datumUpisalab.setFont(new Font ("Consolas", Font.PLAIN, 16));
 		
 		
 		imetxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
 		prezimetxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
-		datetxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
+		datRodjtxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
 		adresatxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
 		teltxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
 		indekstxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
+		emailtxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
+		datumUpisatxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
 		
 		ime.add(imelab); 
 		ime.add(imetxt1);
 		prezime.add(prezimelab); 
 		prezime.add(prezimetxt1);
 		datRodj.add(datRodjlab); 
-		datRodj.add(datetxt1);
+		datRodj.add(datRodjtxt1);
 		adresa.add(adresalab); 
 		adresa.add(adresatxt1);
 		brtel.add(brtellab); 
 		brtel.add(teltxt1);
 		indeks.add(indekslab); 
 		indeks.add(indekstxt1);
+		email.add(emaillab);
+		email.add(emailtxt1);
+		datumUpisa.add(datumUpisalab);
+		datumUpisa.add(datumUpisatxt1);
 		
 		
 		top_panel.add(ime);
@@ -154,6 +173,8 @@ public class StudentPanelEdit extends JPanel{
 		top_panel.add(adresa);
 		top_panel.add(brtel);
 		top_panel.add(indeks);
+		top_panel.add(email);
+		top_panel.add(datumUpisa);
 		
 		// botU = botUpper code 
 		botU.setLayout(new GridLayout(3,1,0, 15));
@@ -202,27 +223,27 @@ public class StudentPanelEdit extends JPanel{
 		    @Override
 		    public void mouseEntered(MouseEvent e) {
 		        // the mouse has entered the label
-		    	quit1.setIcon(new ImageIcon("images//odustani-37.png"));
+		    	quit1.setIcon(new ImageIcon("StudentskaSluzba\\images\\odustani-37.png"));
 		    	
 		    }
 		 
 		    @Override
 		    public void mouseExited(MouseEvent e) {
 		        // the mouse has exited the label
-		    	quit1.setIcon(new ImageIcon("images//odustani-white37.png"));
+		    	quit1.setIcon(new ImageIcon("StudentskaSluzba\\images\\odustani-white37.png"));
 		    }
 		});
 		
 		es.addActionListener(zz -> md.dispose());	
 		es.setPreferredSize(new Dimension(125,35));
-		es.setIcon(new ImageIcon("images//izmeni-120x40.png"));
+		es.setIcon(new ImageIcon("StudentskaSluzba\\images\\izmeni-120x40.png"));
 		es.setFocusPainted(false);
 		es.setBorderPainted(false);
 		es.setContentAreaFilled(false);
 		es.setOpaque(false);
 		
 		quit1.setPreferredSize(new Dimension(125,40));
-		quit1.setIcon(new ImageIcon("images//odustani-white37.png"));
+		quit1.setIcon(new ImageIcon("StudentskaSluzba\\images\\odustani-white37.png"));
 		quit1.setFocusPainted(false);
 		quit1.setBorderPainted(false);
 		quit1.setContentAreaFilled(false);

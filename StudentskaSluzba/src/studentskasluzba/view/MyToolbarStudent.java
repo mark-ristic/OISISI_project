@@ -34,17 +34,17 @@ public class MyToolbarStudent extends JToolBar {
 		// Pomocni panel za popunjavanje mesta pored buttonsa
 		CustomPanel customHelp = new CustomPanel(1440-3*55, 55, Color.CYAN);
 	
-		addStudent.setIcon(new ImageIcon("images\\student-add-55x55.png"));
+		addStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\student-add-55x55.png"));
 		addStudent.setToolTipText("Dodaj studenta");
 		addStudent.setBorderPainted(true);
 		addStudent.setFocusPainted(false);
 
-		editStudent.setIcon(new ImageIcon("images\\student-edit-55x55.png"));
+		editStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\student-edit-55x55.png"));
 		editStudent.setToolTipText("Izmeni studenta");
 		editStudent.setBorderPainted(true);
 		editStudent.setFocusPainted(false);
 		
-		removeStudent.setIcon(new ImageIcon("images\\student-delete-55x55.png"));
+		removeStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\student-delete-55x55.png"));
 		removeStudent.setToolTipText("Obrisi studenta");
 		removeStudent.setBorderPainted(true);
 		removeStudent.setFocusPainted(false);
@@ -59,7 +59,7 @@ public class MyToolbarStudent extends JToolBar {
 		JTextField search = new JTextField (15);
 		JButton magny = new JButton();
 		
-		magny.setIcon(new ImageIcon("images\\search-35x35.png"));
+		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\search-35x35.png"));
 		magny.setBorderPainted(false);
 		magny.setBackground(Color.CYAN);
 		magny.setToolTipText("Pretrazi");
@@ -82,6 +82,21 @@ public class MyToolbarStudent extends JToolBar {
 			dodaj.setMinimumSize(new Dimension(650,750));
 			dodaj.setMaximumSize(new Dimension(650,750));
 			dodaj.setVisible(true); // mora na kraj
+			
+		});
+		
+		editStudent.addActionListener(evt -> {
+			
+			MyDialog izmeni = new MyDialog(parent, "Izmeni Studenta", true,650,675,"");
+			
+			StudentPanelEdit spe = new StudentPanelEdit(izmeni, parent,650,750);
+			
+			izmeni.add(BorderLayout.CENTER, spe);
+			izmeni.setResizable(false);
+			izmeni.setMinimumSize(new Dimension(650,750));
+			izmeni.setMaximumSize(new Dimension(650,750));
+			izmeni.setVisible(true); // mora na kraj
+			
 			
 		});
 		

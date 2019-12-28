@@ -31,17 +31,17 @@ public class MyToolbarProfesor extends JToolBar {
 		// Pomocni panel za popunjavanje mesta pored buttonsa
 		CustomPanel customHelp = new CustomPanel(1440-3*55, 55, Color.CYAN);
 	
-		addProf.setIcon(new ImageIcon("images\\add-55x55.png"));
+		addProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
 		addProf.setToolTipText("Dodaj profesora");
 		addProf.setBorderPainted(true);
 		addProf.setFocusPainted(false);
 
-		editProf.setIcon(new ImageIcon("images\\edit-55x55.png"));
+		editProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\edit-55x55.png"));
 		editProf.setToolTipText("Izmeni profesora");
 		editProf.setBorderPainted(true);
 		editProf.setFocusPainted(false);
 		
-		removeProf.setIcon(new ImageIcon("images\\delete-55x55.png"));
+		removeProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
 		removeProf.setToolTipText("Obrisi profesora");
 		removeProf.setBorderPainted(true);
 		removeProf.setFocusPainted(false);
@@ -58,7 +58,7 @@ public class MyToolbarProfesor extends JToolBar {
 		JTextField search = new JTextField (15);
 		JButton magny = new JButton();
 		
-		magny.setIcon(new ImageIcon("images\\search-35x35.png"));
+		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\search-35x35.png"));
 		magny.setBorderPainted(false);
 		magny.setBackground(Color.CYAN);
 		magny.setToolTipText("Pretrazi");

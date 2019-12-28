@@ -39,39 +39,39 @@ public MyToolbarPredmet(final JFrame parent) {
 		CustomPanel customHelp = new CustomPanel(1440-7*55, 55, Color.CYAN);
 
 		// dodaj,izmeni, brisi studenta sa predmeta buttoni
-		addStudPr.setIcon(new ImageIcon("images\\add-55x55.png"));
+		addStudPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
 		addStudPr.setToolTipText("Dodaj studenta");
 		addStudPr.setBorderPainted(true);
 		addStudPr.setFocusPainted(false);
 		
-		removeStudPr.setIcon(new ImageIcon("images\\delete-55x55.png"));
+		removeStudPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
 		removeStudPr.setToolTipText("Obrisi studenta");
 		removeStudPr.setBorderPainted(true);
 		removeStudPr.setFocusPainted(false);
 		
 		// dodaj, izmeni, brisi profesora sa predmeta buttoni
-		addProfPr.setIcon(new ImageIcon("images\\add-55x55.png"));
+		addProfPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
 		addProfPr.setToolTipText("Dodaj profesora");
 		addProfPr.setBorderPainted(true);
 		addProfPr.setFocusPainted(false);
 
-		removeProfPr.setIcon(new ImageIcon("images\\delete-55x55.png"));
+		removeProfPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
 		removeProfPr.setToolTipText("Obrisi profesora");
 		removeProfPr.setBorderPainted(true);
 		removeProfPr.setFocusPainted(false);
 		
 		// dodaj,izmeni,brisi predmet
-		addPredmet.setIcon(new ImageIcon("images\\add-55x55.png"));
+		addPredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
 		addPredmet.setToolTipText("Dodaj predmet");
 		addPredmet.setBorderPainted(true);
 		addPredmet.setFocusPainted(false);
 
-		editPredmet.setIcon(new ImageIcon("images\\edit-55x55.png"));
+		editPredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\edit-55x55.png"));
 		editPredmet.setToolTipText("Izmeni predmet");
 		editPredmet.setBorderPainted(true);
 		editPredmet.setFocusPainted(false);
 		
-		removePredmet.setIcon(new ImageIcon("images\\delete-55x55.png"));
+		removePredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
 		removePredmet.setToolTipText("Obrisi predmet");
 		removePredmet.setBorderPainted(true);
 		removePredmet.setFocusPainted(false);
@@ -95,7 +95,7 @@ public MyToolbarPredmet(final JFrame parent) {
 		JTextField search = new JTextField (15);
 		JButton magny = new JButton();
 		
-		magny.setIcon(new ImageIcon("images\\search-35x35.png"));
+		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\search-35x35.png"));
 		magny.setBorderPainted(false);
 		magny.setBackground(Color.CYAN);
 		magny.setToolTipText("Pretrazi");

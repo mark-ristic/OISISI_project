@@ -1,8 +1,10 @@
 package studentskasluzba.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -108,6 +110,50 @@ public MyToolbarPredmet(final JFrame parent) {
 		add(customHelp);
 
 		// TODO: Ikone promeniti! 
+		
+		// dijalozi za dodavanje-editovanje predmeta
+		addPredmet.addActionListener(evt -> {
+			
+			MyDialog addPredmet = new MyDialog(parent, "Dodaj predmet", true, 450, 550,"");
+			
+			PredmetPanelAdd dodajPredmet = new PredmetPanelAdd(addPredmet, parent, 450, 550);
+			
+			addPredmet.add(BorderLayout.CENTER, dodajPredmet);
+			addPredmet.setResizable(false);
+			addPredmet.setMinimumSize(new Dimension(450, 550));
+			addPredmet.setMaximumSize(new Dimension(450, 550));
+			addPredmet.setVisible(true);
+			
+		});
+		
+		editPredmet.addActionListener(evt -> {
+			
+			MyDialog editPredmet = new MyDialog(parent, "Izmeni predmet", true, 450, 550,"");
+			
+			PredmetPanelEdit izmeniPredmet = new PredmetPanelEdit(editPredmet, parent, 450, 550);
+			
+			editPredmet.add(BorderLayout.CENTER, izmeniPredmet);
+			editPredmet.setResizable(false);
+			editPredmet.setMinimumSize(new Dimension(450, 550));
+			editPredmet.setMaximumSize(new Dimension(450, 550));
+			editPredmet.setVisible(true);
+	
+			
+		});
+		
+		removePredmet.addActionListener(evt -> {
+			
+			MyDialog removePredmet = new MyDialog(parent, "Obrisi predmet", true, 650, 300 , "");
+			
+			PredmetPanelRemove brisiPredmet = new PredmetPanelRemove(removePredmet, parent, 650, 300);
+			
+			removePredmet.add(BorderLayout.CENTER, brisiPredmet);
+			removePredmet.setResizable(false);
+			removePredmet.setMinimumSize(new Dimension(650, 300));
+			removePredmet.setMaximumSize(new Dimension(650, 300));
+			removePredmet.setVisible(true);
+	
+		});
 
 		
 	}

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Student extends Osoba implements Serializable {
 	// TODO: read that 
@@ -12,16 +13,30 @@ public class Student extends Osoba implements Serializable {
 	 */
 	private static final long serialVersionUID = -3731446794215616771L;
 	
-	public enum Status {B, S;}; 
+	public enum Status {B {
+			@Override
+			public String toString() {
+				return "B";
+			}
+		}
+
+		, S {
+			@Override
+			public String toString() {
+				return "S";
+			}
+		}
+		;};
+
 	private String indeks;
-	private DateFormat datumUpisa = new SimpleDateFormat("dd-mm-yyyy");
+	private Date datumUpisa;
 	private int godStud; 
 	private Status status; 
 	private double prosek;
 	private ArrayList<Predmet> predmeti;
 	
-	public Student(String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek,
+	public Student(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek,
 			ArrayList<Predmet> predmeti  ) {
 		super(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email);
 		this.indeks = indeks;
@@ -40,10 +55,10 @@ public class Student extends Osoba implements Serializable {
 	public void setIndeks(String indeks) {
 		this.indeks = indeks;
 	}
-	public DateFormat getDatumUpisa() {
+	public Date getDatumUpisa() {
 		return datumUpisa;
 	}
-	public void setDatumUpisa(DateFormat datumUpisa) {
+	public void setDatumUpisa(Date datumUpisa) {
 		this.datumUpisa = datumUpisa;
 	}
 	public int getGodStud() {

@@ -1,5 +1,6 @@
 package studentskasluzba.model;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import studentskasluzba.model.Student.Status;
@@ -47,8 +49,8 @@ public class BazaStudenata implements Serializable {
 		System.out.println("Ne postoji student u bazi sa tim indeksom");
 		return null;
 	}
-	public void dodajStudenta(String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek ,
+	public boolean dodajStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek ,
 			ArrayList<Predmet> predmeti  ) {
 		// TODO: CHECK
 		boolean postoji = false;
@@ -64,6 +66,8 @@ public class BazaStudenata implements Serializable {
 			snimiStudente();
 			
 		}
+		return postoji;
+		
 	}
 	
 	public void izbrisiStudenta(String indeks) {
@@ -76,8 +80,8 @@ public class BazaStudenata implements Serializable {
 		}
 	}
 	
-	public void izmeniStudenta(String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek,
+	public void izmeniStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek,
 			ArrayList<Predmet>  predmeti) {
 		for (Student i : studenti) {
 			if (i.getIndeks().equals(indeks)) {
@@ -121,6 +125,12 @@ public class BazaStudenata implements Serializable {
 	
 	private void initStudente() {
 
+		
+		// check if empty 
+				File fajl = new File("studenti.txt");
+				if (fajl.length() == 0)
+					return;
+		
 		try
         {    
             // Reading the object from a file 

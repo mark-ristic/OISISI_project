@@ -3,6 +3,7 @@ package studentskasluzba.model;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Profesor  extends Osoba implements Serializable {
@@ -12,18 +13,39 @@ public class Profesor  extends Osoba implements Serializable {
 	 */
 	private static final long serialVersionUID = 8157416288467881120L;
 
-	public enum ProfesorType { Stalni , Vanredni } ; 
-	private ProfesorType profesorType;
+	public enum ProfesorType { Stalni {
+
+		@Override
+		public String toString() {
+			return "Stalni";
+		}
+
+	}, Vanredni {
+
+		@Override
+		public String toString() {
+			return "Vanredni";
+		}
+
+	}, Docent {
+
+		@Override
+		public String toString() {
+			return "Docent";
+		}
+	} ;
+	}
+	
 	private String adresaKanc;
 	private int brojLK;
 	private String titula;
-	private String zvanje;
+	private ProfesorType zvanje;
 	private List<Predmet> predmeti;
 	
-	public Profesor(ProfesorType profesorType, String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String adresaKanc, int brojLK, String titula, String zvanje, ArrayList<Predmet> predmeti) {
+	public Profesor(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+			String email, String adresaKanc, int brojLK, String titula, ProfesorType zvanje, ArrayList<Predmet> predmeti) {
 		super(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email);
-		this.profesorType = profesorType;
+		
 		this.adresaKanc = adresaKanc;
 		this.brojLK = brojLK;
 		this.titula = titula;
@@ -57,11 +79,11 @@ public class Profesor  extends Osoba implements Serializable {
 		this.titula = titula;
 	}
 
-	public String getZvanje() {
+	public ProfesorType getZvanje() {
 		return zvanje;
 	}
 
-	public void setZvanje(String zvanje) {
+	public void setZvanje(ProfesorType zvanje) {
 		this.zvanje = zvanje;
 	}
 
@@ -73,12 +95,5 @@ public class Profesor  extends Osoba implements Serializable {
 		this.predmeti = predmeti;
 	}
 	
-	public void setProfesorType(ProfesorType type) {
-		this.profesorType = type;		
-	}
-	
-	public ProfesorType getProfesorType() {
-		return this.profesorType;
-	}
 	
 }

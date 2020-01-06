@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 153782876756455625L;
-
+	
 // Parametar je naziv frame-a
 	MainFrame(String naziv){
 		

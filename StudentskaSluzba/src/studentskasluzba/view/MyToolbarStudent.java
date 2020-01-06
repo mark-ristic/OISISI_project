@@ -73,30 +73,44 @@ public class MyToolbarStudent extends JToolBar {
 		
 		addStudent.addActionListener(evt -> {
 			
-			MyDialog dodaj = new MyDialog(parent, "Dodaj Studenta", true,650,675,"");
+			MyDialog dodaj = new MyDialog(parent, "Dodaj Studenta", true,650,675+55,"");
 			
-			StudentPanelAdd spa = new StudentPanelAdd(dodaj, parent,650,750);
+			StudentPanelAdd spa = new StudentPanelAdd(dodaj, parent,650,750+55);
 			
 			dodaj.add(BorderLayout.CENTER, spa);
 			dodaj.setResizable(false);
-			dodaj.setMinimumSize(new Dimension(650,750));
-			dodaj.setMaximumSize(new Dimension(650,750));
+			dodaj.setMinimumSize(new Dimension(650,750+55));
+			dodaj.setMaximumSize(new Dimension(650,750+55));
 			dodaj.setVisible(true); // mora na kraj
 			
 		});
 		
 		editStudent.addActionListener(evt -> {
 			
-			MyDialog izmeni = new MyDialog(parent, "Izmeni Studenta", true,650,675,"");
+			MyDialog izmeni = new MyDialog(parent, "Izmeni Studenta", true,650,675+55,"");
 			
-			StudentPanelEdit spe = new StudentPanelEdit(izmeni, parent,650,750);
+			StudentPanelEdit spe = new StudentPanelEdit(izmeni, parent,650,750+55);
 			
 			izmeni.add(BorderLayout.CENTER, spe);
 			izmeni.setResizable(false);
-			izmeni.setMinimumSize(new Dimension(650,750));
-			izmeni.setMaximumSize(new Dimension(650,750));
+			izmeni.setMinimumSize(new Dimension(650,750+55));
+			izmeni.setMaximumSize(new Dimension(650,750+55));
 			izmeni.setVisible(true); // mora na kraj
 			
+			
+		});
+		
+		removeStudent.addActionListener(remove -> {
+			
+			MyDialog obrisi = new MyDialog(parent, "Obrisi Studenta", true, 650,300, "");
+			
+			StudentPanelRemove spr = new StudentPanelRemove(obrisi, parent, 650,300);
+			
+			obrisi.add(BorderLayout.CENTER, spr);
+			obrisi.setResizable(false);
+			obrisi.setMinimumSize(new Dimension(650,300));
+			obrisi.setMaximumSize(new Dimension(650,300));
+			obrisi.setVisible(true);	
 			
 		});
 		

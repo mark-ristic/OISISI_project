@@ -2,19 +2,24 @@ package studentskasluzba.model;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class Osoba implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5208641147102905436L;
 	private String ime;
 	private String prezime;
-	private DateFormat datRodj = new SimpleDateFormat("dd-mm-yyyy"); 
+	private Date datRodj; 
 	private String adresaStanovanja; 
 	private int kontaktTel; 
 	private String email;
 	
 
-	public Osoba(String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel, String email) {
+	public Osoba(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel, String email) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
@@ -38,10 +43,10 @@ public class Osoba implements Serializable {
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
-	public DateFormat getDatRodj() {
+	public Date getDatRodj() {
 		return datRodj;
 	}
-	public void setDatRodj(DateFormat datRodj) {
+	public void setDatRodj(Date datRodj) {
 		this.datRodj = datRodj;
 	}
 	public String getAdresaStanovanja() {

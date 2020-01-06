@@ -1,5 +1,6 @@
 package studentskasluzba.model;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import studentskasluzba.model.Profesor.ProfesorType;
@@ -48,13 +50,13 @@ public class BazaProfesora implements Serializable {
 		System.out.println("Ne postoji Profesor u bazi sa tim brojLKom");
 		return null;
 	}
-	public void dodajProfesora(ProfesorType profesorType, String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String adresaKanc, int brojLK, String titula, String zvanje, ArrayList<Predmet> predmeti) {
+	public boolean dodajProfesora(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+			String email, String adresaKanc, int brojLK, String titula, ProfesorType zvanje, ArrayList<Predmet> predmeti) {
 		// TODO: CHECK
 		boolean postoji = false;
 		for (Profesor p : Profesori) {
 			if (p.getBrojLK() == brojLK)
-				postoji = true;	
+				postoji = true;	 
 		}
 		
 		//ProfesorType profesorType, String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
@@ -62,10 +64,12 @@ public class BazaProfesora implements Serializable {
 		
 		
 		if (postoji == false) { 
-			this.Profesori.add(new Profesor(profesorType, ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, adresaKanc, brojLK, titula, zvanje,predmeti));
+			this.Profesori.add(new Profesor(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, adresaKanc, brojLK, titula, zvanje,predmeti));
 			snimiProfesore();
 			
 		}
+		return postoji; 
+		
 	}
 	
 	public void izbrisiProfesora(int brojLK) {
@@ -78,8 +82,8 @@ public class BazaProfesora implements Serializable {
 		}
 	}
 	
-	public void izmeniProfesora(ProfesorType profesorType, String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String adresaKanc, int brojLK, String titula, String zvanje, List<Predmet> predmeti) {
+	public void izmeniProfesora(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+			String email, String adresaKanc, int brojLK, String titula, ProfesorType zvanje, List<Predmet> predmeti) {
 		for (Profesor i : Profesori) {
 			if (i.getBrojLK() == brojLK) {
 				i.setIme(ime);
@@ -119,6 +123,11 @@ public class BazaProfesora implements Serializable {
 
 	private void initProfesore() {
 
+		// provera da li je prazan fajl
+				File fajl = new File("profesori.txt");
+				if (fajl.length() == 0)
+					return;
+		
 		try
         {    
             // Reading the object from a file 

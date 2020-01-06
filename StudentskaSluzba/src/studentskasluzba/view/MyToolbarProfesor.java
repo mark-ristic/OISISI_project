@@ -1,6 +1,8 @@
 package studentskasluzba.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -69,6 +71,35 @@ public class MyToolbarProfesor extends JToolBar {
 		customHelp.add(magny);
 		
 		add(customHelp);
+		
+		addProf.addActionListener(evt -> {
+			
+			MyDialog dodaj = new MyDialog(parent, "Dodaj Profesora", true,650,675+205-55, "");
+			
+			ProfesorPanelAdd pp = new ProfesorPanelAdd(dodaj, parent,650,675+205-55);
+			dodaj.add(BorderLayout.CENTER, pp);
+			dodaj.setResizable(false);
+			dodaj.setMinimumSize(new Dimension(650,675+205));
+			dodaj.setMaximumSize(new Dimension(650,675+205));
+			dodaj.setVisible(true); // mora na kraj
+			
+			
+		});
+		
+		editProf.addActionListener( evt1 -> { 
+			
+			MyDialog izmeni = new MyDialog(parent, "Izmeni Profesora", true,650,675+205-55, "");
+			
+			ProfesorPanelEdit pp = new ProfesorPanelEdit(izmeni, parent,650,675+205-55);
+			izmeni.add(BorderLayout.CENTER, pp);
+			izmeni.setResizable(false);
+			izmeni.setMinimumSize(new Dimension(650,675+205-55));
+			izmeni.setMaximumSize(new Dimension(650,675+205-55));
+			izmeni.setVisible(true); // mora na kraj
+			
+		});
+		
+
 		
 	}
 	

@@ -39,6 +39,7 @@ public class StudentPanelEdit extends JPanel{
 	public static final JTextField emailtxt1 = new JTextField(50);
 	public static final JTextField indekstxt1 = new JTextField(50);
 	public static final JTextField datumUpisatxt1 = new JTextField(50);
+	public static final JTextField prosektxt1 = new JTextField(50); //new new 
 	public static final JRadioButton budzet1 = new JRadioButton("Budzet");
 	public static final JRadioButton samofin1 = new JRadioButton("Samofinansiranje");
 	public static final JComboBox<String> trenGodCombo1 = new JComboBox<String>(godine);
@@ -51,12 +52,12 @@ public class StudentPanelEdit extends JPanel{
 		Vector<CustomPanel> vektor = new Vector<CustomPanel>();
 		
 		CustomPanel top_inset = new CustomPanel(650,45, Color.PINK);
-		CustomPanel left_inset = new CustomPanel(75, 675+95, new Color(255,102,255));
-		CustomPanel right_inset = new CustomPanel(75,675+95, new Color(255,102,255));
+		CustomPanel left_inset = new CustomPanel(75, 675+95+55, new Color(255,102,255));
+		CustomPanel right_inset = new CustomPanel(75,675+95+55, new Color(255,102,255));
 		CustomPanel bot_inset = new CustomPanel(650,30, Color.PINK);
-		CustomPanel top_panel = new CustomPanel(500, 400-75 + 95, new Color(255,0,255)); // gornji deo midpanela
+		CustomPanel top_panel = new CustomPanel(500, 400-75 + 95+55, new Color(255,0,255)); // gornji deo midpanela
 		CustomPanel bot_panel = new CustomPanel(500, 245+10, new Color(170,0,170)); // donji deo midpanela
-		CustomPanel full_panelLR = new CustomPanel(650, 400-75 + 95, Color.LIGHT_GRAY); // midpanel sa insetima
+		CustomPanel full_panelLR = new CustomPanel(650, 400-75 + 95+55, Color.LIGHT_GRAY); // midpanel sa insetima
 		CustomPanel mid_panelTB = new CustomPanel(500,675+95, Color.white); // top + bot
 		Collections.addAll(vektor, top_inset,bot_inset,left_inset,right_inset,top_panel
 						 , bot_panel, full_panelLR, mid_panelTB);
@@ -87,7 +88,7 @@ public class StudentPanelEdit extends JPanel{
 		vektor.add(botL);
 		vektor.add(botU_topinset);
 		
-		top_panel.setLayout(new GridLayout(8,1,0,15));
+		top_panel.setLayout(new GridLayout(9,1,0,15));
 		
 		CustomPanel ime = new CustomPanel(500,54-14, Color.CYAN);			
 		CustomPanel prezime = new CustomPanel(500,54-14, Color.CYAN); 	
@@ -97,6 +98,7 @@ public class StudentPanelEdit extends JPanel{
 		CustomPanel indeks = new CustomPanel(500,54-14, Color.CYAN);	
 		CustomPanel email = new CustomPanel(500,54-14, Color.CYAN);
 		CustomPanel datumUpisa = new CustomPanel(500,54-14, Color.CYAN);
+		CustomPanel prosek = new CustomPanel(500,500-14,Color.CYAN);
 		
 		
 		vektor.add(ime);
@@ -107,6 +109,7 @@ public class StudentPanelEdit extends JPanel{
 		vektor.add(indeks);
 		vektor.add(email);
 		vektor.add(datumUpisa);
+		vektor.add(prosek);
 		
 		ime.setLayout(new BoxLayout(ime, BoxLayout.X_AXIS));
 		prezime.setLayout(new BoxLayout(prezime, BoxLayout.X_AXIS));
@@ -116,6 +119,7 @@ public class StudentPanelEdit extends JPanel{
 		indeks.setLayout(new BoxLayout(indeks, BoxLayout.X_AXIS));
 		email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
 		datumUpisa.setLayout(new BoxLayout(datumUpisa, BoxLayout.X_AXIS));
+		prosek.setLayout(new BoxLayout(prosek, BoxLayout.X_AXIS));
 		
 		
 		JLabel imelab =      new JLabel("    Ime*    ");
@@ -127,6 +131,7 @@ public class StudentPanelEdit extends JPanel{
 		JLabel trenGodlab =  new JLabel("    Trenutna godina studija:   ");
 		JLabel emaillab =      new JLabel("    E-mail adresa   ");
 		JLabel datumUpisalab = new JLabel("    Datum upisa   ");
+		JLabel proseklab =     new JLabel("    Prosek*:   ");
 		
 		
 		imelab.setFont(new Font ("Consolas", Font.PLAIN, 16));
@@ -138,6 +143,7 @@ public class StudentPanelEdit extends JPanel{
 		trenGodlab.setFont(new Font ("Consolas", Font.PLAIN, 16));
 		emaillab.setFont(new Font ("Consolas", Font.PLAIN, 16));
 		datumUpisalab.setFont(new Font ("Consolas", Font.PLAIN, 16));
+		proseklab.setFont(new Font ("Consolas", Font.PLAIN, 16));
 		
 		
 		imetxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
@@ -148,6 +154,9 @@ public class StudentPanelEdit extends JPanel{
 		indekstxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
 		emailtxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
 		datumUpisatxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
+		prosektxt1.setFont(new Font("Calibri", Font.PLAIN, 20));
+		
+		
 		
 		ime.add(imelab); 
 		ime.add(imetxt1);
@@ -165,6 +174,8 @@ public class StudentPanelEdit extends JPanel{
 		email.add(emailtxt1);
 		datumUpisa.add(datumUpisalab);
 		datumUpisa.add(datumUpisatxt1);
+		prosek.add(proseklab);
+		prosek.add(prosektxt1);
 		
 		
 		top_panel.add(ime);
@@ -175,6 +186,7 @@ public class StudentPanelEdit extends JPanel{
 		top_panel.add(indeks);
 		top_panel.add(email);
 		top_panel.add(datumUpisa);
+		top_panel.add(prosek);
 		
 		// botU = botUpper code 
 		botU.setLayout(new GridLayout(3,1,0, 15));

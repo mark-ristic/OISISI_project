@@ -154,6 +154,22 @@ public MyToolbarPredmet(final JFrame parent) {
 			removePredmet.setVisible(true);
 	
 		});
+		
+		removeStudPr.addActionListener(evt -> {
+			
+			MyDialog brisiStudsaPredmeta = new MyDialog(parent, "Obrisi studenta sa predmeta", true, 650, 300+200, "removeStudentFromPredmet");
+			brisiStudsaPredmeta.setResizable(false);
+			brisiStudsaPredmeta.setVisible(true);
+					
+		});
+				
+		addStudPr.addActionListener(evt -> {
+					
+			MyDialog dodajStudnaPredmet = new MyDialog(parent, "Dodaj studenta na predmet", true, 650, 500, "addStudentToPredmet");
+			dodajStudnaPredmet.setResizable(false);
+			dodajStudnaPredmet.setVisible(true);
+					
+		});
 
 		
 	}

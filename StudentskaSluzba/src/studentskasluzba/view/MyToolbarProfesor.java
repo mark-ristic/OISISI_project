@@ -99,7 +99,19 @@ public class MyToolbarProfesor extends JToolBar {
 			
 		});
 		
-
+		removeProf.addActionListener(remove -> {
+			
+			MyDialog obrisi = new MyDialog(parent, "Obrisi Profesora", true, 650,300, "");
+			
+			ProfesorPanelRemove pp = new ProfesorPanelRemove(obrisi, parent, 650, 300);
+			
+			obrisi.add(BorderLayout.CENTER, pp);
+			obrisi.setResizable(false);
+			obrisi.setMinimumSize(new Dimension(650,300));
+			obrisi.setMaximumSize(new Dimension(650,300));
+			obrisi.setVisible(true);
+			
+		});
 		
 	}
 	

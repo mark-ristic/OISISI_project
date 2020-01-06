@@ -3,6 +3,7 @@ package studentskasluzba.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -43,6 +44,15 @@ public class MyDialog extends JDialog {
 		if(dialogType.equals("addStudentToPredmet")) {
 			addStudentToPredmet();
 		}
+		
+		if(dialogType.equals("addProfesorToPredmet")) {
+			addProfesorToPredmet();
+		}
+
+		if(dialogType.equals("removeProfesorFromPredmet")) {
+			removeProfesorFromPredmet();
+		}
+
 		
 		
 	}
@@ -149,5 +159,102 @@ public class MyDialog extends JDialog {
 
 	}
 	
+	private void removeProfesorFromPredmet() {
+
+		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
+		CustomPanel bot_inset = new CustomPanel(650,60, Color.WHITE);
+		CustomPanel panel = new CustomPanel(650,190, Color.WHITE);
+
+		bot_inset.setLayout(new BoxLayout(bot_inset, BoxLayout.Y_AXIS));
+		bot_inset.add(new CustomPanel(650,60,Color.WHITE));
+
+		this.add(BorderLayout.NORTH, top_inset);
+		this.add(BorderLayout.CENTER, panel);
+		this.add(BorderLayout.SOUTH, bot_inset);
+
+		JLabel question = new JLabel("Da li ste sigurni da zelite da obrisete profesora sa predmeta?");
+
+		CustomPanel paneltop = new CustomPanel(650,95, Color.WHITE);
+		CustomPanel panelbot = new CustomPanel(650, 95, Color.WHITE);
+
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(paneltop);
+		panel.add(panelbot);
+
+		paneltop.setLayout(new GridBagLayout());
+		paneltop.add(question);
+
+		JButton brisi = new JButton(new ImageIcon("StudentskaSluzba\\images\\obrisi-120.png"));
+		JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\odustani-100.png"));
+
+		brisi.setFocusPainted(false);
+		brisi.setBorderPainted(false);
+		brisi.setOpaque(false);
+		brisi.setContentAreaFilled(false);
+		odustani.setFocusPainted(false);
+		odustani.setBorderPainted(false);
+		odustani.setOpaque(false);
+		odustani.setContentAreaFilled(false);
+
+		panelbot.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
+
+		panelbot.add(brisi);
+		panelbot.add(odustani);
+
+		odustani.addActionListener(evt -> this.dispose());
+
+	}
+
+	private void addProfesorToPredmet() {
+
+		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
+		CustomPanel bot_inset = new CustomPanel(650,60, Color.WHITE);
+		CustomPanel panel = new CustomPanel(650,390, Color.WHITE);
+
+		bot_inset.setLayout(new BoxLayout(bot_inset, BoxLayout.Y_AXIS));
+		bot_inset.add(new CustomPanel(650,60,Color.WHITE));
+
+		this.add(BorderLayout.NORTH, top_inset);
+		this.add(BorderLayout.CENTER, panel);
+		this.add(BorderLayout.SOUTH, bot_inset);
+
+		JLabel question = new JLabel("Broj licne karte profesora: ");
+		JTextField brojLK = new JTextField(20);
+
+		CustomPanel paneltop = new CustomPanel(650,95, Color.WHITE);
+		// mesto za tabelu profesora
+		CustomPanel tablepanel = new CustomPanel(650, 200, Color.YELLOW);
+		CustomPanel panelbot = new CustomPanel(650, 95, Color.WHITE);
+
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(paneltop);
+		panel.add(tablepanel);
+		panel.add(panelbot);
+
+		paneltop.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
+		paneltop.add(question);
+		paneltop.add(brojLK);
+
+		JButton dodaj = new JButton(new ImageIcon("StudentskaSluzba\\images//round-100x35.png"));
+		JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\odustani-100.png"));
+
+		dodaj.setFocusPainted(false);
+		dodaj.setBorderPainted(false);
+		dodaj.setOpaque(false);
+		dodaj.setContentAreaFilled(false);
+		odustani.setFocusPainted(false);
+		odustani.setBorderPainted(false);
+		odustani.setOpaque(false);
+		odustani.setContentAreaFilled(false);
+
+		panelbot.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
+
+		panelbot.add(dodaj);
+		panelbot.add(odustani);
+
+		odustani.addActionListener(evt -> this.dispose());
+
+	}
+
 	
 }

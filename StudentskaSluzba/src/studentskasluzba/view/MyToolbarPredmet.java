@@ -171,6 +171,22 @@ public MyToolbarPredmet(final JFrame parent) {
 					
 		});
 
+		removeProfPr.addActionListener(remove -> {
+			
+			MyDialog brisiProfsaPredmeta = new MyDialog(parent, "Obrisi profesora sa predmeta", true, 650, 300, "removeProfesorFromPredmet");
+			brisiProfsaPredmeta.setResizable(false);
+			brisiProfsaPredmeta.setVisible(true);
+					
+		});
+				
+		addProfPr.addActionListener(add -> {
+					
+			MyDialog dodajProfnaPredmet = new MyDialog(parent, "Dodaj profesora na predmet", true, 650, 500, "addProfesorToPredmet");
+			dodajProfnaPredmet.setResizable(false);
+			dodajProfnaPredmet.setVisible(true);
+					
+		});
+		
 		
 	}
 	

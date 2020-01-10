@@ -12,14 +12,14 @@ public class Predmet implements Serializable {
 	
 	private String sifra;
 	private String naziv;
-	private String semestar;
+	private int semestar;
 	private int godIzv;
 	private Profesor predProf;
 	private ArrayList<Student> studenti;
 	
 	public Predmet() {}
 	
-	public Predmet(String sifra, String naziv, String semestar, int godIzv, Profesor predProf, ArrayList<Student> studenti) {
+	public Predmet(String sifra, String naziv, int semestar, int godIzv, Profesor predProf, ArrayList<Student> studenti) {
 			 
 		this.sifra = sifra;
 		this.naziv = naziv;
@@ -45,11 +45,11 @@ public class Predmet implements Serializable {
 		this.naziv = naziv;
 	}
 	
-	public String getSemestar() {
+	public int getSemestar() {
 		return semestar;
 	}
 	
-	public void setSemestar(String semestar) {
+	public void setSemestar(int semestar) {
 		this.semestar = semestar;
 	}
 	

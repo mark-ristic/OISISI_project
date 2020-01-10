@@ -45,7 +45,7 @@ public class BazaPredmeta implements Serializable {
 		return null;
 	}
 
-	public boolean dodajPredmet(String sifra, String naziv, String semestar, int godIzv, Profesor predProf,ArrayList<Student> studenti) {
+	public boolean dodajPredmet(String sifra, String naziv, int semestar, int godIzv, Profesor predProf,ArrayList<Student> studenti) {
 
 		boolean flag = false; // flag da znamo da li smo uspesno dodali ili ne
 
@@ -72,7 +72,7 @@ public class BazaPredmeta implements Serializable {
 			}
 		}
 	}
-	public void izmeniPredmet(String sifra, String naziv, String semestar, int godIzv, Profesor predProf,ArrayList<Student> studenti) {
+	public void izmeniPredmet(String sifra, String naziv, int semestar, int godIzv, Profesor predProf,ArrayList<Student> studenti) {
 		for (Predmet p : predmeti) {
 			if (p.getSifra().equals(sifra)) {
 				p.setSifra(sifra);

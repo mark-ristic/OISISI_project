@@ -27,12 +27,11 @@ public class PredmetPanelEdit extends JPanel {
 	
 	public static JTextField sifratxt = new JTextField(10);
 	public static  JTextField nazivtxt = new JTextField(50);
-	public static  JTextField semestartxt = new JTextField(50);
 	public static  JTextField godinatxt = new JTextField(50);
 	public static  JTextField profesortxt = new JTextField(50);
 	// semestar
-	public static JRadioButton letnji = new JRadioButton("letnji");
-	public static JRadioButton zimski = new JRadioButton("zimski");
+	public static  JTextField semestartxt = new JTextField(50);
+
 	// izmeni, odustani
 	public static JButton izmeni = new JButton(new ImageIcon("StudentskaSluzba\\\\images\\\\izmeni-120x40.png"));
 	public static JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\\\images//odustani-100.png"));
@@ -93,24 +92,12 @@ public class PredmetPanelEdit extends JPanel {
 			JLabel godinalab =   new JLabel("     Godina predavanja:*        ");
 			JLabel profesorlab = new JLabel("     Predmetni profesor:*         ");
 			
-			// po defaultu zimski semestar ce biti selektovan
-			ButtonGroup bg = new ButtonGroup();
-			zimski.setOpaque(false);
-			letnji.setOpaque(false);
-			bg.add(letnji);
-			bg.add(zimski);
-			
-			zimski.setSelected(true);
-			
 			sifra.add(sifralab); 	 	
 			sifra.add(sifratxt);
 			naziv.add(nazivlab); 		
 			naziv.add(nazivtxt);
 			semestar.add(semestarlab); 
-			semestar.add(zimski); 
-			semestar.add(new CustomPanel(15,30, Color.WHITE));
-			semestar.add(letnji);
-			semestar.add(new CustomPanel(202, 30, Color.WHITE));
+			semestar.add(semestartxt);
 			godina.add(godinalab); 		
 			godina.add(comboGod);
 			profesor.add(profesorlab); 	

@@ -41,17 +41,17 @@ public class BazaProfesora implements Serializable {
 		return Profesori;	
 	}
 	
-	public Profesor getProfesor(int brojLK) {
+	public Profesor getProfesor(String brojLK) {
 		
 		for (Profesor i : Profesori) {
-			if (i.getBrojLK() == brojLK)
+			if (i.getBrojLK().equals(brojLK))
 				return i;	
 		}
 		System.out.println("Ne postoji Profesor u bazi sa tim brojLKom");
 		return null;
 	}
-	public boolean dodajProfesora(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String adresaKanc, int brojLK, String titula, ProfesorType zvanje, ArrayList<Predmet> predmeti) {
+	public boolean dodajProfesora(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
+			String email, String adresaKanc, String brojLK, String titula, ProfesorType zvanje, ArrayList<Predmet> predmeti) {
 		// TODO: CHECK
 		boolean postoji = false;
 		for (Profesor p : Profesori) {
@@ -72,9 +72,9 @@ public class BazaProfesora implements Serializable {
 		
 	}
 	
-	public void izbrisiProfesora(int brojLK) {
+	public void izbrisiProfesora(String brojLK) {
 		for (Profesor i : Profesori) {
-			if (i.getBrojLK() == brojLK) {
+			if (i.getBrojLK().equals(brojLK)) {
 				Profesori.remove(i);	
 				snimiProfesore();
 				break;
@@ -82,10 +82,10 @@ public class BazaProfesora implements Serializable {
 		}
 	}
 	
-	public void izmeniProfesora(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String adresaKanc, int brojLK, String titula, ProfesorType zvanje, List<Predmet> predmeti) {
+	public void izmeniProfesora(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
+			String email, String adresaKanc, String brojLK, String titula, ProfesorType zvanje, List<Predmet> predmeti) {
 		for (Profesor i : Profesori) {
-			if (i.getBrojLK() == brojLK) {
+			if (i.getBrojLK().equals(brojLK)) {
 				i.setIme(ime);
 				i.setPrezime(prezime);
 				i.setDatRodj(datRodj);
@@ -103,7 +103,7 @@ public class BazaProfesora implements Serializable {
 		}
 	}
 	
-	private void snimiProfesore() {
+	public void snimiProfesore() {
 		// TODO Auto-generated method stub
 		try{  
 

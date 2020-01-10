@@ -47,7 +47,46 @@ public class PredmetiController {
 	}
 
 	public void removeStudentFromPredmet(Student s, Predmet p ) {
-        // TODO: finish this
+        
+		for (Student st : p.getStudenti()) {
+			if (st.getIndeks().equals(s.getIndeks())) {
+				p.getStudenti().remove(st);
+				System.out.println(p.getStudenti().size());
+				break;
+			}
+		}
+		
+		for (Predmet pt : s.getPredmeti()) { 
+			
+			if (pt.getSifra().equals(p.getSifra())) {
+				
+				s.getPredmeti().remove(pt);
+				System.out.println(s.getPredmeti().size());	
+				break;
+			}
+			
+		}	
+		
+		 StudentiController.getInstance().snimiStudente();
+		 snimiPredmete();
+		
+	}
+	
+	public void addStudentToPredmet(Student ss, Predmet p) {
+		
+		ss.getPredmeti().add(p);
+		p.getStudenti().add(ss);
+		
+		StudentiController.getInstance().snimiStudente();
+		snimiPredmete();
+		
+	}
+	
+	private void snimiPredmete() {
+		BazaPredmeta.getInstance().snimiPredmete();
+		
 	}
     
+	
+	
 }

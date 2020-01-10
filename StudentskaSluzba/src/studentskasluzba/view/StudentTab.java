@@ -1,6 +1,9 @@
 package studentskasluzba.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
+
+import javax.swing.BoxLayout;
 
 public class StudentTab extends CustomPanel {
 	
@@ -11,6 +14,15 @@ public class StudentTab extends CustomPanel {
 	
 	StudentTab(){
 	
+		CustomPanel top_inset = new CustomPanel(1440,120, Color.CYAN);
+		CustomPanel bot_inset = new CustomPanel(1440,120, Color.CYAN);
+		CustomPanel centerPanel = new CustomPanel(1440, 630, Color.PINK);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		this.add(top_inset);
+		this.add(centerPanel);
+		this.add(bot_inset);
+		
 	}
 
 }

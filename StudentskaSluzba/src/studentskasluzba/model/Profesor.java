@@ -37,13 +37,13 @@ public class Profesor  extends Osoba implements Serializable {
 	}
 	
 	private String adresaKanc;
-	private int brojLK;
+	private String brojLK; 
 	private String titula;
 	private ProfesorType zvanje;
 	private List<Predmet> predmeti;
 	
-	public Profesor(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
-			String email, String adresaKanc, int brojLK, String titula, ProfesorType zvanje, ArrayList<Predmet> predmeti) {
+	public Profesor(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
+			String email, String adresaKanc, String brojLK, String titula, ProfesorType zvanje, ArrayList<Predmet> predmeti) {
 		super(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email);
 		
 		this.adresaKanc = adresaKanc;
@@ -63,11 +63,11 @@ public class Profesor  extends Osoba implements Serializable {
 		this.adresaKanc = adresaKanc;
 	}
 
-	public int getBrojLK() {
+	public String getBrojLK() {
 		return brojLK;
 	}
 
-	public void setBrojLK(int brojLK) {
+	public void setBrojLK(String brojLK) {
 		this.brojLK = brojLK;
 	}
 

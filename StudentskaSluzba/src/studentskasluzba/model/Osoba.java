@@ -15,11 +15,11 @@ public class Osoba implements Serializable {
 	private String prezime;
 	private Date datRodj; 
 	private String adresaStanovanja; 
-	private int kontaktTel; 
+	private String kontaktTel; 
 	private String email;
 	
 
-	public Osoba(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel, String email) {
+	public Osoba(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel, String email) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
@@ -55,10 +55,10 @@ public class Osoba implements Serializable {
 	public void setAdresaStanovanja(String adresaStanovanja) {
 		this.adresaStanovanja = adresaStanovanja;
 	}
-	public int getKontaktTel() {
+	public String getKontaktTel() {
 		return kontaktTel;
 	}
-	public void setKontaktTel(int kontaktTel) {
+	public void setKontaktTel(String kontaktTel) {
 		this.kontaktTel = kontaktTel;
 	}
 	public String getEmail() {

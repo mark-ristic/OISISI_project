@@ -35,7 +35,7 @@ public class Student extends Osoba implements Serializable {
 	private double prosek;
 	private ArrayList<Predmet> predmeti;
 	
-	public Student(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+	public Student(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
 			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek,
 			ArrayList<Predmet> predmeti  ) {
 		super(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email);

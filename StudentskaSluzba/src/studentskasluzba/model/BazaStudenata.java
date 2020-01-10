@@ -49,7 +49,7 @@ public class BazaStudenata implements Serializable {
 		System.out.println("Ne postoji student u bazi sa tim indeksom");
 		return null;
 	}
-	public boolean dodajStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+	public boolean dodajStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
 			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek ,
 			ArrayList<Predmet> predmeti  ) {
 		// TODO: CHECK
@@ -80,7 +80,7 @@ public class BazaStudenata implements Serializable {
 		}
 	}
 	
-	public void izmeniStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
+	public void izmeniStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
 			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek,
 			ArrayList<Predmet>  predmeti) {
 		for (Student i : studenti) {

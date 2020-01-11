@@ -13,11 +13,11 @@ public class Profesor  extends Osoba implements Serializable {
 	 */
 	private static final long serialVersionUID = 8157416288467881120L;
 
-	public enum ProfesorType { Stalni {
+	public enum ProfesorType { Redovni {
 
 		@Override
 		public String toString() {
-			return "Stalni";
+			return "Redovni";
 		}
 
 	}, Vanredni {

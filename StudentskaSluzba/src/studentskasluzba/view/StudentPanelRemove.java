@@ -1,11 +1,10 @@
 package studentskasluzba.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -13,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 public class StudentPanelRemove extends JPanel {
 
@@ -21,8 +19,8 @@ public class StudentPanelRemove extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 4109397236831412456L;
-	public static JButton yes = new JButton(new ImageIcon("StudentskaSluzba\\images\\obrisi-120.png"));
-	public static JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\odustani-100.png"));
+	public static JButton yes = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\obrisi.png"));
+	public static JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
 	
 	public StudentPanelRemove(MyDialog md, JFrame parent, int width, int height) {
 		
@@ -65,10 +63,51 @@ public class StudentPanelRemove extends JPanel {
 		panelbot.add(yes);
 		panelbot.add(odustani);
 		
-		odustani.addActionListener(evt -> md.dispose());
-		yes.addActionListener(evt -> md.dispose());
+		yes.addMouseListener(new MouseAdapter() {
+			 
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        // the user clicks on the label
+		    	yes.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\obrisi.png"));
+		    	md.dispose();
+		    }
+		 
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		        // the mouse has entered the label
+		    	yes.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\obrisi_selected.png"));
+		    	
+		    }
+		 
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		        // the mouse has exited the label
+		    	yes.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\obrisi.png"));
+		    }
+		});
 		
-		
+		odustani.addMouseListener(new MouseAdapter() {
+			 
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        // the user clicks on the label
+		    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+		    	md.dispose();
+		    }
+		 
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		        // the mouse has entered the label
+		    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani_selected.png"));
+		    	
+		    }
+		 
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		        // the mouse has exited the label
+		    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+		    }
+		});
 		
 	}
 	

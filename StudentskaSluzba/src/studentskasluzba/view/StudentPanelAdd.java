@@ -207,6 +207,9 @@ public class StudentPanelAdd extends JPanel{
 		bg.add(budzet);  bg.add(samofin);
 		budzet.setSelected(true);
 		
+		budzet.setOpaque(false);
+		samofin.setOpaque(false);
+		
 		botU_row2.setLayout(new BoxLayout(botU_row2, BoxLayout.X_AXIS));
 		botU_row2.add(new JLabel("            ")); // labela sluzi kao inset sa leve strane
 		botU_row2.add(budzet);
@@ -230,37 +233,63 @@ public class StudentPanelAdd extends JPanel{
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		
+		// dodat novi design za buttonse
 		quit.addMouseListener(new MouseAdapter() {
-			 
-		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		        // the user clicks on the label
+					 
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			// the user clicks on the label
+		    	quit.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
 		    	md.dispose();
 		    }
-		 
+			 
 		    @Override
 		    public void mouseEntered(MouseEvent e) {
 		        // the mouse has entered the label
-		    	quit.setIcon(new ImageIcon("StudentskaSluzba\\\\images//odustani-37.png"));
+		    	quit.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani_selected.png"));
 		    	
 		    }
 		 
 		    @Override
 		    public void mouseExited(MouseEvent e) {
 		        // the mouse has exited the label
-		    	quit.setIcon(new ImageIcon("StudentskaSluzba\\\\images//odustani-white37.png"));
+		    	quit.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+		    }
+		});
+		
+		
+		ds.addMouseListener(new MouseAdapter() {
+			 
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        // the user clicks on the label
+		    	ds.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));
+		    	md.dispose();
+		    }
+		 
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		        // the mouse has entered the label
+		    	ds.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj_selected.png"));
+		    	
+		    }
+		 
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		        // the mouse has exited the label
+		    	ds.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));
 		    }
 		});
 		
 		ds.setPreferredSize(new Dimension(125,35));
-		ds.setIcon(new ImageIcon("StudentskaSluzba\\images//round-100x35.png"));
+		ds.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));
 		ds.setFocusPainted(false);
 		ds.setBorderPainted(false);
 		ds.setContentAreaFilled(false);
 		ds.setOpaque(false);
 		
 		quit.setPreferredSize(new Dimension(125,40));
-		quit.setIcon(new ImageIcon("StudentskaSluzba\\images//odustani-white37.png"));
+		quit.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
 		quit.setFocusPainted(false);
 		quit.setBorderPainted(false);
 		quit.setContentAreaFilled(false);
@@ -278,8 +307,8 @@ public class StudentPanelAdd extends JPanel{
 		
 		//recolor comment if you want original colours
 		
-		//for (CustomPanel i : vektor)
-			//i.setBackground(Color.WHITE);
+		for (CustomPanel i : vektor)
+			i.setBackground(Color.WHITE);
 		// let's add some borders hehe
 		top_panel.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		bot_panel.setBorder(new LineBorder(Color.LIGHT_GRAY));

@@ -1,7 +1,7 @@
 package studentskasluzba.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 
@@ -22,6 +22,10 @@ public class StudentTab extends CustomPanel {
 		this.add(top_inset);
 		this.add(centerPanel);
 		this.add(bot_inset);
+		
+		centerPanel.setLayout(new GridLayout(1,1));
+		MyStudentTable myStudentTable = new MyStudentTable();
+		centerPanel.add(myStudentTable.getJScrollPane());
 		
 	}
 

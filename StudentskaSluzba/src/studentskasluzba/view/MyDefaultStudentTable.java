@@ -19,12 +19,20 @@ public class MyDefaultStudentTable extends DefaultTableModel {
 
 	public MyDefaultStudentTable() { 
 		
-		Object[] columns = {"indeks",
-				"ime", 
+		Object[] columns = {
+				"ime",
 				"prezime",
-				"godina studija", 
+				"datum rodjenja",
+				"adresa stanovanja",
+				"kontakt telefon",
+				"email adresa",
+				"indeks",
+				"datum upisa",
+				"godina studiranja",
 				"status",
-				"prosek"};
+				"prosek",
+				"Spisak predmeta"
+		};
 		
 		//this.setColumnIdentifiers(columns);
 		

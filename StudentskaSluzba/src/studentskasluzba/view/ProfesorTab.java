@@ -1,6 +1,7 @@
 package studentskasluzba.view;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 
@@ -22,6 +23,9 @@ public class ProfesorTab extends CustomPanel {
 		this.add(centerPanel);
 		this.add(bot_inset);
 		
+		centerPanel.setLayout(new GridLayout(1,1));
+		MyProfesorTable myProfesorTable = new MyProfesorTable();
+		centerPanel.add(myProfesorTable.getJScrollPane());		
 	}
 	
 	// TODO: uraditi proftab

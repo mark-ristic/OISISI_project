@@ -15,7 +15,17 @@ public class MyDefaultProfesorTable extends DefaultTableModel {
 
 	public MyDefaultProfesorTable() { 
 		
-		Object[] columns = { "Broj licne karte", "Ime", "Prezime", "Stalni/Vanredni", "Titula", "Spisak predmeta" };
+		Object[] columns = { "ime",
+				 "prezime",
+				 "datum rodjenja",
+				 "adresa stanovanja",
+				 "kontakt telefon",
+				 "email",
+				 "adresa kancelarije",
+				 "broj licne karte",
+				 "titula",
+				 "zvanje",
+				 "Spisak predmeta"};
 	
 		//this.setColumnIdentifiers(columns);
 		

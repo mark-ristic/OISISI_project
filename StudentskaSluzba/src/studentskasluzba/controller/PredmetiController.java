@@ -8,6 +8,7 @@ import studentskasluzba.model.Predmet;
 import studentskasluzba.model.Profesor;
 import studentskasluzba.model.Student;
 import studentskasluzba.view.MyDefaultPredmetTable;
+import studentskasluzba.view.MyPredmetTable;
 
 public class PredmetiController {
 
@@ -30,7 +31,7 @@ public class PredmetiController {
 		}
 	}
 
-	public void izbrisiPredmet(String sifra, Object[] row, MyDefaultPredmetTable mdpt, int selected) {
+	public void izbrisiPredmet(String sifra, MyDefaultPredmetTable mdpt, int selected) {
 		BazaPredmeta.getInstance().izbrisiPredmet(sifra);
 	
 		if(selected < 0) {
@@ -158,7 +159,7 @@ public class PredmetiController {
 		
 	}
 	
-	private void snimiPredmete() {
+	public void snimiPredmete() {
 		BazaPredmeta.getInstance().snimiPredmete();
 		
 	}
@@ -194,6 +195,19 @@ public class PredmetiController {
 
 		}	
 			return objects;
+	}
+	
+	public void updateTable(MyPredmetTable mpt, String brojLK) {
+		// u slucaju promene licne karte profesora azuriramo tabelu ili ako brisemo profesor
+		for (int i = 0; i< mpt.getRowCount(); i++) {
+			
+			String oldID = (String) mpt.getValueAt(i, 4);
+			
+			if (oldID.equals(brojLK) == true) {
+				mpt.setValueAt("null", i, 4);
+				break;
+			}		
+		}		
 	}
 	
 	

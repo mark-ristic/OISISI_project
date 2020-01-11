@@ -23,7 +23,7 @@ public class MyDefaultPredmetTable extends DefaultTableModel {
 		kolone.add("semestar");
 		kolone.add("godina");
 		kolone.add("pred prof");
-		kolone.add("Additional");
+		kolone.add("Spisak studenata");
 		
 		this.setDataVector(objekti, kolone); 
 		

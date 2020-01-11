@@ -42,10 +42,18 @@ public class ProfesoriController {
 			mdpt.addRow(row);
 	}
 
-	public void izbrisiProfesora(String brojLK) {
-		BazaProfesora.getInstance().izbrisiProfesora(brojLK);
-		//TODO : brisanje profesora iz tabele 
+	public void izbrisiProfesora(String brojLK, DefaultTableModel mdpt, int selected) {
 		
+		BazaProfesora.getInstance().izbrisiProfesora(brojLK);
+		
+		if (selected<0) {
+			System.out.println("Greska prilikom brisanja profesora" + " " + this.getClass().getSimpleName());
+			return;
+		}
+		if (selected != -1) {
+			mdpt.removeRow(selected);
+			System.out.println("Profesor uspesno obrisan" + " " + this.getClass().getSimpleName()); 
+		}
 		
 	}
 

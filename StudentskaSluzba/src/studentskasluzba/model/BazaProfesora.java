@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import studentskasluzba.controller.PredmetiController;
 import studentskasluzba.model.Profesor.ProfesorType;
+import studentskasluzba.view.PredmetTab;
 
 public class BazaProfesora implements Serializable {
 
@@ -73,6 +75,21 @@ public class BazaProfesora implements Serializable {
 	}
 	
 	public void izbrisiProfesora(String brojLK) {
+		
+		// nulliranje svih predProf atributa predmeta koje profesor kog brisemo predaje 
+		
+		for (Predmet p : getProfesor(brojLK).getPredmeti()) {
+			
+			PredmetiController.getInstance().getPredmet(p.getSifra()).setPredProf(null);
+			
+			System.out.println(PredmetiController.getInstance().getPredmet(p.getSifra()).getPredProf());
+	
+			PredmetiController.getInstance().snimiPredmete();
+			
+			// kad izbrisemo profesora, moramo azurirati i tabelu predmeta
+			PredmetiController.getInstance().updateTable(PredmetTab.myPredmetTable, brojLK);
+		}
+		
 		for (Profesor i : Profesori) {
 			if (i.getBrojLK().equals(brojLK)) {
 				Profesori.remove(i);	

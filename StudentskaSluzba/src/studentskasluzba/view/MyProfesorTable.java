@@ -185,8 +185,8 @@ public class MyProfesorTable extends JTable {
 				if (getSelectedRow() != -1) {
 					// action listener za brisanje profesora
 					ProfesorPanelRemove.brisi.addActionListener(remove -> {
-						// TODO : zavrsiti metodu za brisanje profesora
-						//ProfesoriController.getInstance().izbrisiProfesora(brojLK, mdpt, getSelectedRow());					
+
+						ProfesoriController.getInstance().izbrisiProfesora(brojLK, mdpt, getSelectedRow());					
 					});	
 				}
 				// popunjavanje jtextfieldova kada zelimo da izmenimo podatke profesora

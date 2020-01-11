@@ -25,6 +25,7 @@ public class StudentTab extends CustomPanel {
 		
 		centerPanel.setLayout(new GridLayout(1,1));
 		MyStudentTable myStudentTable = new MyStudentTable();
+		myStudentTable.getTableHeader().setReorderingAllowed(false);
 		centerPanel.add(myStudentTable.getJScrollPane());
 		
 	}

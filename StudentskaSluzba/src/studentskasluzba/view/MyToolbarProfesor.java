@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.border.LineBorder;
 
 public class MyToolbarProfesor extends JToolBar {
 
@@ -31,39 +34,44 @@ public class MyToolbarProfesor extends JToolBar {
 		setFloatable(false);
 		
 		// Pomocni panel za popunjavanje mesta pored buttonsa
-		CustomPanel customHelp = new CustomPanel(1440-3*55, 55, Color.CYAN);
+		CustomPanel customHelp = new CustomPanel(1440-3*55, 55, Color.WHITE);
 	
-		addProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
+		addProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\teacher_final_add.png"));
 		addProf.setToolTipText("Dodaj profesora");
 		addProf.setBorderPainted(true);
 		addProf.setFocusPainted(false);
+		addProf.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 
-		editProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\edit-55x55.png"));
+		editProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\teacher_final_edit.png"));
 		editProf.setToolTipText("Izmeni profesora");
 		editProf.setBorderPainted(true);
 		editProf.setFocusPainted(false);
+		editProf.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
-		removeProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
+		removeProf.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\teacher_final_remove.png"));
 		removeProf.setToolTipText("Obrisi profesora");
 		removeProf.setBorderPainted(true);
 		removeProf.setFocusPainted(false);
+		removeProf.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
 		add(addProf);
 		add(editProf);
 		add(removeProf);
 		
-		//TODO: Slike za JButtone zameniti 
-		
 		
 		// searchbar
 		
-		JTextField search = new JTextField (15);
+		JTextField search = new JTextField (30);
+		search.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		// template za pretragu profesora
+		search.setText("broj licne karte<>ime<>prezime<>");
 		JButton magny = new JButton();
 		
 		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\search-35x35.png"));
 		magny.setBorderPainted(false);
-		magny.setBackground(Color.CYAN);
-		magny.setToolTipText("Pretrazi");
+		magny.setFocusPainted(false);
+		magny.setBackground(Color.WHITE);
+		magny.setToolTipText("Pretrazi profesora");
 		
 		customHelp.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		

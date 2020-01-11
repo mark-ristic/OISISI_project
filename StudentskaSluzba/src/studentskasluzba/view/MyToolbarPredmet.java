@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.border.LineBorder;
 
 public class MyToolbarPredmet extends JToolBar {
 
@@ -38,45 +40,52 @@ public MyToolbarPredmet(final JFrame parent) {
 		setFloatable(false);
 		
 		// Pomocni panel za popunjavanje mesta pored buttonsa
-		CustomPanel customHelp = new CustomPanel(1440-7*55, 55, Color.CYAN);
+		CustomPanel customHelp = new CustomPanel(1440-7*55, 55, Color.WHITE);
 
-		// dodaj,izmeni, brisi studenta sa predmeta buttoni
-		addStudPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
+		// dodaj, brisi studenta sa predmeta buttoni
+		addStudPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\student_final_add.png"));
 		addStudPr.setToolTipText("Dodaj studenta");
 		addStudPr.setBorderPainted(true);
 		addStudPr.setFocusPainted(false);
+		addStudPr.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
-		removeStudPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
+		removeStudPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\student_final_remove.png"));
 		removeStudPr.setToolTipText("Obrisi studenta");
 		removeStudPr.setBorderPainted(true);
 		removeStudPr.setFocusPainted(false);
+		removeStudPr.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
-		// dodaj, izmeni, brisi profesora sa predmeta buttoni
-		addProfPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
+		// dodaj, brisi profesora sa predmeta buttoni
+		addProfPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\teacher_final_add.png"));
 		addProfPr.setToolTipText("Dodaj profesora");
 		addProfPr.setBorderPainted(true);
 		addProfPr.setFocusPainted(false);
+		addProfPr.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 
-		removeProfPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
+		removeProfPr.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\teacher_final_remove.png"));
 		removeProfPr.setToolTipText("Obrisi profesora");
 		removeProfPr.setBorderPainted(true);
 		removeProfPr.setFocusPainted(false);
+		removeProfPr.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
 		// dodaj,izmeni,brisi predmet
-		addPredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\add-55x55.png"));
+		addPredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\predmet_final_add.png"));
 		addPredmet.setToolTipText("Dodaj predmet");
 		addPredmet.setBorderPainted(true);
 		addPredmet.setFocusPainted(false);
+		addPredmet.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 
-		editPredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\edit-55x55.png"));
+		editPredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\predmet_final_edit.png"));
 		editPredmet.setToolTipText("Izmeni predmet");
 		editPredmet.setBorderPainted(true);
 		editPredmet.setFocusPainted(false);
+		editPredmet.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
-		removePredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\delete-55x55.png"));
+		removePredmet.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\predmet_final_remove.png"));
 		removePredmet.setToolTipText("Obrisi predmet");
 		removePredmet.setBorderPainted(true);
 		removePredmet.setFocusPainted(false);
+		removePredmet.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
 		//dodavanje na panel
 		add(addStudPr);
@@ -90,17 +99,19 @@ public MyToolbarPredmet(final JFrame parent) {
 		add(removePredmet);
 	
 		
-		// TODO: Ikone promeniti! 
-		
 		// Searchbar 
 		
-		JTextField search = new JTextField (15);
+		JTextField search = new JTextField (30);
+		search.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		// template za pretragy predmeta
+		search.setText("sifra<>naziv<>");
 		JButton magny = new JButton();
 		
 		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\search-35x35.png"));
 		magny.setBorderPainted(false);
-		magny.setBackground(Color.CYAN);
-		magny.setToolTipText("Pretrazi");
+		magny.setFocusPainted(false);
+		magny.setBackground(Color.WHITE);
+		magny.setToolTipText("Pretrazi predmet");
 		
 		customHelp.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		

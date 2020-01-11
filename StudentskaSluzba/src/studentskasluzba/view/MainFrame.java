@@ -3,6 +3,7 @@ package studentskasluzba.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
@@ -28,12 +29,12 @@ public class MainFrame extends JFrame {
 		execDefaultToolkit();
 		// glavni prozor se sastoji od 3 panela => tbPanel + centerPanel + statusBar
 		// centralni panel 
-		CustomPanel centerPanel = new CustomPanel(1440, 630, Color.BLUE);
+		CustomPanel centerPanel = new CustomPanel(1440, 620, Color.BLUE);
 		
 		// Toolbar paneli
-		CustomPanel tbStudent = new CustomPanel(1440, 55, Color.CYAN);
-		CustomPanel tbProfesor = new CustomPanel(1440, 55, Color.RED);
-		CustomPanel tbPredmet = new CustomPanel(1440, 55, Color.GREEN);
+		CustomPanel tbStudent = new CustomPanel(1440, 65, Color.CYAN);
+		CustomPanel tbProfesor = new CustomPanel(1440, 65, Color.RED);
+		CustomPanel tbPredmet = new CustomPanel(1440, 65, Color.GREEN);
 		
 		// inicijalna vidljivost panela
 		tbProfesor.setVisible(false);
@@ -46,6 +47,7 @@ public class MainFrame extends JFrame {
 		PredmetTab predmetTab = new PredmetTab();
 		// glavni TabbedPane 
 		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setFont(new Font("Segoe UI", Font.PLAIN, 35));
 		
 		// spajanje panela u tabbedPane
 		decoratePanels(tabbedPane, studentTab, profesorTab, predmetTab, centerPanel);

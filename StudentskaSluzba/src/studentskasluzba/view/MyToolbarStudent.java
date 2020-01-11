@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.border.LineBorder;
 
 public class MyToolbarStudent extends JToolBar {
 
@@ -32,37 +34,43 @@ public class MyToolbarStudent extends JToolBar {
 		setFloatable(false);
 		
 		// Pomocni panel za popunjavanje mesta pored buttonsa
-		CustomPanel customHelp = new CustomPanel(1440-3*55, 55, Color.CYAN);
+		CustomPanel customHelp = new CustomPanel(1440-3*55, 55, Color.WHITE);
 	
-		addStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\student-add-55x55.png"));
+		addStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\student_final_add.png"));
 		addStudent.setToolTipText("Dodaj studenta");
 		addStudent.setBorderPainted(true);
 		addStudent.setFocusPainted(false);
+		addStudent.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 
-		editStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\student-edit-55x55.png"));
+		editStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\student_final_edit.png"));
 		editStudent.setToolTipText("Izmeni studenta");
 		editStudent.setBorderPainted(true);
 		editStudent.setFocusPainted(false);
+		editStudent.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
-		removeStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\student-delete-55x55.png"));
+		removeStudent.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Avatars\\student_final_remove.png"));
 		removeStudent.setToolTipText("Obrisi studenta");
 		removeStudent.setBorderPainted(true);
 		removeStudent.setFocusPainted(false);
+		removeStudent.setBorder(new LineBorder(new Color(51, 153, 255, 90)));
 		
 		add(addStudent);
 		add(editStudent);
 		add(removeStudent);
-		//add(customHelp);
 		
-		// TODO: Slike za JButtone mozemo naknadno zameniti po potrebi
 		
-		JTextField search = new JTextField (15);
+		JTextField search = new JTextField(30);
+		search.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		// template za pretragu studenta
+		search.setText("indeks<>ime<>prezime<>");
+		
 		JButton magny = new JButton();
 		
 		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\search-35x35.png"));
 		magny.setBorderPainted(false);
-		magny.setBackground(Color.CYAN);
-		magny.setToolTipText("Pretrazi");
+		magny.setFocusPainted(false);
+		magny.setBackground(Color.WHITE);
+		magny.setToolTipText("Pretrazi studenta");
 		
 		customHelp.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		

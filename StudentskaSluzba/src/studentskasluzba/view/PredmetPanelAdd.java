@@ -4,16 +4,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class PredmetPanelAdd extends JPanel {
@@ -34,8 +34,8 @@ public class PredmetPanelAdd extends JPanel {
 	// semestar
 	public static  JTextField semestartxt = new JTextField(50);
 	// dodaj, odustani
-	public static JButton dodaj = new JButton(new ImageIcon("StudentskaSluzba\\images//round-100x35.png"));
-	public static JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\\\images//odustani-100.png"));
+	public static JButton dodaj = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));
+	public static JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
 	// Combobox za godine izvodjenja 
 	public static JComboBox<String> comboGod = new JComboBox<>(godine);
 	
@@ -130,6 +130,54 @@ public class PredmetPanelAdd extends JPanel {
 			
 			
 			odustani.addActionListener(evt -> md.dispose());
+			
+			dodaj.addMouseListener(new MouseAdapter() {
+				 
+			    @Override
+			    public void mouseClicked(MouseEvent e) {
+			        // the user clicks on the label
+			    	dodaj.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));
+			    	md.dispose();
+			    }
+			 
+			    @Override
+			    public void mouseEntered(MouseEvent e) {
+			        // the mouse has entered the label
+			    	dodaj.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj_selected.png"));
+			    	
+			    }
+			 
+			    @Override
+			    public void mouseExited(MouseEvent e) {
+			        // the mouse has exited the label
+			    	dodaj.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));
+			    }
+			});
+			
+			odustani.addActionListener(evt -> odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png")));
+			
+			odustani.addMouseListener(new MouseAdapter() {
+				
+			    @Override
+			    public void mouseClicked(MouseEvent e) {
+			        // the user clicks on the label
+			    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+			    	md.dispose();
+			    }
+			 
+			    @Override
+			    public void mouseEntered(MouseEvent e) {
+			        // the mouse has entered the label
+			    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani_selected.png"));
+			    	
+			    }
+			 
+			    @Override
+			    public void mouseExited(MouseEvent e) {
+			        // the mouse has exited the label
+			    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+			    }
+			});
 		
 	
 		}

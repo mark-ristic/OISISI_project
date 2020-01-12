@@ -161,7 +161,10 @@ public class StudentiController {
 		BazaStudenata.getInstance().snimiStudente();
 	}
 
-
+	public ArrayList<Object> findStudent(String ime, String prezime, String index) {
+		
+		return BazaStudenata.getInstance().findStudent(ime, prezime, index);
+	}
 
 
 

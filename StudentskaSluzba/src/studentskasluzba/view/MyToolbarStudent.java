@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -14,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
+
+import studentskasluzba.controller.StudentiController;
 
 public class MyToolbarStudent extends JToolBar {
 
@@ -130,6 +133,41 @@ public class MyToolbarStudent extends JToolBar {
 				JOptionPane.showMessageDialog(parent, "Molim odaberite studenta!");	
 			}	
 			
+		});
+		
+		magny.addActionListener(listen -> {
+			/* samo za testiranje
+			for (Student s : StudentController.getInstance().getStudenti()) {
+				System.out.println(s.getIndeks());
+				for (Predmet p : s.getPredmeti())
+					System.out.println("   " + p.getNaziv() );
+			}
+			 */
+			
+			//split by <  ->   index RA115>ime MARK>prezime RISTIC>
+		       //      substring()                 substring(    substring
+			
+			String temp = search.getText();
+			
+			String[] splits = temp.split("<");
+			
+			String index,ime,prezime;
+			
+			index = splits[1].substring(0, splits[1].length()-4);
+			ime = splits[2].substring(0, splits[2].length()-8);
+			prezime = splits[3].substring(0, splits[3].length()-1);
+			
+			index = index.toLowerCase();
+			ime = ime.toLowerCase();
+			prezime = prezime.toLowerCase();
+			
+			
+			
+			// MyDialog(JFrame parent, String title, boolean modal, int width, int height, String dialogType, ArrayList<Object> list)
+			ArrayList<Object> studenti = StudentiController.getInstance().findStudent(ime, prezime, index); 
+			MyDialog findStudents = new MyDialog(parent, "Pronadji studenta" , true, 650, 500, "findStudents", studenti );
+			search.setText("indeks<>ime<>prezime<>");
+			findStudents.setVisible(true);
 		});
 		
 		

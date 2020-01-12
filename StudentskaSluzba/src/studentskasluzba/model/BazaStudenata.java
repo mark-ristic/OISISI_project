@@ -208,9 +208,9 @@ public class BazaStudenata implements Serializable {
 	
 	
 	
-	public ArrayList<Student> findStudent(String ime, String prezime, String index) {
+	public ArrayList<Object> findStudent(String ime, String prezime, String index) {
 		
-		ArrayList<Student> found = new ArrayList<>();
+		ArrayList<Object> found = new ArrayList<>(); 
 		
 		ime = ime.toLowerCase();
 		prezime = prezime.toLowerCase();

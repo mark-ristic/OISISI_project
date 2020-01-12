@@ -6,11 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,12 +16,14 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
-import studentskasluzba.controller.PredmetiController;
 import studentskasluzba.controller.StudentiController;
 import studentskasluzba.model.BazaStudenata;
 import studentskasluzba.model.Predmet;
@@ -65,6 +64,14 @@ public class MyStudentTable extends JTable {
 		/* String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
 		String email, String indeks, DateFormat datumUpisa, int godStud, Status status, double prosek,
 		ArrayList<Predmet> predmeti */
+		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.getModel());
+		this.setRowSorter(sorter);
+		ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+		for (int i = 0 ; i < 5; i++) {
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.ASCENDING));
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.DESCENDING));
+		}
 		
 		TableColumnModel cm = this.getColumnModel();
 		cm.getColumn(0).setPreferredWidth(120);

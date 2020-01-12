@@ -18,21 +18,18 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import studentskasluzba.controller.ProfesoriController;
-import studentskasluzba.model.BazaProfesora;
 import studentskasluzba.model.Predmet;
 import studentskasluzba.model.Profesor;
 import studentskasluzba.model.Profesor.ProfesorType;
-import studentskasluzba.view.MyStudentTable.ButtonEditor;
-import studentskasluzba.view.MyStudentTable.ButtonRenderer;
-import sun.security.jca.GetInstance;
 
 public class MyProfesorTable extends JTable {
 
@@ -64,6 +61,14 @@ public class MyProfesorTable extends JTable {
 		this.setModel(mdpt);
 		this.setBackground(Color.pink);
 		this.setForeground(Color.black);
+		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.getModel());
+		this.setRowSorter(sorter);
+		ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+		for (int i = 0 ; i < 5; i++) {
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.ASCENDING));
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.DESCENDING));
+		}
 		
 		TableColumnModel cm = this.getColumnModel();
 		

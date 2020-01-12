@@ -217,7 +217,10 @@ public class ProfesorPanelEdit extends JPanel {
 		bg.add(stalni);
 		bg.add(vanredni);
 		bg.add(docent);
-		stalni.setSelected(true);
+		//stalni.setSelected(true);
+		stalni.setOpaque(false);
+		vanredni.setOpaque(false);
+		docent.setOpaque(false); 
 		
 		botU_row2.setLayout(new BoxLayout(botU_row2, BoxLayout.X_AXIS));
 		botU_row2.add(new JLabel("            ")); // labela sluzi kao inset sa leve strane

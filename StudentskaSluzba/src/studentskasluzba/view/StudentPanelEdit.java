@@ -200,7 +200,7 @@ public class StudentPanelEdit extends JPanel{
 		
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(budzet1);  bg.add(samofin1);
-		budzet1.setSelected(true);
+		//budzet1.setSelected(true);
 		
 		budzet1.setOpaque(false);
 		samofin1.setOpaque(false); 

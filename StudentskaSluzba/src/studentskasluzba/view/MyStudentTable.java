@@ -58,7 +58,7 @@ public class MyStudentTable extends JTable {
 		selected = -1;
 		mdst = new MyDefaultStudentTable();
 		this.setModel(mdst);
-		this.setBackground(Color.orange);
+		this.setBackground(Color.white);
 		this.setForeground(Color.black);
 		
 		/* String ime, String prezime, DateFormat datRodj, String adresaStanovanja, int kontaktTel,
@@ -76,16 +76,16 @@ public class MyStudentTable extends JTable {
 		TableColumnModel cm = this.getColumnModel();
 		cm.getColumn(0).setPreferredWidth(120);
 		cm.getColumn(1).setPreferredWidth(120);
-		cm.getColumn(2).setPreferredWidth(120);
-		cm.getColumn(3).setPreferredWidth(120);
+		cm.getColumn(2).setPreferredWidth(100);
+		cm.getColumn(3).setPreferredWidth(220);
 		cm.getColumn(4).setPreferredWidth(120);
-		cm.getColumn(5).setPreferredWidth(120);
-		cm.getColumn(6).setPreferredWidth(120);
-		cm.getColumn(7).setPreferredWidth(120);
-		cm.getColumn(8).setPreferredWidth(120);
-		cm.getColumn(9).setPreferredWidth(120);
-		cm.getColumn(10).setPreferredWidth(120);
-		cm.getColumn(11).setPreferredWidth(120);
+		cm.getColumn(5).setPreferredWidth(220);
+		cm.getColumn(6).setPreferredWidth(80);
+		cm.getColumn(7).setPreferredWidth(80);
+		cm.getColumn(8).setPreferredWidth(110);
+		cm.getColumn(9).setPreferredWidth(50);
+		cm.getColumn(10).setPreferredWidth(60); 
+		cm.getColumn(11).setPreferredWidth(180);
 		this.setRowHeight(30);
 		
 		this.getColumn("Spisak predmeta").setCellRenderer(new ButtonRenderer());
@@ -247,10 +247,11 @@ public class MyStudentTable extends JTable {
 					if (s.getGodStud() == 4)
 						StudentPanelEdit.trenGodCombo1.setSelectedIndex(3);
 					
-					if (s.getStatus().equals(Student.Status.B))
+					if (s.getStatus().toString().equals("B"))
 						StudentPanelEdit.budzet1.setSelected(true);
 					else
 						StudentPanelEdit.samofin1.setSelected(true);
+					
 					// dopunjavamo action listener za izmenu studenta
 					StudentPanelEdit.es.addActionListener( editevent1 -> {
 						

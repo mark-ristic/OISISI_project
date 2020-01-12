@@ -14,9 +14,9 @@ public class ProfesorTab extends CustomPanel {
 	
 	ProfesorTab() {
 		
-		CustomPanel top_inset = new CustomPanel(1440,120, Color.CYAN);
-		CustomPanel bot_inset = new CustomPanel(1440,120, Color.CYAN);
-		CustomPanel centerPanel = new CustomPanel(1440, 630, Color.green);
+		CustomPanel top_inset = new CustomPanel(1440,120, Color.WHITE);
+		CustomPanel bot_inset = new CustomPanel(1440,120, Color.WHITE);
+		CustomPanel centerPanel = new CustomPanel(1440, 630, Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.add(top_inset);

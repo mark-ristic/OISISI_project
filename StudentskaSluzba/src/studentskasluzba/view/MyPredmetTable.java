@@ -56,7 +56,7 @@ public class MyPredmetTable extends JTable {
 		selected = -1;
 		mdpt = new MyDefaultPredmetTable();
 		this.setModel(mdpt);
-		this.setBackground(Color.LIGHT_GRAY);
+		this.setBackground(Color.white);
 		this.setForeground(Color.BLACK);
 		// sortiranje tabele, klikom na header kolone 
 		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.getModel());

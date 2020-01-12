@@ -59,7 +59,7 @@ public class MyProfesorTable extends JTable {
 		selected = -1;
 		mdpt = new MyDefaultProfesorTable();
 		this.setModel(mdpt);
-		this.setBackground(Color.pink);
+		this.setBackground(Color.white);
 		this.setForeground(Color.black);
 		
 		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.getModel());
@@ -75,13 +75,13 @@ public class MyProfesorTable extends JTable {
 		cm.getColumn(0).setPreferredWidth(120);
 		cm.getColumn(1).setPreferredWidth(120);
 		cm.getColumn(2).setPreferredWidth(120);
-		cm.getColumn(3).setPreferredWidth(120);
+		cm.getColumn(3).setPreferredWidth(180);
 		cm.getColumn(4).setPreferredWidth(120);
 		cm.getColumn(5).setPreferredWidth(120);
-		cm.getColumn(6).setPreferredWidth(120);
+		cm.getColumn(6).setPreferredWidth(180);
 		cm.getColumn(7).setPreferredWidth(120);
-		cm.getColumn(8).setPreferredWidth(120);
-		cm.getColumn(9).setPreferredWidth(120);
+		cm.getColumn(8).setPreferredWidth(60);
+		cm.getColumn(9).setPreferredWidth(60);
 		cm.getColumn(10).setPreferredWidth(240);
 		this.setRowHeight(30);
 		

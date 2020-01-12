@@ -126,7 +126,7 @@ public MyToolbarPredmet(final JFrame parent) {
 		search.setText("sifra<>naziv<>");
 		JButton magny = new JButton();
 		
-		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\search-35x35.png"));
+		magny.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\search.png"));
 		magny.setBorderPainted(false);
 		magny.setFocusPainted(false);
 		magny.setBackground(Color.WHITE);

@@ -20,6 +20,7 @@ public class MainFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 153782876756455625L;
 	public static int tab;
+	private int width, height;
 	
 	
 // Parametar je naziv frame-a
@@ -31,7 +32,7 @@ public class MainFrame extends JFrame {
 		execDefaultToolkit();
 		// glavni prozor se sastoji od 3 panela => tbPanel + centerPanel + statusBar
 		// centralni panel 
-		CustomPanel centerPanel = new CustomPanel(1440, 620, new Color(69, 179, 157));
+		CustomPanel centerPanel = new CustomPanel(1440, 620, new Color(110 ,255 ,207));
 		
 		// Toolbar paneli
 		CustomPanel tbStudent = new CustomPanel(1440, 65, Color.CYAN);
@@ -86,7 +87,7 @@ public class MainFrame extends JFrame {
 		this.add(BorderLayout.NORTH, tbProfesor);
 		this.add(BorderLayout.NORTH, tbStudent); // mora zadnje
 		this.add(BorderLayout.CENTER, centerPanel);	
-		this.add(BorderLayout.SOUTH, new MyStatusBar(1440, 45, new Color(69, 179, 157)));
+		this.add(BorderLayout.SOUTH, new MyStatusBar(1440, 45, new Color(110 ,255 ,207)));
 		
 	}
 	
@@ -152,8 +153,8 @@ public class MainFrame extends JFrame {
 			// 	rezolucija 3/4*width x 3/4*height
 			Toolkit tk = Toolkit.getDefaultToolkit();
 			Dimension screenSize = tk.getScreenSize();
-			int height = screenSize.height;
-			int width = screenSize.width;
+			height = screenSize.height;
+			width = screenSize.width;
 			width = width * 3/ 4 ; 
 			height = height * 3/4 ; 
 			setSize(width, height); 

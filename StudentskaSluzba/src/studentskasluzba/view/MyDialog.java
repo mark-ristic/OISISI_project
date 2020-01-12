@@ -23,10 +23,12 @@ import javax.swing.table.TableColumnModel;
 
 import studentskasluzba.controller.PredmetiController;
 import studentskasluzba.controller.ProfesoriController;
+import studentskasluzba.controller.StudentiController;
 import studentskasluzba.model.BazaPredmeta;
 import studentskasluzba.model.BazaProfesora;
 import studentskasluzba.model.Predmet;
 import studentskasluzba.model.Profesor;
+import studentskasluzba.model.Student;
 
 
 
@@ -72,7 +74,7 @@ public class MyDialog extends JDialog {
 		
 	}
 	
-	// metoda za brisanje studenta sa predmeta - GUI 
+	// metoda za brisanje studenta sa predmeta - GUI + funkcionalnost 
 	private void removeStudentFromPredmet() {
 
 		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
@@ -118,6 +120,70 @@ public class MyDialog extends JDialog {
 
 		panelbot.add(obrisi);
 		panelbot.add(odustani);
+		
+		// Tabela koja prikazuje studente koji su na predmetu
+		
+		String[] kolona = {"Studenti"};
+		DefaultTableModel dtm = new DefaultTableModel();
+		dtm.setColumnIdentifiers(kolona);
+		
+		JTable studTable = new JTable() {
+		 /**
+			 * 
+			 */
+			private static final long serialVersionUID = -3616267117240262552L;
+
+		public boolean isCellEditable(int row, int column) { 
+			return false; 
+			} 
+		 };
+		 
+		 studTable.setModel(dtm);
+		 //TableColumnModel cm = studTable.getColumnModel();
+		 studTable.setRowHeight(30);
+		 
+		 JScrollPane scrollPane = new JScrollPane(studTable);
+		 scrollPane.setPreferredSize(new Dimension(350,160));
+		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		 
+		 tablepanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		 tablepanel.add(scrollPane);
+		 
+		 // prolazimo kroz sve studente selektovanog predmeta i dodajemo ih u tabelu studTable
+		 for (Student s : PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getStudenti()) {
+			 
+			 Vector<String> vek = new Vector<String>();
+			 vek.add(s.getIme() + " " + s.getPrezime() + " " + s.getIndeks());
+			 dtm.addRow(vek);
+		 }
+	
+		 // mouse listener za preuzimanje podatka o selektovanom studentu
+		 studTable.addMouseListener(new MouseAdapter() { 
+		  
+			 public void mouseClicked(MouseEvent e) {
+				 
+				 String string = (String) studTable.getValueAt(studTable.getSelectedRow(), 0);
+				 String[] strings = string.split(" ");
+				 String index = strings[2] + " " + strings[3];
+				 indeks.setText(index);		 			 
+			 }
+			 
+		 } );
+		 // klikom na dugme preuzimamo indeks iz tabele bacamo ga u textfield i taj tekst saljemo u odgovarajucu metodu (moguce je i upisati samo indeks u textfield) 
+		 obrisi.addActionListener(add -> { 
+			 
+			 String indexZZ = indeks.getText();
+			 if (indexZZ.length() == 0) 
+				 return;
+			 if (StudentiController.getInstance().getStudent(indexZZ) == null) {
+				 System.out.println(" NE POSTOJI STUDENT SA TIM INDEKSOM ");
+				 return;
+			 }
+			 PredmetiController.getInstance().removeStudentFromPredmet(StudentiController.getInstance().getStudent(indexZZ)
+					 												   , PredmetiController.getInstance().getPredmet(MyPredmetTable.pw));
+ 
+		 });
 		
 		obrisi.addActionListener(evt -> this.dispose());
 		 
@@ -171,7 +237,7 @@ public class MyDialog extends JDialog {
 
 	}
 
-	// metoda za dodavanje studenta na predmet - GUI
+	// metoda za dodavanje studenta na predmet - GUI + funkcionalnost
 	private void addStudentToPredmet() {
 
 		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
@@ -217,6 +283,101 @@ public class MyDialog extends JDialog {
 
 		panelbot.add(dodaj);
 		panelbot.add(odustani);
+		
+		// Tabela za dodavanje studenta na predmet
+		
+		String[] kolona = {"Studenti"};
+		DefaultTableModel dtm = new DefaultTableModel();
+		dtm.setColumnIdentifiers(kolona);
+		
+		JTable studTable = new JTable() {
+		 /**
+			 * 
+			 */
+			private static final long serialVersionUID = -3616267117240262552L;
+
+		public boolean isCellEditable(int row, int column) { 
+			return false; 
+			} 
+		 };
+		 
+		 studTable.setModel(dtm);
+		 TableColumnModel cm = studTable.getColumnModel();
+		 studTable.setRowHeight(30);
+		 
+		 JScrollPane scrollPane = new JScrollPane(studTable);
+		 scrollPane.setPreferredSize(new Dimension(350,160));
+		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		 
+		 tablepanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		 tablepanel.add(scrollPane);
+		 
+		 // preuzimamo sve studente iz baze ali ubacujemo samo one koji su odgovarajuca godina i koji ne slusaju predmet
+		 for (Student s : StudentiController.getInstance().getStudenti()) {
+			  
+			 boolean flag = false;
+			 
+			 if (s.getGodStud() != PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getGodIzv())
+				 continue;
+			 
+			 for (Student st : PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getStudenti()) {
+				 
+				 if (st.getIndeks().equals(s.getIndeks())) {
+					 flag = true;
+					 break;
+				 }
+			 }
+			 // koristimo flag jer ne mogu da pozovem continue za spoljasnji for iz unutrasnjeg fora
+			 if (flag == true)
+				 continue;
+			 // dodajemo studenta u tabelu
+			 Vector<String> vek = new Vector<String>();
+			 vek.add(s.getIme() + " " + s.getPrezime() + " " + s.getIndeks());
+			 dtm.addRow(vek);
+		 }
+		 // mouse listener kako bi znali koga smo selektovali
+		 studTable.addMouseListener(new MouseAdapter() { 
+		 
+			 public void mouseClicked(MouseEvent e) {
+				 
+				 // Luka Jovanovic RA 1/2019
+				 //   0       1     2    3  
+				 
+				 String string = (String) studTable.getValueAt(studTable.getSelectedRow(), 0);
+				 String[] strings = string.split(" ");
+				 String index = strings[2] + " " + strings[3];
+				 indeks.setText(index);
+		 
+			 }
+		 
+		 } );
+		 
+		 dodaj.addActionListener(add -> { 
+			 //preuzimamo vrednost iz text fielda i saljemo odgovarajucoj funkciji
+			 String indexZZ = indeks.getText(); 
+			 
+			 if (indexZZ.length() == 0) 
+				 return;
+			 
+			 if (StudentiController.getInstance().getStudent(indexZZ) == null) {
+				
+				 System.out.println("NE POSTOJI STUDENT SA TIM INDEKSOM");
+				 //this.dispose();
+				 return;
+			 }
+			 
+			 Student ss = StudentiController.getInstance().getStudent(indexZZ);
+			 Predmet p = PredmetiController.getInstance().getPredmet(MyPredmetTable.pw);
+			 
+			 PredmetiController.getInstance().addStudentToPredmet(ss, p);
+
+			 // provera uspesnosti
+			 for ( Student s : PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getStudenti()) 
+				 System.out.println(s.getIndeks());
+
+			 this.dispose();
+		 });
 
 		odustani.addActionListener(evt -> this.dispose());
 		
@@ -243,7 +404,7 @@ public class MyDialog extends JDialog {
 		    }
 		});
 		
-		dodaj.addActionListener(evt -> this.dispose());
+		//dodaj.addActionListener(evt -> this.dispose());
 		
 		dodaj.addMouseListener(new MouseAdapter() {
 			 

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -14,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
+
+import studentskasluzba.controller.ProfesoriController;
+import studentskasluzba.model.Profesor;
 
 public class MyToolbarProfesor extends JToolBar {
 
@@ -135,6 +139,38 @@ public class MyToolbarProfesor extends JToolBar {
 				JOptionPane.showMessageDialog(parent, "Molim odaberite Profesora!");		
 			}
 			
+		});
+		
+		magny.addActionListener(listen -> {
+			
+			// split by < -> broj licne karte<0055699>ime<Profa>prezime<Profic>
+			//               broj licne karte , 0055699>ime , Profa>prezime , Profic>
+			// substring
+				
+			String temp = search.getText();
+			String[] splits = temp.split("<");
+			String brojLK, ime, prezime;
+			
+			brojLK = splits[1].substring(0, splits[1].length()-4);
+			ime = splits[2].substring(0,  splits[2].length()-8);
+			prezime = splits[3].substring(0, splits[3].length()-1);
+			
+			brojLK = brojLK.toLowerCase();
+			ime = ime.toLowerCase();
+			prezime = prezime.toLowerCase();
+			
+			ArrayList<Object> objects = ProfesoriController.getInstance().findProfesor(ime, prezime, brojLK);
+			
+			for (Object o : objects) {
+				Profesor p = (Profesor) o;
+				System.out.println(p.getIme() + " " + p.getPrezime() + " " + p.getBrojLK() );
+				
+			}
+			
+			MyDialog findProfesors = new MyDialog(parent, "Pronadji profesora" , true, 450, 500, "findProfesors", objects );
+			
+			findProfesors.setVisible(true);
+			search.setText("broj licne karte<>ime<>prezime<>");
 		});
 		
 	}

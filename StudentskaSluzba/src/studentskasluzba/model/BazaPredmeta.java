@@ -253,5 +253,25 @@ public class BazaPredmeta implements Serializable {
         }
 
 	}
+	
+	public ArrayList<Object> findPredmet(String sifra, String naziv) {
+		
+		ArrayList<Object> found = new ArrayList<>();
+		
+		sifra = sifra.toLowerCase();
+		naziv = naziv.toLowerCase();
+		
+		
+		for (Predmet i: predmeti) {
+			
+			if (i.getSifra().toLowerCase().equals(sifra)) {
+				found.add(i);
+				return found;
+			} 
+			if (i.getNaziv().toLowerCase().startsWith(naziv)  && i.getSifra().toLowerCase().startsWith(sifra)) 
+				found.add(i);	
+		}	
+		return found;	
+	}
 
 }

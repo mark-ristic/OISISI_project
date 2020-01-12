@@ -5,13 +5,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -47,6 +50,24 @@ public class MyDialog extends JDialog {
 		
 	}
 	
+	MyDialog(JFrame parent, String title, boolean modal, int width, int height, String dialogType, ArrayList<Object> list) {
+		
+		super(parent, title, modal);
+		setSize(width,height);
+		setLocationRelativeTo(parent);
+		
+		//if (dialogType.equals("findStudents"))
+		//	findStudents(list);
+		
+		if (dialogType.equals("findProfesors"))
+			findProfesors(list);
+		
+		if (dialogType.equals("findSubjects"))
+			findSubjects(list);
+		
+	}
+	
+	
 	MyDialog(JFrame parent, String title, boolean modal,int width,int height, String dialogType) {
 		
 		super(parent, title, modal);
@@ -72,6 +93,555 @@ public class MyDialog extends JDialog {
 
 		
 		
+	}
+	
+	private void findSubjects(ArrayList<Object> list) {
+		
+		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
+		CustomPanel bot_inset = new CustomPanel(650,60, Color.WHITE);
+		CustomPanel panel = new CustomPanel(650,390, Color.WHITE);
+		
+		bot_inset.setLayout(new BoxLayout(bot_inset, BoxLayout.Y_AXIS));
+		bot_inset.add(new CustomPanel(650,60,Color.WHITE));
+	
+		this.add(BorderLayout.NORTH, top_inset);
+		this.add(BorderLayout.CENTER, panel);
+		this.add(BorderLayout.SOUTH, bot_inset);
+		
+		JLabel question = new JLabel("Sifra Predmeta : ");
+		JTextField indeks = new JTextField(20);
+		
+		CustomPanel paneltop = new CustomPanel(650,95, Color.WHITE);
+		CustomPanel tablepanel = new CustomPanel(650, 200, Color.WHITE);
+		CustomPanel panelbot = new CustomPanel(650, 95, Color.WHITE); 
+		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(paneltop);
+		panel.add(tablepanel);
+		panel.add(panelbot);
+		
+		paneltop.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
+		paneltop.add(question);
+		paneltop.add(indeks);
+		
+		JButton prikazi = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi.png"));
+		JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+		
+		prikazi.setFocusPainted(false);
+		prikazi.setBorderPainted(false);				
+		prikazi.setOpaque(false);
+		prikazi.setContentAreaFilled(false);
+		odustani.setFocusPainted(false);
+		odustani.setBorderPainted(false);
+		odustani.setOpaque(false);
+		odustani.setContentAreaFilled(false);
+		
+		panelbot.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
+		
+		panelbot.add(prikazi);
+		panelbot.add(odustani);
+		
+		// Tabela u tablepanel
+		
+		String[] kolona = {"Predmeti"};
+		DefaultTableModel dtm = new DefaultTableModel();
+		dtm.setColumnIdentifiers(kolona);
+		
+		JTable predTable = new JTable() {
+		 /**
+			 * 
+			 */
+			private static final long serialVersionUID = -3616267117240262552L;
+
+		public boolean isCellEditable(int row, int column) { 
+			return false; 
+			} 
+		 };
+		 
+		 predTable.setModel(dtm);
+		 TableColumnModel cm = predTable.getColumnModel();
+		 predTable.setRowHeight(30);
+		 
+		 JScrollPane scrollPane = new JScrollPane(predTable);
+		 scrollPane.setPreferredSize(new Dimension(350,160));
+		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		 
+		 tablepanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		 tablepanel.add(scrollPane);
+		 
+		 for (Object o : list ) {
+			  
+			 Predmet p = (Predmet) o;
+					 
+			 Vector<String> vek = new Vector<String>();
+			 vek.add(p.getNaziv() + " " + p.getSifra());
+			 dtm.addRow(vek);
+		 }
+	
+		 predTable.addMouseListener(new MouseAdapter() { 
+		 
+		 public void mouseClicked(MouseEvent e) {
+			 
+			 // Luka Jovanovic RA 1/2019
+			 //   0       1     2    3  
+			 
+			 String string = (String) predTable.getValueAt(predTable.getSelectedRow(), 0);
+			 String[] strings = string.split(" ");
+			 String index = strings[strings.length - 1];
+			 indeks.setText(index);
+	 
+		 }
+		 
+		 } );
+		 
+		 prikazi.addActionListener(add -> { 
+			 //index = indeks.getText();
+			 String indexZZ = indeks.getText();
+			 
+			 if (indexZZ.length() == 0) 
+				 return;
+			 
+			 if (PredmetiController.getInstance().getPredmet(indexZZ) == null) {
+				
+				 System.out.println("NE POSTOJI PREDMET SA TOM SIFROM");
+				 //this.dispose();
+				 return;
+			 }
+			 
+			 Predmet predmet = PredmetiController.getInstance().getPredmet(indexZZ);
+			 
+			 this.remove(bot_inset);
+			 this.remove(top_inset);
+			 this.remove(panel);
+			 this.setSize(300,500);
+			 
+			 this.setPreferredSize(new Dimension(300,500));
+			 this.dispose();
+			 // JFrame parent, String title, boolean modal,int width,int height, String dialogType
+			 MyDialog md = new MyDialog(null, "Pronadji predmet", true,  450,250, ""); 
+			 
+			 CustomPanel full_pane = new CustomPanel(650,500 ,Color.white);
+			 
+			 full_pane.setLayout(new GridLayout(5,1,0, 15));
+			 // "ime", "prezime", "datum rodjenja","adresa stanovanja","kontakt telefon","email",
+			// "adresa kancelarije",
+			// "broj licne karte",
+			 //"titula",
+			// "zvanje",
+			// "Spisak predmeta"
+			 
+			CustomPanel sifra = new CustomPanel(650,50, Color.white);
+			CustomPanel naziv = new CustomPanel(650,50, Color.white);
+			CustomPanel godIzv = new CustomPanel(650,50, Color.white);
+			CustomPanel semestar = new CustomPanel(650,50, Color.white);
+			CustomPanel predProf = new CustomPanel(650,50, Color.white);
+			 
+			CustomPanel withInsets = new CustomPanel(450,500, Color.white);
+			
+			md.add(withInsets);
+			withInsets.setLayout(new BoxLayout(withInsets, BoxLayout.X_AXIS));
+			withInsets.add(new CustomPanel(50,450, Color.white));
+			withInsets.add(full_pane);
+			withInsets.add(new CustomPanel(50,450, Color.white));
+			
+			full_pane.add(sifra);
+			full_pane.add(naziv);
+			full_pane.add(godIzv);
+			full_pane.add(semestar);
+			full_pane.add(predProf);
+			
+			sifra.setLayout(new BoxLayout(sifra, BoxLayout.X_AXIS));
+			naziv.setLayout(new BoxLayout(naziv, BoxLayout.X_AXIS));
+			godIzv.setLayout(new BoxLayout(godIzv, BoxLayout.X_AXIS));
+			semestar.setLayout(new BoxLayout(semestar, BoxLayout.X_AXIS));
+			predProf.setLayout(new BoxLayout(predProf, BoxLayout.X_AXIS));
+			
+			sifra.add(new JLabel("     Sifra predmeta:*        "));
+			naziv.add(new JLabel("     Naziv predmeta:*        "));
+			semestar.add(new JLabel("     Semestar:*    "));
+			godIzv.add( new JLabel("     Godina predavanja:*        "));
+			predProf.add(new JLabel("     Predmetni profesor:*         "));
+			
+			JTextField _sifra = new JTextField();
+			JTextField _naziv = new JTextField();
+			JTextField _semestar = new JTextField();
+			JTextField _godIzv = new JTextField();
+			JTextField _predProf = new JTextField();
+			
+			_sifra.setEditable(false);
+			_naziv.setEditable(false);
+			_semestar.setEditable(false);
+			_godIzv.setEditable(false);
+			_predProf.setEditable(false);
+			
+			_sifra.setText(predmet.getSifra());
+			_naziv.setText(predmet.getNaziv());
+			_semestar.setText(Integer.toString(predmet.getSemestar()));
+			_godIzv.setText(Integer.toString(predmet.getGodIzv()));
+			
+			String ime, prezime = null;
+			
+			if (predmet.getPredProf() == null) {
+				ime = "null";
+				prezime = "";
+			}
+			else {
+				ime = predmet.getPredProf().getIme();
+				prezime = predmet.getPredProf().getPrezime();
+			}
+			
+			_predProf.setText(ime + " " + prezime);
+			
+			sifra.add(_sifra);
+			naziv.add(_naziv);
+			semestar.add(_semestar);
+			godIzv.add(_godIzv);
+			predProf.add(_predProf);
+		
+			md.setVisible(true);
+			
+		 });
+ 
+		 prikazi.addMouseListener(new MouseAdapter() {
+			 
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        // the user clicks on the label
+		    	prikazi.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi.png"));
+		    }
+		 
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		        // the mouse has entered the label
+		    	prikazi.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi_selected.png"));
+		    	
+		    }
+		 
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		        // the mouse has exited the label
+		    	prikazi.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi.png"));
+		    }
+		});
+		
+		odustani.addActionListener(close -> this.dispose());
+		
+		odustani.addMouseListener(new MouseAdapter() {
+			 
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        // the user clicks on the label
+		    	//this.dispose();
+		    }
+		 
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		        // the mouse has entered the label
+		    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani_selected.png"));
+		    	
+		    }
+		 
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		        // the mouse has exited the label
+		    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+		    }
+		});
+		
+	}
+	
+	private void findProfesors(ArrayList<Object> list) {
+		
+		
+		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
+		CustomPanel bot_inset = new CustomPanel(650,60, Color.WHITE);
+		CustomPanel panel = new CustomPanel(650,390, Color.WHITE);
+		
+		bot_inset.setLayout(new BoxLayout(bot_inset, BoxLayout.Y_AXIS));
+		bot_inset.add(new CustomPanel(650,60,Color.WHITE));
+	
+		this.add(BorderLayout.NORTH, top_inset);
+		this.add(BorderLayout.CENTER, panel);
+		this.add(BorderLayout.SOUTH, bot_inset);
+		
+		JLabel question = new JLabel("Broj licne karte profesora: ");
+		JTextField indeks = new JTextField(20);
+		
+		CustomPanel paneltop = new CustomPanel(650,95, Color.WHITE);
+		CustomPanel tablepanel = new CustomPanel(650, 200, Color.WHITE);
+		CustomPanel panelbot = new CustomPanel(650, 95, Color.WHITE); 
+		
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(paneltop);
+		panel.add(tablepanel);
+		panel.add(panelbot);
+		
+		paneltop.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
+		paneltop.add(question);
+		paneltop.add(indeks);
+		
+		JButton prikazi = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi.png"));
+		JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+		
+		prikazi.setFocusPainted(false);
+		prikazi.setBorderPainted(false);				
+		prikazi.setOpaque(false);
+		prikazi.setContentAreaFilled(false);
+		odustani.setFocusPainted(false);
+		odustani.setBorderPainted(false);
+		odustani.setOpaque(false);
+		odustani.setContentAreaFilled(false);
+		
+		panelbot.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
+		
+		panelbot.add(prikazi);
+		panelbot.add(odustani);
+		
+		// Tabela u tablepanel
+		
+		String[] kolona = {"Profesori"};
+		DefaultTableModel dtm = new DefaultTableModel();
+		dtm.setColumnIdentifiers(kolona);
+		
+		JTable profTable = new JTable() {
+		 /**
+			 * 
+			 */
+			private static final long serialVersionUID = -3616267117240262552L;
+
+		public boolean isCellEditable(int row, int column) { 
+			return false; 
+			} 
+		 };
+		 
+		 profTable.setModel(dtm);
+		 TableColumnModel cm = profTable.getColumnModel();
+		 profTable.setRowHeight(30);
+		 
+		 JScrollPane scrollPane = new JScrollPane(profTable);
+		 scrollPane.setPreferredSize(new Dimension(350,160));
+		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		 
+		 tablepanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		 tablepanel.add(scrollPane);
+		 
+		 for (Object o : list ) {
+			  
+			 Profesor p = (Profesor) o;
+					 
+			 Vector<String> vek = new Vector<String>();
+			 vek.add(p.getIme() + " " + p.getPrezime() + " " + p.getBrojLK());
+			 dtm.addRow(vek);
+		 }
+	
+		 profTable.addMouseListener(new MouseAdapter() { 
+		 
+		 public void mouseClicked(MouseEvent e) {
+			 
+			 // Luka Jovanovic RA 1/2019
+			 //   0       1     2    3  
+			 
+			 String string = (String) profTable.getValueAt(profTable.getSelectedRow(), 0);
+			 String[] strings = string.split(" ");
+			 String index = strings[2];
+			 indeks.setText(index);
+	 
+		 }
+		 
+		 } );
+		 
+		 prikazi.addActionListener(add -> { 
+			 //index = indeks.getText();
+			 String indexZZ = indeks.getText();
+			 
+			 if (indexZZ.length() == 0) 
+				 return;
+			 
+			 if (ProfesoriController.getInstance().getProfesor(indexZZ) == null) {
+				
+				 System.out.println("NE POSTOJI PROFESOR SA TIM BROJEM LICNE KARTE");
+				 //this.dispose();
+				 return;
+			 }
+			 
+			 Profesor prof = ProfesoriController.getInstance().getProfesor(indexZZ);
+			 
+			 this.remove(bot_inset);
+			 this.remove(top_inset);
+			 this.remove(panel);
+			 this.setPreferredSize(new Dimension(300,950));
+			 
+			 CustomPanel full_pane = new CustomPanel(650,500 ,Color.white);
+			 
+			 full_pane.setLayout(new GridLayout(11,1,0, 15));
+			 // "ime", "prezime", "datum rodjenja","adresa stanovanja","kontakt telefon","email",
+			// "adresa kancelarije",
+			// "broj licne karte",
+			 //"titula",
+			// "zvanje",
+			// "Spisak predmeta"
+			 
+			 CustomPanel ime = new CustomPanel(650,45, Color.white);
+			 CustomPanel prz = new CustomPanel(650,45, Color.white);
+			 CustomPanel dr = new CustomPanel(650,45, Color.white);
+			 CustomPanel as = new CustomPanel(650,45, Color.white);
+			 CustomPanel kt = new CustomPanel(650,45, Color.white);
+			 CustomPanel email = new CustomPanel(650,45, Color.white);
+			 CustomPanel ak = new CustomPanel(650,45, Color.white);
+			 CustomPanel lk = new CustomPanel(650,45, Color.white);
+			 CustomPanel title = new CustomPanel(650,45, Color.white);
+			 CustomPanel zv = new CustomPanel(650,45, Color.white);
+			 CustomPanel predmeti = new CustomPanel(650,45, Color.white);
+			 
+			 ime.setLayout(new BoxLayout(ime, BoxLayout.X_AXIS));
+			 prz.setLayout(new BoxLayout(prz, BoxLayout.X_AXIS));
+			 dr.setLayout(new BoxLayout(dr, BoxLayout.X_AXIS));
+			 as.setLayout(new BoxLayout(as, BoxLayout.X_AXIS));
+			 kt.setLayout(new BoxLayout(kt, BoxLayout.X_AXIS));
+			 email.setLayout(new BoxLayout(email, BoxLayout.X_AXIS));
+			 ak.setLayout(new BoxLayout(ak, BoxLayout.X_AXIS));
+			 lk.setLayout(new BoxLayout(lk, BoxLayout.X_AXIS));
+			 title.setLayout(new BoxLayout(title, BoxLayout.X_AXIS));
+			 zv.setLayout(new BoxLayout(zv, BoxLayout.X_AXIS));
+			 predmeti.setLayout(new BoxLayout(predmeti, BoxLayout.X_AXIS));
+			 
+			 
+			 ime.add( new JLabel("    Ime:    "));
+			 prz.add( new JLabel("    Prezime:*   "));
+			 dr.add( new JLabel("    Datum rodjenja:    "));
+			 as.add( new JLabel("    Adresa stanovanja:    "));
+			 kt.add(new JLabel("    Broj telefona:    "));
+			 email.add(new JLabel("    E-mail adresa:    "));
+			 ak.add(new JLabel("    Adresa Kancelarije:    "));
+			 lk.add(new JLabel("    Broj licne karte:    "));
+			 title.add(new JLabel("    Titula:    "));
+			 zv.add(new JLabel("    Zvanje:    "));
+			 predmeti.add(new JLabel("    Lista predmeta:    "));	
+			 
+			 JTextField _ime = new JTextField();
+			 JTextField _prz = new JTextField();
+			 JTextField _dr = new JTextField();
+			 JTextField _as = new JTextField();
+			 JTextField _kt = new JTextField();
+			 JTextField _email = new JTextField();
+			 JTextField _ak = new JTextField();
+			 JTextField _lk = new JTextField();
+			 JTextField _title = new JTextField();
+			 JTextField _zv = new JTextField();
+			 
+			 _ime.setText(prof.getIme());
+			 _prz.setText(prof.getPrezime());
+			 _dr.setText(ProfesoriController.getInstance().parseDate(prof.getDatRodj()));
+			 _as.setText(prof.getAdresaStanovanja());
+			 _kt.setText(prof.getKontaktTel());
+			 _email.setText(prof.getEmail());
+			 _ak.setText(prof.getAdresaKanc());
+			 _lk.setText(prof.getBrojLK());
+			 _title.setText(prof.getTitula());
+			 _zv.setText(prof.getZvanje().toString());
+			 
+			 _ime.setEditable(false);
+			 _prz.setEditable(false);
+			 _dr.setEditable(false);
+			 _as.setEditable(false);
+			 _kt.setEditable(false);
+			 _email.setEditable(false);
+			 _ak.setEditable(false);
+			 _lk.setEditable(false);
+			 _title.setEditable(false);
+			 _zv.setEditable(false);
+			 
+	 
+			 ime.add( _ime);
+			 prz.add(_prz);
+			 dr.add(_dr);
+			 as.add(_as);
+			 kt.add(_kt);
+			 email.add(_email);
+			 ak.add(_ak);
+			 lk.add(_lk);
+			 title.add(_title);
+			 zv.add(_zv);
+			 
+			 Vector<String> subjects = new Vector<String>();
+			 
+			 for (Predmet p : prof.getPredmeti())
+				 subjects.add(p.getNaziv());
+			 JComboBox<String> combo = new JComboBox<String>(subjects);
+			 combo.setEditable(false);
+			 predmeti.add(combo);  
+						 		 
+			 full_pane.add(ime);
+			 full_pane.add(prz);
+			 full_pane.add(dr);
+			 full_pane.add(as);
+			 full_pane.add(kt);
+			 full_pane.add(email);
+			 full_pane.add(ak);
+			 full_pane.add(lk);
+			 full_pane.add(title);
+			 full_pane.add(zv);
+			 full_pane.add(predmeti);
+			 CustomPanel withInsets = new CustomPanel(450,500, Color.white);
+			 
+			 withInsets.setLayout(new BoxLayout(withInsets, BoxLayout.X_AXIS));
+			 withInsets.add(new CustomPanel(50, 500, Color.white));
+			 withInsets.add(full_pane);
+			 withInsets.add(new CustomPanel(50, 500, Color.white));
+			 this.add(withInsets);
+			 this.setVisible(true);
+			 
+			 
+		 });
+		 
+		 prikazi.addMouseListener(new MouseAdapter() {
+			 
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        // the user clicks on the label
+		    	prikazi.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi.png"));
+		    }
+		 
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		        // the mouse has entered the label
+		    	prikazi.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi_selected.png"));
+		    	
+		    }
+		 
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		        // the mouse has exited the label
+		    	prikazi.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\prikazi.png"));
+		    }
+		});
+		
+		odustani.addActionListener(close -> this.dispose());
+		
+		odustani.addMouseListener(new MouseAdapter() {
+			 
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        // the user clicks on the label
+		    	//this.dispose();
+		    }
+		 
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+		        // the mouse has entered the label
+		    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani_selected.png"));
+		    	
+		    }
+		 
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+		        // the mouse has exited the label
+		    	odustani.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
+		    }
+		});
+			
 	}
 	
 	// metoda za brisanje studenta sa predmeta - GUI + funkcionalnost 

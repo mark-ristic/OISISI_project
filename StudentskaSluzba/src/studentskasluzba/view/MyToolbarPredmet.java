@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -16,6 +17,7 @@ import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
 
 import studentskasluzba.controller.PredmetiController;
+import studentskasluzba.model.Predmet;
 
 public class MyToolbarPredmet extends JToolBar {
 
@@ -243,6 +245,39 @@ public MyToolbarPredmet(final JFrame parent) {
 				JOptionPane.showMessageDialog(parent, "Molim odaberite predmet!");
 			}
 					
+		});
+		
+		magny.addActionListener(listen -> {
+			
+			// substring
+			// sifra<NANS1337>naziv<Nans>
+			//split by <   ->   sifra, NANS1337>naziv Nans>
+			//  
+			
+				
+			String temp = search.getText();
+			String[] splits = temp.split("<");
+			String sifra, naziv;
+			
+			sifra = splits[1].substring(0, splits[1].length()-6);
+			naziv = splits[2].substring(0, splits[2].length() -1);
+			
+			sifra = sifra.toLowerCase();
+			naziv = naziv.toLowerCase();
+			
+			ArrayList<Object> objects = PredmetiController.getInstance().findPredmet(sifra, naziv);
+			
+			for (Object o : objects) {
+				Predmet p = (Predmet) o;
+				System.out.println(p.getNaziv() + " " + p.getSifra());
+				
+			}
+			
+			MyDialog findSubjects = new MyDialog(parent, "Pronadji Predmet" , true, 650, 500, "findSubjects", objects );
+			
+			findSubjects.setVisible(true);
+			
+			search.setText("sifra<>naziv<>");
 		});
 		
 		

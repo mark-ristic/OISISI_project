@@ -174,5 +174,26 @@ public class BazaProfesora implements Serializable {
   
     } 
 	
+	public ArrayList<Object> findProfesor(String ime, String prezime, String brojLK) {
+		
+		ArrayList<Object> found = new ArrayList<>();
+		
+		ime = ime.toLowerCase();
+		prezime = prezime.toLowerCase();
+		brojLK = brojLK.toLowerCase();
+		
+		
+		for (Profesor i: Profesori) {
+			
+			if (i.getBrojLK().toLowerCase().equals(brojLK)) {
+				found.add(i);
+				return found;
+			} 
+			if (i.getIme().toLowerCase().startsWith(ime) && i.getPrezime().toLowerCase().startsWith(prezime) && i.getBrojLK().toLowerCase().startsWith(brojLK)) 
+				found.add(i);	
+		}	
+		return found;	
+	}
+	
 	
 }

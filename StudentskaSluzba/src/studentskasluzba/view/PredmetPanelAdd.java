@@ -94,7 +94,9 @@ public class PredmetPanelAdd extends JPanel {
 			JLabel semestarlab = new JLabel("     Semestar:*    ");
 			JLabel godinalab =   new JLabel("     Godina predavanja:*        ");
 			JLabel profesorlab = new JLabel("     Predmetni profesor:*         ");
-				
+			
+			profesortxt.setToolTipText("Uneti broj licne karte profesora");
+			
 			sifra.add(sifralab); 	 	
 			sifra.add(sifratxt);
 			naziv.add(nazivlab); 		

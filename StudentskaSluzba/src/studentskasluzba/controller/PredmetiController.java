@@ -210,5 +210,9 @@ public class PredmetiController {
 		}		
 	}
 	
+	public ArrayList<Object> findPredmet(String sifra, String naziv) {
+		return BazaPredmeta.getInstance().findPredmet(sifra, naziv);
+	}
+	
 	
 }

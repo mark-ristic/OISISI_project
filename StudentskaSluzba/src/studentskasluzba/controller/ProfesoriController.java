@@ -152,4 +152,8 @@ public class ProfesoriController {
 		return objects;
 	}
 	
+	public ArrayList<Object> findProfesor(String ime, String prezime, String brojLK) {
+		return BazaProfesora.getInstance().findProfesor(ime, prezime, brojLK);
+	}
+	
 }

@@ -63,7 +63,7 @@ public class ProfesoriController {
 
 		BazaProfesora.getInstance().izmeniProfesora(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, adresaKanc,
 													brojLK, titula, zvanje, predmeti);
-		
+		// izvucemo bas onog profesora koga smo izmenili i azuriramo podatke u tabeli
 		Profesor p = BazaProfesora.getInstance().getProfesor(brojLK);
 		
 		/* String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
@@ -126,7 +126,7 @@ public class ProfesoriController {
 		 BazaProfesora.getInstance().snimiProfesore();
 		
 	}
-	
+	// inicijalno popunjavanje tabele profesora
 	public Vector<Object> initiateTable(DefaultTableModel model) {
 		Vector<Object> objects = new Vector<Object>();
 		for (Profesor p : BazaProfesora.getInstance().getProfesori()) {

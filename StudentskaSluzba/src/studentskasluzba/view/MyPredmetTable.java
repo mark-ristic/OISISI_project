@@ -86,7 +86,6 @@ public class MyPredmetTable extends JTable {
 			String godIzv = Integer.toString(PredmetPanelAdd.comboGod.getSelectedIndex() + 1);
 			row[3] = godIzv;
 			
-			row[4] = PredmetPanelAdd.profesortxt.getText();
 			String brojLK = PredmetPanelAdd.profesortxt.getText();
 			
 			// ako ne unesemo profesora stavi na 'null' po defaultu
@@ -94,6 +93,7 @@ public class MyPredmetTable extends JTable {
 				if(brojLK.length() == 0) {
 					brojLK = "null";
 				}
+			row[4] = brojLK;	
 			
 			Profesor predProf = ProfesoriController.getInstance().getProfesor(brojLK);
 			

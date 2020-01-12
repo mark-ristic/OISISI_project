@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import studentskasluzba.controller.PredmetiController;
 import studentskasluzba.model.Student.Status;
 
 public class BazaStudenata implements Serializable {
@@ -52,7 +53,7 @@ public class BazaStudenata implements Serializable {
 	public boolean dodajStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
 			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek ,
 			ArrayList<Predmet> predmeti  ) {
-		// TODO: CHECK
+		
 		boolean postoji = false;
 		
 		for (Student s : studenti) {
@@ -61,6 +62,7 @@ public class BazaStudenata implements Serializable {
 					postoji = true;	
 			}
 		}
+		// samo ako vec ne postoji student u bazi ga dodaj u bazu
 		if (postoji == false) { 
 			this.studenti.add(new Student(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, indeks, datumUpisa, godStud, status, prosek ,predmeti ));
 			snimiStudente();
@@ -71,6 +73,24 @@ public class BazaStudenata implements Serializable {
 	}
 	
 	public void izbrisiStudenta(String indeks) {
+			
+		// iteriramo preko svakog predmeta studenta kojeg brisemo i sa liste svakog tog predmeta brisemo trenutnog studenta
+		for (Predmet p : getStudent(indeks).getPredmeti()) {
+			boolean predmetChanged = false;
+			for (Student s : p.getStudenti()) {
+				
+				if (s.getIndeks().equals(indeks) == true)  {
+					p.getStudenti().remove(s);	
+					predmetChanged = true;
+					break;
+				}
+			}
+			
+			if (predmetChanged == true)
+				PredmetiController.getInstance().snimiPredmete();
+			
+		}
+		
 		for (Student i : studenti) {
 			if (i.getIndeks().contentEquals(indeks)) {
 				studenti.remove(i);	
@@ -83,6 +103,33 @@ public class BazaStudenata implements Serializable {
 	public void izmeniStudenta(String ime, String prezime, Date datRodj, String adresaStanovanja, String kontaktTel,
 			String email, String indeks, Date datumUpisa, int godStud, Status status, double prosek,
 			ArrayList<Predmet>  predmeti) {
+		
+		boolean year_changed = false;
+		
+		if (godStud != getStudent(indeks).getGodStud())
+			year_changed = true;
+		// ako je promenjena godina studenta skini ga sa liste svakog predmeta
+		if (year_changed == true) {
+			
+			for (Predmet p : PredmetiController.getInstance().getPredmeti()) {
+				
+				if (p.getGodIzv() != getStudent(indeks).getGodStud())
+					continue;
+				
+				for (Student s : p.getStudenti()) {
+					
+					if (s.getIndeks().equals(indeks)) {
+						
+						p.getStudenti().remove(s);
+						break;					
+					}					
+				}			
+			}
+			// ocisti listu predmeta bas tog studenta zbog promene godine
+			getStudent(indeks).getPredmeti().clear(); 
+			PredmetiController.getInstance().snimiPredmete();
+		}
+		
 		for (Student i : studenti) {
 			if (i.getIndeks().equals(indeks)) {
 				i.setIme(ime);
@@ -127,9 +174,9 @@ public class BazaStudenata implements Serializable {
 
 		
 		// check if empty 
-				File fajl = new File("studenti.txt");
-				if (fajl.length() == 0)
-					return;
+			File fajl = new File("studenti.txt");
+			if (fajl.length() == 0)
+				return;
 		
 		try
         {    
@@ -171,7 +218,7 @@ public class BazaStudenata implements Serializable {
 		
 		
 		for (Student i : studenti) {
-			
+			// ako nadjemo bas tog jednog po indeksu onda smo zavrsili pretragu
 			if (i.getIndeks().toLowerCase().equals(index)) {
 				found.add(i);
 				return found;

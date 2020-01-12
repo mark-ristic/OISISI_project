@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import studentskasluzba.controller.ProfesoriController;
+import studentskasluzba.controller.StudentiController;
+
 public class BazaPredmeta implements Serializable {
 
 	/**
@@ -41,6 +44,7 @@ public class BazaPredmeta implements Serializable {
 			if (p.getSifra().equals(sifra))
 				return p;
 		}
+		// test
 		System.out.println("Ne postoji predmet sa tom sifrom" + " " + this.getClass().getSimpleName());
 		return null;
 	}
@@ -51,6 +55,7 @@ public class BazaPredmeta implements Serializable {
 
 		for (Predmet p : predmeti) {
 			if (p.getSifra().equals(sifra)) {
+				// test
 				System.out.println("Predmet vec postoji u bazi" + " " + this.getClass().getSimpleName());
 				flag = true;
 				return flag;
@@ -58,21 +63,127 @@ public class BazaPredmeta implements Serializable {
 		}
 
 		predmeti.add(new Predmet(sifra,naziv,semestar,godIzv,predProf,studenti));
+		
+		// ako dodajemo novi predmet sa predmetnim profesorom, i taj profesor vec postoji - dodaj ovaj predmet na njegove predmete
+		if (predProf != null && ProfesoriController.getInstance().getProfesor(predProf.getBrojLK()).getBrojLK().equals(predProf.getBrojLK())) {
+			 
+			String brojLK = predProf.getBrojLK();
+			Profesor prof = BazaProfesora.getInstance().getProfesor(brojLK);
+			Predmet predm = BazaPredmeta.getInstance().getPredmet(sifra);
+			
+			prof.getPredmeti().add(predm);
+			predm.setPredProf(prof);
+			// test 
+			System.out.println("---------------------------------------");
+			System.out.println(predm.getNaziv() + " predaje " + predProf.getEmail());
+			System.out.println(predProf.getEmail() + " predaje " + predProf.getPredmeti().size() + " predmeta");
+			System.out.println("---------------------------------------");
+			ProfesoriController.getInstance().snimiProfesore();	
+		}
+		
 		snimiPredmete();
 		return flag;
 	}
 
 	public void izbrisiPredmet(String sifra) {
+		
+		// ako izbrisemo predmet, izbrisemo ga i sa liste predmeta predmetnog profesora
+		for (Profesor prof : ProfesoriController.getInstance().getProfesori()) {
+			for (Predmet pt : prof.getPredmeti()) {
+				if (pt.getSifra().equals(sifra)) {
+					prof.getPredmeti().remove(pt);
+					break;
+				}
+			}
+		}
+		
+		// izbrisanjem predmeta, izbrisemo taj predmet i sa liste studenata koji ga slusaju
+		for (Student s : StudentiController.getInstance().getStudenti()) {
+			for (Predmet pred : s.getPredmeti()) {
+				if (pred.getSifra().equals(sifra)) {
+					s.getPredmeti().remove(pred);
+					break;
+				}
+			}
+		}
+		
+		// brisanje predmeta
 		for (Predmet p : predmeti) {
 			if(p.getSifra().equals(sifra)) {
 
 				predmeti.remove(p);
-				snimiPredmete();
 				break;
 			}
 		}
+		
+		snimiPredmete();
+		ProfesoriController.getInstance().snimiProfesore();
+		StudentiController.getInstance().snimiStudente();
+			
 	}
+	
 	public void izmeniPredmet(String sifra, String naziv, int semestar, int godIzv, Profesor predProf,ArrayList<Student> studenti) {
+		
+		boolean changed_professor = false;
+		boolean year_changed = false;
+		
+		// ako promenimo godinu predavanja na predmetu onda cemo da brisemo taj predmet sa liste svih studenata koji su ga slusali
+		if (godIzv != getPredmet(sifra).getGodIzv())
+			year_changed = true;
+		
+		if (year_changed == true) {
+			
+			for (Student s : StudentiController.getInstance().getStudenti()) {
+				
+				if (s.getGodStud() != getPredmet(sifra).getGodIzv())
+					continue;
+				
+				for (Predmet p : s.getPredmeti()) {
+					
+					if (p.getSifra().equals(sifra)) {
+						s.getPredmeti().remove(p);	
+						break;
+					}
+				}			
+			}	
+			// resetujemo listu studenata kod bas tog predmeta
+			getPredmet(sifra).getStudenti().clear();
+			StudentiController.getInstance().snimiStudente();
+			
+		}
+		
+		String newProf = null;
+		// ako profesor nije zamenjen na drugi postojeci profesor, vec je samo izbrisan
+		if (predProf == null)
+			newProf = "null";
+		else
+			newProf = predProf.getBrojLK();
+		
+		String oldProf = null;
+		
+		if (getPredmet(sifra).getPredProf() == null)
+			oldProf = "null";
+		else
+			oldProf= getPredmet(sifra).getPredProf().getBrojLK();	//predProf.getBrojLK()
+		
+		// ako smo izmenili predmetnog profesora na drugi postojeci profesor 
+		if (!oldProf.equals(newProf))
+			changed_professor = true; 
+		
+		if (changed_professor == true && getPredmet(sifra).getPredProf() != null) { // obrisi iz liste predmeta profesora samo ako profesor postoji
+			
+			for (Predmet pt : ProfesoriController.getInstance().
+							  getProfesor(oldProf).getPredmeti()) {
+				
+				if (pt.getSifra().equals(sifra)) {
+					ProfesoriController.getInstance().getProfesor(oldProf).getPredmeti().remove(pt);
+					break;
+				}
+			}
+			
+		}
+		
+		// preuzimanje novih podataka kod izmene
 		for (Predmet p : predmeti) {
 			if (p.getSifra().equals(sifra)) {
 				p.setSifra(sifra);

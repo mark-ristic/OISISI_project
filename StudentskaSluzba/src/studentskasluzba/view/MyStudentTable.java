@@ -98,6 +98,7 @@ public class MyStudentTable extends JTable {
 		
 		Object[] row = new Object[12];
 		// action listener za dodavanje studenta
+		
 		StudentPanelAdd.ds.addActionListener( add -> {
 			
 			row[0] = StudentPanelAdd.imetxt.getText();
@@ -106,16 +107,7 @@ public class MyStudentTable extends JTable {
 			String prezime = StudentPanelAdd.prezimetxt.getText();
 			row[2] = StudentPanelAdd.datumRodjtxt.getText();
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy."); 
-			String dateInString = StudentPanelAdd.datumRodjtxt.getText();
-			Date datRodj = null;
-			try {
-				datRodj = formatter.parse(dateInString);
-			} catch (ParseException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
- 
+			String dateRegex = StudentPanelAdd.datumRodjtxt.getText();
 			
 			row[3] = StudentPanelAdd.adresatxt.getText();
 			String adresaStanovanja = StudentPanelAdd.adresatxt.getText();
@@ -127,19 +119,10 @@ public class MyStudentTable extends JTable {
 			String indeks = StudentPanelAdd.indekstxt.getText();
 			row[7] = StudentPanelAdd.datumUpisatxt.getText();
 			
-			SimpleDateFormat formatter1 = new SimpleDateFormat("dd.MM.yyyy."); 
-			String dateInString1 = StudentPanelAdd.datumUpisatxt.getText();
-			Date datumUpisa = null;
-			try {
-				datumUpisa = formatter1.parse(dateInString1);
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-					
+			String datUpisRegex = StudentPanelAdd.datumUpisatxt.getText();
 			
 			int godStud = StudentPanelAdd.trenGodCombo.getSelectedIndex()	;
-			
+			String godStudregex = Integer.toString(godStud + 1);
 			row[8] = Integer.toString(godStud + 1);
 				
 			Status status; 
@@ -151,21 +134,53 @@ public class MyStudentTable extends JTable {
 				row[9] = "S";
 				status = Status.valueOf("S");
 			}
-			
-			
-			
-			row[10] = Double.parseDouble(StudentPanelAdd.prosektxt.getText());
+				
 			row[11] = "PREDMETI-" + indeks;
 			
 			ArrayList<Predmet> predmeti = new ArrayList<Predmet>();
 			
+
+			String prosekregex = StudentPanelAdd.prosektxt.getText();
+			
+
+			boolean checkRegexFlag = StudentiController.getInstance().checkRegex(ime, prezime, dateRegex, adresaStanovanja, kontaktTel,
+																				email, indeks, datUpisRegex, prosekregex);
+			
+			if(checkRegexFlag == true) {
+				return;
+			}
+				
+			row[10] = Double.parseDouble(StudentPanelAdd.prosektxt.getText());
+			
+			
 			Double prosek = Double.parseDouble(StudentPanelAdd.prosektxt.getText());
-			// poziv funkcije za dodavanje studenta u bazu i tabelu
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy."); 
+			String dateInString = StudentPanelAdd.datumRodjtxt.getText();
+			Date datRodj = null;
+			try {
+				datRodj = formatter.parse(dateInString);
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+			SimpleDateFormat formatter1 = new SimpleDateFormat("dd.MM.yyyy."); 
+			String dateInString1 = StudentPanelAdd.datumUpisatxt.getText();
+			Date datumUpisa = null;
+			try {
+				datumUpisa = formatter1.parse(dateInString1);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
 			StudentiController.getInstance().dodajStudenta(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, indeks,
 														  datumUpisa, godStud+1, status, prosek, predmeti, row, mdst);
 			
 			System.out.println(StudentPanelAdd.trenGodCombo.getSelectedIndex());
-			// resetujemo panel 
+			
 			StudentPanelAdd.imetxt.setText("");
 			StudentPanelAdd.prezimetxt.setText("");
 			StudentPanelAdd.datumRodjtxt.setText("");
@@ -238,6 +253,22 @@ public class MyStudentTable extends JTable {
 						StudentPanelEdit.samofin1.setSelected(true);
 					// dopunjavamo action listener za izmenu studenta
 					StudentPanelEdit.es.addActionListener( editevent1 -> {
+						
+						String ime = StudentPanelEdit.imetxt1.getText();
+						String prezime = StudentPanelEdit.prezimetxt1.getText();
+						String datumRodjregex = StudentPanelEdit.datRodjtxt1.getText();
+						String adresa = StudentPanelEdit.adresatxt1.getText();
+						String telefon = StudentPanelEdit.teltxt1.getText();
+						String email = StudentPanelEdit.emailtxt1.getText();
+						String indeks = StudentPanelEdit.indekstxt1.getText();
+						String datumUpisaregex = StudentPanelEdit.datumUpisatxt1.getText();
+						String prosek = StudentPanelEdit.prosektxt1.getText();
+						
+						boolean flag = StudentiController.getInstance().checkRegex(ime, prezime, datumRodjregex, 
+								adresa, telefon, email, indeks, datumUpisaregex,  prosek) ; 
+						
+						if (flag == true)
+							return;
 						
 						String statuszz = (StudentPanelEdit.budzet1.isSelected() == true) ? "B" : "S";
 						

@@ -273,7 +273,7 @@ public class StudentPanelEdit extends JPanel{
 		    }
 		});
 		
-		es.addActionListener(zz -> md.dispose());	
+			
 		es.setPreferredSize(new Dimension(125,35));
 		es.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\izmeni.png"));
 		es.setFocusPainted(false);

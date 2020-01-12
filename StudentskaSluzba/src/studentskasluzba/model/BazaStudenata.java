@@ -73,7 +73,12 @@ public class BazaStudenata implements Serializable {
 	}
 	
 	public void izbrisiStudenta(String indeks) {
-			
+		
+		if (getStudent(indeks) == null) {
+			System.out.println("Uhvacena greska pri brisanju studenta");
+			return;
+		}
+		
 		// iteriramo preko svakog predmeta studenta kojeg brisemo i sa liste svakog tog predmeta brisemo trenutnog studenta
 		for (Predmet p : getStudent(indeks).getPredmeti()) {
 			boolean predmetChanged = false;

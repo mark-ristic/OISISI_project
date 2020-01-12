@@ -81,19 +81,20 @@ public class MyPredmetTable extends JTable {
 			String naziv = PredmetPanelAdd.nazivtxt.getText();
 			
 			String semestar = PredmetPanelAdd.semestartxt.getText();
+			
 			row[2] = semestar;
 			
 			String godIzv = Integer.toString(PredmetPanelAdd.comboGod.getSelectedIndex() + 1);
 			row[3] = godIzv;
 			
+			
+			// trenutno izvadicemo iz Baze a kasnije prebaciti iz Controllera
 			String brojLK = PredmetPanelAdd.profesortxt.getText();
+			String brojLKregex = brojLK;
+			if(brojLK.length() == 0) {
+				brojLK = "null";
+			}
 			
-			// ako ne unesemo profesora stavi na 'null' po defaultu
-			
-				if(brojLK.length() == 0) {
-					brojLK = "null";
-				}
-			row[4] = brojLK;	
 			
 			Profesor predProf = ProfesoriController.getInstance().getProfesor(brojLK);
 			
@@ -101,22 +102,32 @@ public class MyPredmetTable extends JTable {
 				System.out.println("POSTOJI PROFESOR" + " " + this.getClass().getSimpleName());
 			else
 				brojLK = "null";
+			row[4] = brojLK;
 			
-			row[5] = "STUDENTI-" + sifra;
-
+			row[5] = "STUDENTI-" + sifra	;
+			
 			ArrayList<Student> studenti = new ArrayList<>();
+			
+			
+			boolean checkRegexFlag = PredmetiController.getInstance().checkRegex(sifra, naziv, semestar, brojLKregex);
+			
+			if(checkRegexFlag == true) {
+				return;
+			}
+			
+			
+			
 			
 			PredmetiController.getInstance().dodajPredmet(sifra, naziv, Integer.parseInt(semestar), PredmetPanelAdd.comboGod.getSelectedIndex()+1,
 														  ProfesoriController.getInstance().getProfesor(brojLK), studenti, row, mdpt);
-			 
-			// kad dodajemo predmet iz panela, polja za unos u panelu resetujemo
+		
 			PredmetPanelAdd.sifratxt.setText("");
 			PredmetPanelAdd.nazivtxt.setText("");
 			PredmetPanelAdd.profesortxt.setText("");
 			PredmetPanelAdd.semestartxt.setText("");
 			PredmetPanelAdd.comboGod.setSelectedIndex(0);
 			
-		});
+		}); 
 		
 		this.addMouseListener(new MouseAdapter() {
 			
@@ -158,6 +169,8 @@ public class MyPredmetTable extends JTable {
 				
 				PredmetPanelEdit.sifratxt.setEditable(false);
 				
+				PredmetPanelEdit.nazivtxt.setEditable(false);
+				
 				PredmetPanelEdit.nazivtxt.setText(p.getNaziv());
 				
 				if(p.getGodIzv() == 1) 
@@ -182,6 +195,13 @@ public class MyPredmetTable extends JTable {
 					String naziv = PredmetPanelEdit.nazivtxt.getText();
 					
 					String brojLK = PredmetPanelEdit.profesortxt.getText();
+					
+					String semestar = PredmetPanelEdit.semestartxt.getText();
+					
+					boolean flag = PredmetiController.getInstance().checkRegex(sifr, naziv, semestar, brojLK);
+					
+					if (flag == true)
+						return;
 					
 					PredmetiController.getInstance().izmeniPredmet(	pw,
 																	naziv,

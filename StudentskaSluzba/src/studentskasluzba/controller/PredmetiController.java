@@ -2,6 +2,10 @@ package studentskasluzba.controller;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 
 import studentskasluzba.model.BazaPredmeta;
 import studentskasluzba.model.Predmet;
@@ -212,6 +216,74 @@ public class PredmetiController {
 	
 	public ArrayList<Object> findPredmet(String sifra, String naziv) {
 		return BazaPredmeta.getInstance().findPredmet(sifra, naziv);
+	}
+	
+
+	public boolean checkRegex(String sifra, String naziv, String semestar, String brojLK) {
+		//ha greska beugrik true ba ;; if(regexmatches) ha nem optionpane return true; ha flag true sima return/// 
+		
+		//Prvo provera obaveznih polja
+		if(sifra.trim().isEmpty() ||
+				naziv.trim().isEmpty() ||
+					semestar.trim().isEmpty())
+		{
+			JOptionPane.showMessageDialog(null, "Polja sa oznakom '*' moraju biti popunjena");
+			return true;
+		}
+		
+		// regexMatch za sifru predmeta
+		
+		String sifrapattern = "^[A-Z]{1,3}[0-9]{1,5}";
+		Pattern sifraPatt = Pattern.compile(sifrapattern);
+		Matcher sifraMatcher = sifraPatt.matcher(sifra);
+		
+		if(!sifraMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Neodgovarajuca sifra predmeta!");
+			return true;
+		}
+		
+		// regexMatch za naziv predmeta - mora poceti jednim velikim slovom, i moze sastojati od vise reci
+		/*
+		String nazivpattern = "[A-Z]{1}[a-z]{0,30}[ ]?[a-z]{1,30}?[ ]?[0-9]?[ ]?[a-z]{1,30}?[ ]?[0-9]?";
+		Pattern nazivPatt = Pattern.compile(nazivpattern);
+		Matcher nazivMatcher = nazivPatt.matcher(naziv);
+		
+		if(!nazivMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Neodgovarajuci naziv predmeta!");
+			return true;
+		} */ // ZAKOMENTARISANO ZATO STO NE PREPOZNAJE LATINICNA SLOVA SA KAPICOM 
+		
+		// regexMatch za semestar - 1 broj izmedju 1 i 8 
+		
+		int i;
+		try {
+			i = Integer.parseInt(semestar);
+		} catch (NumberFormatException nfe) {
+			System.out.println("neuspesna konverzija");
+			JOptionPane.showMessageDialog(null, "Neodg semestar");
+			return true;
+		} 
+		
+		if(i < 1 || i > 8) {
+			JOptionPane.showMessageDialog(null, "Neodg semestar");
+			return true;
+		}
+
+		// regexMatch za broj licne karte predmetnog profesora
+		
+		int brLK;
+		if(brojLK.isEmpty() == false) {
+			try {
+				brLK = Integer.parseInt(brojLK);
+			} 
+			catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(null, "Los broj lk");
+				return true;
+			}
+		}
+		
+		
+		return false;
 	}
 	
 	

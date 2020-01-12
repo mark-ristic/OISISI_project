@@ -1,10 +1,12 @@
 package studentskasluzba.controller;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import studentskasluzba.model.BazaProfesora;
@@ -154,6 +156,91 @@ public class ProfesoriController {
 	
 	public ArrayList<Object> findProfesor(String ime, String prezime, String brojLK) {
 		return BazaProfesora.getInstance().findProfesor(ime, prezime, brojLK);
+	}
+	
+	
+	public boolean checkRegex(String ime, String prezime, String datumRodj, String telefon, String brojLK, String email) {
+		
+		if(ime.trim().isEmpty() ||
+				prezime.trim().isEmpty() ||
+					datumRodj.trim().isEmpty() ||
+						brojLK.trim().isEmpty() /*||
+							email.trim().isEmpty()*/ )
+		{
+			JOptionPane.showMessageDialog(null, "Polja sa oznakom '*' moraju biti popunjena");
+			return true;
+		}
+		/*
+		// regexMatch za ime
+		
+		String imepattern = "[A-Z]{1}[a-z]{0,30}";
+		Pattern imePatt = Pattern.compile(imepattern);
+		Matcher imeMatcher = imePatt.matcher(ime);
+		
+		if(!imeMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Neodgovarajuce ime");
+			return true;
+		}
+		
+		// regex za prezime - ista sema kao i za ime
+		
+		Matcher prezimeMatcher = imePatt.matcher(prezime);
+		
+		if(!prezimeMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Neodgovarajuce prezime");
+			return true;
+		}		 */  // ZAKOMENTARISAN CHECKER ZA IME I PREZIME ZBOG LATINICNIH SLOVA SA KAPICOM
+		
+		// regexMatch za datum rodjenja 
+		
+		String datumpattern = "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[012])\\.(19|20)\\d\\d\\.$";
+		Pattern datePatt = Pattern.compile(datumpattern);
+		Matcher datumMatcher = datePatt.matcher(datumRodj);
+		
+		if(!datumMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Los format datuma");
+			return true;
+		}	
+		
+		
+		// telefon format - na semu datih podataka	
+		String mobPattern = "[0-9]{1,10}\\/?[0-9]{1,10}?[-]?[0-9]{1,10}?";
+		Pattern mobpatt = Pattern.compile(mobPattern);
+		Matcher mobMatcher = mobpatt.matcher(telefon);
+
+		if(!mobMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Los broj telefona");
+			return true;
+		}	
+		
+		// brojLICNA regex
+		
+		String licnaPattern ="[0-9]{5,15}";
+		Pattern licnapatt = Pattern.compile(licnaPattern);
+		Matcher licnaMatcher = licnapatt.matcher(brojLK);
+		
+		if(!licnaMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Neodgovarajuca licna!");
+			return true;
+		}
+		
+		// email matching
+		
+		String emailPattern = "^[a-zA-Z0-9]{1,20}\\.?[a-zA-Z0-9]{1,20}?@[a-zA-Z0-9]{1,20}\\.[a-zA-Z]{2,3}$";
+		Pattern pattern = Pattern.compile(emailPattern);
+		Matcher regexMatcher = pattern.matcher(email);
+		
+		if(!regexMatcher.matches()) {
+			JOptionPane.showMessageDialog(null, "Los email format");
+			return true;
+		}
+		
+		
+		
+		
+		
+		
+		return false;
 	}
 	
 }

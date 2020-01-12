@@ -96,7 +96,7 @@ public class MyProfesorTable extends JTable {
 		
 		System.out.println("selected is " + selected);
 		
-		ProfesorPanelAdd.dp.addActionListener( add -> {
+ProfesorPanelAdd.dp.addActionListener( add -> {
 			
 			/* String ime, String prezime, Date datRodj, String adresaStanovanja, int kontaktTel,
 			String email, String adresaKanc, int brojLK, String titula, ProfesorType zvanje, ArrayList<Predmet> predmeti */
@@ -107,16 +107,7 @@ public class MyProfesorTable extends JTable {
 			String prezime = ProfesorPanelAdd.prezimetxt.getText();
 			row[2] = ProfesorPanelAdd.datumRodjtxt.getText();
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy."); 
-			String dateInString = ProfesorPanelAdd.datumRodjtxt.getText();
-			Date datRodj = null;
-			try {
-				datRodj = formatter.parse(dateInString);
-			} catch (ParseException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			
+			String datRodjregex = ProfesorPanelAdd.datumRodjtxt.getText();
 			
 			String adresaStanovanja = ProfesorPanelAdd.adresatxt.getText();
 			row[3] = adresaStanovanja;
@@ -148,11 +139,29 @@ public class MyProfesorTable extends JTable {
 			
 			row[10] = "PREDMETI-" + ProfesorPanelAdd.brojLKtxt.getText();
 			
-			// poziv funkcije za dodavanje profesora
+			
+			boolean checkRegexFlag = ProfesoriController.getInstance().checkRegex(ime, prezime, datRodjregex, kontaktTel, brojLK, email);
+			
+			if(checkRegexFlag == true) {
+				return;
+			}
+			
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy."); 
+			String dateInString = ProfesorPanelAdd.datumRodjtxt.getText();
+			Date datRodj = null;
+			try {
+				datRodj = formatter.parse(dateInString);
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+			
+			
 			ProfesoriController.getInstance().dodajProfesora(ime, prezime, datRodj, adresaStanovanja, kontaktTel, email, adresaKanc, brojLK, 
 															titula, zvanje, new ArrayList<Predmet>(), row, mdpt);
-			
-			 // resetovanje panela
+			 
 			ProfesorPanelAdd.imetxt.setText("");
 			ProfesorPanelAdd.prezimetxt.setText("");
 			ProfesorPanelAdd.datumRodjtxt.setText("");
@@ -229,6 +238,19 @@ public class MyProfesorTable extends JTable {
 					
 					// action listener za izmenu profesora - preuzimamo nazad vrednosti iz jtextfieldova
 					ProfesorPanelEdit.ep.addActionListener(  ep -> {
+						
+						String ime = ProfesorPanelEdit.imetxt1.getText();
+						String prezime = ProfesorPanelEdit.prezimetxt1.getText();
+						String datumRodj = ProfesorPanelEdit.datumRodjtxt1.getText();
+						String telefon = ProfesorPanelEdit.teltxt1.getText();
+						String email = ProfesorPanelEdit.emailtxt1.getText();
+						String brojLKregex = ProfesorPanelEdit.brojLKtxt1.getText();
+						
+						
+						boolean flag = ProfesoriController.getInstance().checkRegex(ime, prezime, datumRodj, telefon, brojLKregex, email);
+						
+						if (flag == true)
+							return;
 						
 						SimpleDateFormat formatter1337 = new SimpleDateFormat("dd.MM.yyyy."); 
 						String dateInString = ProfesorPanelEdit.datumRodjtxt1.getText();

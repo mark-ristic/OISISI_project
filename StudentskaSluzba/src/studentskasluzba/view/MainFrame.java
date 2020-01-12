@@ -19,6 +19,8 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 153782876756455625L;
+	public static int tab;
+	
 	
 // Parametar je naziv frame-a
 	MainFrame(String naziv){
@@ -118,6 +120,7 @@ public class MainFrame extends JFrame {
 					tbPredmet.setVisible(false);
 					tbProfesor.setVisible(false);
 					add(tbStudent, BorderLayout.NORTH);	
+					tab = 0;
 				}
 				if (tbProfesor.isVisible() == false && 
 						tabbedPane.getSelectedIndex() == 1 && 
@@ -127,6 +130,7 @@ public class MainFrame extends JFrame {
 					tbPredmet.setVisible(false);
 					tbProfesor.setVisible(true);
 					add(tbProfesor, BorderLayout.NORTH);
+					tab = 1;
 				}
 				if (tbPredmet.isVisible() == false && 
 						tabbedPane.getSelectedIndex() == 2 && 
@@ -136,6 +140,7 @@ public class MainFrame extends JFrame {
 					tbPredmet.setVisible(true);
 					tbProfesor.setVisible(false);
 					add(tbPredmet, BorderLayout.NORTH);
+					tab = 2;
 				}
 			}	
 		});

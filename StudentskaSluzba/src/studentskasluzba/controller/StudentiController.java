@@ -215,7 +215,7 @@ public class StudentiController {
 		Matcher datumMatcher = datePatt.matcher(datumRodj);
 		
 		if(!datumMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los format datuma");
+			JOptionPane.showMessageDialog(null, "Pogresan format datuma");
 			return true;
 		}
 		
@@ -226,7 +226,7 @@ public class StudentiController {
 		Matcher regexMatcher = pattern.matcher(email);
 		
 		if(!regexMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los email format");
+			JOptionPane.showMessageDialog(null, "Pogresan email format");
 			return true;
 		}
 		
@@ -237,7 +237,7 @@ public class StudentiController {
 		Matcher indexMatcher = indexpatt.matcher(indeks);
 		
 		if(!indexMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los indeks format");
+			JOptionPane.showMessageDialog(null, "Pogresan indeks format");
 			return true;
 		}
 		
@@ -247,7 +247,7 @@ public class StudentiController {
 		Matcher mobMatcher = mobpatt.matcher(telefon);
 
 		if(!mobMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los broj telefona");
+			JOptionPane.showMessageDialog(null, "Pogresan format broja telefona");
 			return true;
 		} 
 
@@ -256,7 +256,7 @@ public class StudentiController {
 		Matcher datUpisMatcher = datePatt.matcher(datumUpisa);
 		
 		if(!datUpisMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los format datuma upisa");
+			JOptionPane.showMessageDialog(null, "Pogresan format datuma upisa");
 			return true;
 		}
 		
@@ -278,7 +278,7 @@ public class StudentiController {
 		double d = Double.parseDouble(prosek);
 		
 		if (d < 6 || d>10) {
-			JOptionPane.showMessageDialog(null, "Prosek mora biti izmedju 6.00 i 10.00!!!!!!");
+			JOptionPane.showMessageDialog(null, "Prosek mora biti izmedju 6.00 i 10.00!");
 			return true;		
 		}
 		

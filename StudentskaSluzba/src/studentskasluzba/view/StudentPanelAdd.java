@@ -158,6 +158,8 @@ public class StudentPanelAdd extends JPanel{
 		datumUpisatxt.setFont(new Font("Calibri", Font.PLAIN, 20));
 		prosektxt.setFont(new Font("Calibri", Font.PLAIN, 20));
 		
+		datumRodjtxt.setToolTipText("format datuma : dd.mm.yyyy.");
+		datumUpisatxt.setToolTipText("format datuma : dd.mm.yyyy.");
 		
 		ime.add(imelab); 
 		ime.add(imetxt);

@@ -198,7 +198,7 @@ public class ProfesoriController {
 		Matcher datumMatcher = datePatt.matcher(datumRodj);
 		
 		if(!datumMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los format datuma");
+			JOptionPane.showMessageDialog(null, "Pogresan format datuma");
 			return true;
 		}	
 		
@@ -209,7 +209,7 @@ public class ProfesoriController {
 		Matcher mobMatcher = mobpatt.matcher(telefon);
 
 		if(!mobMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los broj telefona");
+			JOptionPane.showMessageDialog(null, "Pogresan format broja telefona");
 			return true;
 		}	
 		
@@ -220,7 +220,7 @@ public class ProfesoriController {
 		Matcher licnaMatcher = licnapatt.matcher(brojLK);
 		
 		if(!licnaMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Neodgovarajuca licna!");
+			JOptionPane.showMessageDialog(null, "Broj licne karte sadrzi samo brojeve (5 do 15 brojeva)");
 			return true;
 		}
 		
@@ -231,7 +231,7 @@ public class ProfesoriController {
 		Matcher regexMatcher = pattern.matcher(email);
 		
 		if(!regexMatcher.matches()) {
-			JOptionPane.showMessageDialog(null, "Los email format");
+			JOptionPane.showMessageDialog(null, "Pogresan email format");
 			return true;
 		}
 		

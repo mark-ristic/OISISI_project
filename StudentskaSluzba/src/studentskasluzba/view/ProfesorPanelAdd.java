@@ -167,6 +167,8 @@ public class ProfesorPanelAdd extends JPanel {
 		//zvanjetxt.setFont(new Font("Calibri", Font.PLAIN, 20));
 		titulatxt.setFont(new Font("Calibri", Font.PLAIN, 20));
 		
+		datumRodjtxt.setToolTipText("format datuma : dd.mm.yyyy.");
+		
 		
 		ime.add(imelab); 
 		ime.add(imetxt);

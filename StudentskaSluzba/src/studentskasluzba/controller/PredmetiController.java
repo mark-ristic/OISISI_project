@@ -260,12 +260,12 @@ public class PredmetiController {
 			i = Integer.parseInt(semestar);
 		} catch (NumberFormatException nfe) {
 			System.out.println("neuspesna konverzija");
-			JOptionPane.showMessageDialog(null, "Neodg semestar");
+			JOptionPane.showMessageDialog(null, "Neodgovarajuci semestar");
 			return true;
 		} 
 		
 		if(i < 1 || i > 8) {
-			JOptionPane.showMessageDialog(null, "Neodg semestar");
+			JOptionPane.showMessageDialog(null, "Neodgovarajuci semestar");
 			return true;
 		}
 
@@ -277,7 +277,7 @@ public class PredmetiController {
 				brLK = Integer.parseInt(brojLK);
 			} 
 			catch (NumberFormatException nfe) {
-				JOptionPane.showMessageDialog(null, "Los broj lk");
+				JOptionPane.showMessageDialog(null, "Licna karta sme da sadrzi samo brojeve"); 
 				return true;
 			}
 		}

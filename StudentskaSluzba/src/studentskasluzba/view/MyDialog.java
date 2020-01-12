@@ -2,10 +2,12 @@ package studentskasluzba.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -13,7 +15,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import studentskasluzba.controller.PredmetiController;
+import studentskasluzba.controller.ProfesoriController;
+import studentskasluzba.model.BazaPredmeta;
+import studentskasluzba.model.BazaProfesora;
+import studentskasluzba.model.Predmet;
+import studentskasluzba.model.Profesor;
 
 
 
@@ -48,11 +61,11 @@ public class MyDialog extends JDialog {
 		}
 		
 		if(dialogType.equals("addProfesorToPredmet")) {
-			addProfesorToPredmet();
+			addProfesorToPredmet(PredmetTab.myPredmetTable.getMyDefaultPredmetTable());
 		}
 
 		if(dialogType.equals("removeProfesorFromPredmet")) {
-			removeProfesorFromPredmet();
+			removeProfesorFromPredmet(PredmetTab.myPredmetTable.getMyDefaultPredmetTable());
 		}
 
 		
@@ -257,7 +270,7 @@ public class MyDialog extends JDialog {
 
 	}
 	
-	private void removeProfesorFromPredmet() {
+	private void removeProfesorFromPredmet(MyDefaultPredmetTable mdpt) {
 
 		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
 		CustomPanel bot_inset = new CustomPanel(650,60, Color.WHITE);
@@ -270,7 +283,16 @@ public class MyDialog extends JDialog {
 		this.add(BorderLayout.CENTER, panel);
 		this.add(BorderLayout.SOUTH, bot_inset);
 
-		JLabel question = new JLabel("Da li ste sigurni da zelite da obrisete profesora sa predmeta?");
+		JLabel question = null;
+		boolean flag = false; 
+		// menjamo labelu u zavisnosti od postojanja predmetnog profesora 
+		if (PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getPredProf() != null) {
+			
+			question = new JLabel("Da li ste sigurni da zelite da obrisete profesora " 
+									+ PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getPredProf().getIme() + " " 
+									+ PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getPredProf().getPrezime() + " sa predmeta?");
+			flag = true;
+		}
 
 		CustomPanel paneltop = new CustomPanel(650,95, Color.WHITE);
 		CustomPanel panelbot = new CustomPanel(650, 95, Color.WHITE);
@@ -298,6 +320,18 @@ public class MyDialog extends JDialog {
 
 		panelbot.add(brisi);
 		panelbot.add(odustani);
+		
+		// izbrisemo predmetnog profesora sa predmeta i stavljamo vrednost u tabeli na 'null'
+		if (flag = true) {
+			brisi.addActionListener(obrisi -> {
+			
+				PredmetiController.getInstance().removeProfesorFromPredmet(PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getPredProf(),
+																		   PredmetiController.getInstance().getPredmet(MyPredmetTable.pw));
+				
+				 mdpt.setValueAt("null", MyPredmetTable.selected, 4);
+			
+			});
+		}
 
 		odustani.addActionListener(evt -> this.dispose());
 		brisi.addActionListener(evt -> this.dispose());
@@ -349,7 +383,7 @@ public class MyDialog extends JDialog {
 
 	}
 
-	private void addProfesorToPredmet() {
+	private void addProfesorToPredmet(MyDefaultPredmetTable mdpt) {
 
 		CustomPanel top_inset = new CustomPanel(650, 50, Color.WHITE);
 		CustomPanel bot_inset = new CustomPanel(650,60, Color.WHITE);
@@ -363,11 +397,11 @@ public class MyDialog extends JDialog {
 		this.add(BorderLayout.SOUTH, bot_inset);
 
 		JLabel question = new JLabel("Broj licne karte profesora: ");
-		JTextField brojLK = new JTextField(20);
+		JTextField brojLKtxt = new JTextField(20);
 
 		CustomPanel paneltop = new CustomPanel(650,95, Color.WHITE);
 		// mesto za tabelu profesora
-		CustomPanel tablepanel = new CustomPanel(650, 200, Color.YELLOW);
+		CustomPanel tablepanel = new CustomPanel(650, 200, Color.WHITE);
 		CustomPanel panelbot = new CustomPanel(650, 95, Color.WHITE);
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -377,7 +411,7 @@ public class MyDialog extends JDialog {
 
 		paneltop.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 25));
 		paneltop.add(question);
-		paneltop.add(brojLK);
+		paneltop.add(brojLKtxt);
 
 		JButton dodaj = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));
 		JButton odustani = new JButton(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\odustani.png"));
@@ -396,12 +430,85 @@ public class MyDialog extends JDialog {
 		panelbot.add(dodaj);
 		panelbot.add(odustani);
 
-		odustani.addActionListener(evt -> this.dispose());
-		dodaj.addActionListener(evt -> this.dispose());
+		// Tabela u tablepanel - koja ce prikazati sve profesore
+		
+		String[] kolona = {"PROFESORI"};
+		DefaultTableModel dtm = new DefaultTableModel();
+		dtm.setColumnIdentifiers(kolona);
+		
+		JTable profTable = new JTable() {
+		 /**
+			 * 
+			 */
+			private static final long serialVersionUID = -3616267117240262552L;
+
+		public boolean isCellEditable(int row, int column) { 
+			return false; 
+			} 
+		 };
 		 
-		dodaj.addMouseListener(new MouseAdapter() {
+		 profTable.setModel(dtm);
+		 TableColumnModel cm = profTable.getColumnModel();
+		 profTable.setRowHeight(30);
+		 // Ubacivanje podataka u tabelu
+		 for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 			 
-		    @Override
+			 Vector<String> red = new Vector<>();
+			 red.add(p.getIme() + " " + p.getPrezime() + " (" + p.getBrojLK() + ")");
+			 dtm.addRow(red);
+ 
+		 }
+		 
+		 profTable.addMouseListener(new MouseAdapter() {
+			 // preuzimanje vrednosti iz selektovanog reda 
+			 public void mouseClicked(MouseEvent me) {
+				 
+				 String profa = (String) profTable.getValueAt(profTable.getSelectedRow(), 0);
+				 String[] delovi = profa.split(" ");
+				 String brojLK = delovi[2].substring(1, delovi[2].length()-1);
+				 brojLKtxt.setText(brojLK);
+				 System.out.println(brojLK);			 
+				 
+			 }
+		});
+		 
+		 dodaj.addActionListener(add -> {
+			 
+			 String _brojLK = brojLKtxt.getText();
+			 
+			 if (_brojLK.length() == 0) 
+				 return ;
+			 if (ProfesoriController.getInstance().getProfesor(_brojLK) == null) {				 
+				 System.out.println("Ne postoji profesor sa tim brojem licne karte");
+				 return;
+			 }
+			 
+			 Profesor prof = BazaProfesora.getInstance().getProfesor(_brojLK);
+			 Predmet predm = BazaPredmeta.getInstance().getPredmet(MyPredmetTable.pw);
+			 
+			 PredmetiController.getInstance().addProfesorToPredmet(prof, predm);
+			 
+			 mdpt.setValueAt(prof.getBrojLK(), MyPredmetTable.selected, 4);
+			 
+			 dispose();
+
+		 });
+		 
+		 JScrollPane scrollPane = new JScrollPane(profTable);
+		 scrollPane.setPreferredSize(new Dimension(350,160));
+		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		 
+		 tablepanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		 tablepanel.add(scrollPane);
+		
+		 
+		 odustani.addActionListener(evt -> this.dispose());
+		 dodaj.addActionListener(evt -> this.dispose());
+		 
+		 dodaj.addMouseListener(new MouseAdapter() {
+			 
+			 @Override
 		    public void mouseClicked(MouseEvent e) {
 		        // the user clicks on the label
 		    	dodaj.setIcon(new ImageIcon("StudentskaSluzba\\images\\actual_images\\Buttons\\dodaj.png"));

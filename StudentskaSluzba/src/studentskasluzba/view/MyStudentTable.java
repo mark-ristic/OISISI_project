@@ -55,6 +55,7 @@ public class MyStudentTable extends JTable {
 	}
 	
 	public MyStudentTable() { 
+		// default vrednost za izabran red kako bi znali da li je korisnik uopste selektovao studenta
 		selected = -1;
 		mdst = new MyDefaultStudentTable();
 		this.setModel(mdst);

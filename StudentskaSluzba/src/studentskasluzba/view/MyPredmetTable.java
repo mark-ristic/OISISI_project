@@ -48,7 +48,7 @@ public class MyPredmetTable extends JTable {
 	}
 	
 	public MyPredmetTable() {
-		
+		// default vrednost za izabran red kako bi znali da li je korisnik uopste selektovao predmet
 		selected = -1;
 		mdpt = new MyDefaultPredmetTable();
 		this.setModel(mdpt);

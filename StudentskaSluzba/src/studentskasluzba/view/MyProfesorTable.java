@@ -58,6 +58,7 @@ public class MyProfesorTable extends JTable {
 	}
 	
 	public MyProfesorTable() {
+		// default vrednost za izabran red kako bi znali da li je korisnik uopste selektovao profesora
 		selected = -1;
 		mdpt = new MyDefaultProfesorTable();
 		this.setModel(mdpt);

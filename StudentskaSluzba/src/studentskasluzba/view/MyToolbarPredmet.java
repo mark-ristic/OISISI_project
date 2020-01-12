@@ -10,9 +10,12 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
+
+import studentskasluzba.controller.PredmetiController;
 
 public class MyToolbarPredmet extends JToolBar {
 
@@ -125,7 +128,7 @@ public MyToolbarPredmet(final JFrame parent) {
 		// dijalozi za dodavanje-editovanje predmeta
 		addPredmet.addActionListener(evt -> {
 			
-			MyDialog addPredmet = new MyDialog(parent, "Dodaj predmet", true, 450, 550,"");
+			MyDialog addPredmet = new MyDialog(parent, "Dodaj predmet", true, 450, 550,"");	// namerno prazan string, ovaj panel je posebna klasa
 			
 			PredmetPanelAdd dodajPredmet = new PredmetPanelAdd(addPredmet, parent, 450, 550);
 			
@@ -138,63 +141,107 @@ public MyToolbarPredmet(final JFrame parent) {
 		});
 		
 		editPredmet.addActionListener(evt -> {
+			// odabrati predmet koji zelimo da izmenimo
+			if (MyPredmetTable.selected != -1) {
+				
+				MyDialog editPredmet = new MyDialog(parent, "Izmeni predmet", true, 450, 550,"");	// namerno prazan string, ovaj panel je posebna klasa
 			
-			MyDialog editPredmet = new MyDialog(parent, "Izmeni predmet", true, 450, 550,"");
+				PredmetPanelEdit izmeniPredmet = new PredmetPanelEdit(editPredmet, parent, 450, 550);
 			
-			PredmetPanelEdit izmeniPredmet = new PredmetPanelEdit(editPredmet, parent, 450, 550);
-			
-			editPredmet.add(BorderLayout.CENTER, izmeniPredmet);
-			editPredmet.setResizable(false);
-			editPredmet.setMinimumSize(new Dimension(450, 550));
-			editPredmet.setMaximumSize(new Dimension(450, 550));
-			editPredmet.setVisible(true);
+				editPredmet.add(BorderLayout.CENTER, izmeniPredmet);
+				editPredmet.setResizable(false);
+				editPredmet.setMinimumSize(new Dimension(450, 550));
+				editPredmet.setMaximumSize(new Dimension(450, 550));
+				editPredmet.setVisible(true);
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite predmet!");
+			}
 	
 			
 		});
 		
 		removePredmet.addActionListener(evt -> {
+			// mora da se odabere predmet koji zelimo obrisati
+			if (MyPredmetTable.selected != -1) {
+				MyDialog removePredmet = new MyDialog(parent, "Obrisi predmet", true, 650, 300 , "");	// namerno prazan string, ovaj panel je posebna klasa
 			
-			MyDialog removePredmet = new MyDialog(parent, "Obrisi predmet", true, 650, 300 , "");
+				PredmetPanelRemove brisiPredmet = new PredmetPanelRemove(removePredmet, parent, 650, 300);
 			
-			PredmetPanelRemove brisiPredmet = new PredmetPanelRemove(removePredmet, parent, 650, 300);
-			
-			removePredmet.add(BorderLayout.CENTER, brisiPredmet);
-			removePredmet.setResizable(false);
-			removePredmet.setMinimumSize(new Dimension(650, 300));
-			removePredmet.setMaximumSize(new Dimension(650, 300));
-			removePredmet.setVisible(true);
+				removePredmet.add(BorderLayout.CENTER, brisiPredmet);
+				removePredmet.setResizable(false);
+				removePredmet.setMinimumSize(new Dimension(650, 300));
+				removePredmet.setMaximumSize(new Dimension(650, 300));
+				removePredmet.setVisible(true);
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite predmet!");
+			}
 	
 		});
 		
 		removeStudPr.addActionListener(evt -> {
-			
-			MyDialog brisiStudsaPredmeta = new MyDialog(parent, "Obrisi studenta sa predmeta", true, 650, 300+200, "removeStudentFromPredmet");
-			brisiStudsaPredmeta.setResizable(false);
-			brisiStudsaPredmeta.setVisible(true);
+			// dok ne izaberemo predmet ne mozemo obrisati studenta sa njega
+			if (MyPredmetTable.selected != -1) {
+				MyDialog brisiStudsaPredmeta = new MyDialog(parent, "Obrisi studenta sa predmeta", true, 650, 500, "removeStudentFromPredmet");
+				brisiStudsaPredmeta.setResizable(false);
+				brisiStudsaPredmeta.setVisible(true);
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite predmet!");
+			}
 					
 		});
 				
 		addStudPr.addActionListener(evt -> {
-					
-			MyDialog dodajStudnaPredmet = new MyDialog(parent, "Dodaj studenta na predmet", true, 650, 500, "addStudentToPredmet");
-			dodajStudnaPredmet.setResizable(false);
-			dodajStudnaPredmet.setVisible(true);
+			// izabrati prvo na koji predmet zelimo dodati studenta		
+			if (MyPredmetTable.selected != -1) {		
+				MyDialog dodajStudnaPredmet = new MyDialog(parent, "Dodaj studenta na predmet", true, 650, 500, "addStudentToPredmet");
+				dodajStudnaPredmet.setResizable(false);
+				dodajStudnaPredmet.setVisible(true);
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite predmet!");
+			}
 					
 		});
 
 		removeProfPr.addActionListener(remove -> {
+			// if (nema predmetnog profesora onda dialog)  else poruka o gresci da nema predmetnog profesora	
 			
-			MyDialog brisiProfsaPredmeta = new MyDialog(parent, "Obrisi profesora sa predmeta", true, 650, 300, "removeProfesorFromPredmet");
-			brisiProfsaPredmeta.setResizable(false);
-			brisiProfsaPredmeta.setVisible(true);
+			if (MyPredmetTable.selected != -1) {
+				if (PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getPredProf() != null) {
+					MyDialog brisiProfsaPredmeta = new MyDialog(parent, "Obrisi profesora sa predmeta", true, 650, 300, "removeProfesorFromPredmet");
+					brisiProfsaPredmeta.setResizable(false);
+					brisiProfsaPredmeta.setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(parent, "Ovaj predmet nema predmetnog profesora");
+				}
 					
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite predmet!");
+			}
+		
 		});
 				
 		addProfPr.addActionListener(add -> {
-					
-			MyDialog dodajProfnaPredmet = new MyDialog(parent, "Dodaj profesora na predmet", true, 650, 500, "addProfesorToPredmet");
-			dodajProfnaPredmet.setResizable(false);
-			dodajProfnaPredmet.setVisible(true);
+			// dok ne selektujemo predmet - ne mozemo na njega dodati profesora		
+			if (MyPredmetTable.selected != -1) {
+				
+				if (PredmetiController.getInstance().getPredmet(MyPredmetTable.pw).getPredProf() == null) {
+					MyDialog dodajProfnaPredmet = new MyDialog(parent, "Dodaj profesora na predmet", true, 650, 500, "addProfesorToPredmet");
+					dodajProfnaPredmet.setResizable(false);
+					dodajProfnaPredmet.setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(parent, "Ovaj predmet vec ima predmetnog profesora");
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite predmet!");
+			}
 					
 		});
 		

@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
@@ -96,28 +97,43 @@ public class MyToolbarProfesor extends JToolBar {
 		
 		editProf.addActionListener( evt1 -> { 
 			
-			MyDialog izmeni = new MyDialog(parent, "Izmeni Profesora", true,650,675+205-55, "");
+			if (MyProfesorTable.selected != -1) {
+				
+				MyDialog izmeni = new MyDialog(parent, "Izmeni Profesora", true,650,675+205-55, "");
 			
-			ProfesorPanelEdit pp = new ProfesorPanelEdit(izmeni, parent,650,675+205-55);
-			izmeni.add(BorderLayout.CENTER, pp);
-			izmeni.setResizable(false);
-			izmeni.setMinimumSize(new Dimension(650,675+205-55));
-			izmeni.setMaximumSize(new Dimension(650,675+205-55));
-			izmeni.setVisible(true); // mora na kraj
+				ProfesorPanelEdit pp = new ProfesorPanelEdit(izmeni, parent,650,675+205-55);
+				izmeni.add(BorderLayout.CENTER, pp);
+				izmeni.setResizable(false);
+				izmeni.setMinimumSize(new Dimension(650,675+205-55));
+				izmeni.setMaximumSize(new Dimension(650,675+205-55));
+				izmeni.setVisible(true); // mora na kraj
+				
+			}
+			else {
+				
+				JOptionPane.showMessageDialog(parent, "Molim odaberite Profesora!");
+				
+			}
 			
 		});
 		
 		removeProf.addActionListener(remove -> {
 			
-			MyDialog obrisi = new MyDialog(parent, "Obrisi Profesora", true, 650,300, "");
+			if (MyProfesorTable.selected != -1) {
+				
+				MyDialog obrisi = new MyDialog(parent, "Obrisi Profesora", true, 650,300, "");
 			
-			ProfesorPanelRemove pp = new ProfesorPanelRemove(obrisi, parent, 650, 300);
+				ProfesorPanelRemove pp = new ProfesorPanelRemove(obrisi, parent, 650, 300);
 			
-			obrisi.add(BorderLayout.CENTER, pp);
-			obrisi.setResizable(false);
-			obrisi.setMinimumSize(new Dimension(650,300));
-			obrisi.setMaximumSize(new Dimension(650,300));
-			obrisi.setVisible(true);
+				obrisi.add(BorderLayout.CENTER, pp);
+				obrisi.setResizable(false);
+				obrisi.setMinimumSize(new Dimension(650,300));
+				obrisi.setMaximumSize(new Dimension(650,300));
+				obrisi.setVisible(true);
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite Profesora!");		
+			}
 			
 		});
 		

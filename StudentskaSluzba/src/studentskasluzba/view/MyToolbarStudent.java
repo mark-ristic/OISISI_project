@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
@@ -95,30 +96,39 @@ public class MyToolbarStudent extends JToolBar {
 		
 		editStudent.addActionListener(evt -> {
 			
-			MyDialog izmeni = new MyDialog(parent, "Izmeni Studenta", true,650,675+55,"");
+			if (MyStudentTable.selected != -1) {
+				MyDialog izmeni = new MyDialog(parent, "Izmeni Studenta", true,650,675+55,"");
 			
-			StudentPanelEdit spe = new StudentPanelEdit(izmeni, parent,650,750+55);
+				StudentPanelEdit spe = new StudentPanelEdit(izmeni, parent,650,750+55);
 			
-			izmeni.add(BorderLayout.CENTER, spe);
-			izmeni.setResizable(false);
-			izmeni.setMinimumSize(new Dimension(650,750+55));
-			izmeni.setMaximumSize(new Dimension(650,750+55));
-			izmeni.setVisible(true); // mora na kraj
-			
-			
+				izmeni.add(BorderLayout.CENTER, spe);
+				izmeni.setResizable(false);
+				izmeni.setMinimumSize(new Dimension(650,750));
+				izmeni.setMaximumSize(new Dimension(650,750));
+				izmeni.setVisible(true); // mora na kraj
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite studenta!");
+			}
+					
 		});
 		
 		removeStudent.addActionListener(remove -> {
 			
-			MyDialog obrisi = new MyDialog(parent, "Obrisi Studenta", true, 650,300, "");
+			if (MyStudentTable.selected != -1) {
+				MyDialog obrisi = new MyDialog(parent, "Obrisi Studenta", true, 650,300, "");
 			
-			StudentPanelRemove spr = new StudentPanelRemove(obrisi, parent, 650,300);
+				StudentPanelRemove spr = new StudentPanelRemove(obrisi, parent, 650,300);
 			
-			obrisi.add(BorderLayout.CENTER, spr);
-			obrisi.setResizable(false);
-			obrisi.setMinimumSize(new Dimension(650,300));
-			obrisi.setMaximumSize(new Dimension(650,300));
-			obrisi.setVisible(true);	
+				obrisi.add(BorderLayout.CENTER, spr);
+				obrisi.setResizable(false);
+				obrisi.setMinimumSize(new Dimension(650,300));
+				obrisi.setMaximumSize(new Dimension(650,300));
+				obrisi.setVisible(true);	
+			}
+			else {
+				JOptionPane.showMessageDialog(parent, "Molim odaberite studenta!");	
+			}	
 			
 		});
 		

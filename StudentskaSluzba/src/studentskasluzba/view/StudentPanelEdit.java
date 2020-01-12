@@ -122,15 +122,15 @@ public class StudentPanelEdit extends JPanel{
 		prosek.setLayout(new BoxLayout(prosek, BoxLayout.X_AXIS));
 		
 		
-		JLabel imelab =      new JLabel("    Ime*    ");
-		JLabel prezimelab =  new JLabel("    Prezime*    ");
-		JLabel datRodjlab =  new JLabel("    Datum rodjenja*    ");
-		JLabel adresalab =   new JLabel("    Adresa stanovanja*    ");
-		JLabel brtellab =    new JLabel("    Broj telefona*    ");
-		JLabel indekslab =   new JLabel("    Broj indeksa*    ");
-		JLabel trenGodlab =  new JLabel("    Trenutna godina studija:   ");
-		JLabel emaillab =      new JLabel("    E-mail adresa   ");
-		JLabel datumUpisalab = new JLabel("    Datum upisa   ");
+		JLabel imelab =      new JLabel("    Ime:*    ");
+		JLabel prezimelab =  new JLabel("    Prezime:*    ");
+		JLabel datRodjlab =  new JLabel("    Datum rodjenja:*    ");
+		JLabel adresalab =   new JLabel("    Adresa stanovanja:    ");
+		JLabel brtellab =    new JLabel("    Broj telefona:*    ");
+		JLabel indekslab =   new JLabel("    Broj indeksa:*    ");
+		JLabel trenGodlab =  new JLabel("    Trenutna godina studija:*   ");
+		JLabel emaillab =      new JLabel("    E-mail adresa:*   ");
+		JLabel datumUpisalab = new JLabel("    Datum upisa:*   ");
 		JLabel proseklab =     new JLabel("    Prosek*:   ");
 		
 		

@@ -18,7 +18,7 @@ public class BazaPredmeta implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5079750069711873L;
+	private static final long serialVersionUID = -5001161040265455442L;
 
 	private static BazaPredmeta instance = null;
 

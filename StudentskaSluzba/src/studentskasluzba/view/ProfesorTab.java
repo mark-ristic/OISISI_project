@@ -26,6 +26,7 @@ public class ProfesorTab extends CustomPanel {
 		centerPanel.setLayout(new GridLayout(1,1));
 		MyProfesorTable myProfesorTable = new MyProfesorTable();
 		myProfesorTable.getTableHeader().setReorderingAllowed(false);
+		myProfesorTable.getTableHeader().setResizingAllowed(false);
 		centerPanel.add(myProfesorTable.getJScrollPane());		
 	}
 	

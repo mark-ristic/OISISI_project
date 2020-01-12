@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
 
+import com.sun.glass.events.KeyEvent;
+
 import studentskasluzba.controller.ProfesoriController;
 import studentskasluzba.model.Profesor;
 
@@ -62,6 +64,11 @@ public class MyToolbarProfesor extends JToolBar {
 		add(addProf);
 		add(editProf);
 		add(removeProf);
+		
+		// mnemonici   ALT + I/M/R
+		addProf.setMnemonic(KeyEvent.VK_I);
+		editProf.setMnemonic(KeyEvent.VK_M);
+		removeProf.setMnemonic(KeyEvent.VK_R);
 		
 		
 		// searchbar

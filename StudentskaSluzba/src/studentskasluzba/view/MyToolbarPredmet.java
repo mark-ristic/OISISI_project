@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
 
+import com.sun.glass.events.KeyEvent;
+
 import studentskasluzba.controller.PredmetiController;
 import studentskasluzba.model.Predmet;
 
@@ -102,7 +104,19 @@ public MyToolbarPredmet(final JFrame parent) {
 		add(addPredmet);
 		add(editPredmet);
 		add(removePredmet);
-	
+		
+		//mnemonici 
+		
+		addPredmet.setMnemonic(KeyEvent.VK_I);
+		editPredmet.setMnemonic(KeyEvent.VK_M);
+		removePredmet.setMnemonic(KeyEvent.VK_R);
+		
+		addProfPr.setMnemonic(KeyEvent.VK_P);
+		removeProfPr.setMnemonic(KeyEvent.VK_B);
+		
+		addStudPr.setMnemonic(KeyEvent.VK_S);
+		removeStudPr.setMnemonic(KeyEvent.VK_J);
+
 		
 		// Searchbar 
 		

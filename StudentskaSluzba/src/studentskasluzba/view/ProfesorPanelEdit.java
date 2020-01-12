@@ -136,7 +136,7 @@ public class ProfesorPanelEdit extends JPanel {
 		JLabel brtellab =    	new JLabel("    Broj telefona:*    ");
 		JLabel indekslab =   	new JLabel("    Broj licne karte:*    ");
 		JLabel predmetilab =    new JLabel("    Lista predmeta:    ");
-		JLabel emaillab =       new JLabel("    E-mail adresa:    ");
+		JLabel emaillab =       new JLabel("    E-mail adresa:*    ");
 		JLabel adresaKanclab =  new JLabel("    Adresa Kancelarije:    ");
 		//JLabel zvanjelab =  	new JLabel("    Zvanje:    ");
 		JLabel titulalab = 		new JLabel("    Titula:    ");

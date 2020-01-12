@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.border.LineBorder;
 
+import com.sun.glass.events.KeyEvent;
+
 import studentskasluzba.controller.StudentiController;
 
 public class MyToolbarStudent extends JToolBar {
@@ -61,6 +63,11 @@ public class MyToolbarStudent extends JToolBar {
 		add(addStudent);
 		add(editStudent);
 		add(removeStudent);
+		
+		// mnemonici  ALT + I/M/R
+		addStudent.setMnemonic(KeyEvent.VK_I);
+		editStudent.setMnemonic(KeyEvent.VK_M);
+		removeStudent.setMnemonic(KeyEvent.VK_R);
 		
 		
 		JTextField search = new JTextField(30);

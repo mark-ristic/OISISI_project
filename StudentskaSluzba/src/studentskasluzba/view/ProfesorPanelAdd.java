@@ -133,11 +133,11 @@ public class ProfesorPanelAdd extends JPanel {
 		JLabel imelab =     	 new JLabel("    Ime:*    ");
 		JLabel prezimelab =  	new JLabel("    Prezime:*    ");
 		JLabel datRodjlab =  	new JLabel("    Datum rodjenja:*    ");
-		JLabel adresalab =   	new JLabel("    Adresa stanovanja:*    ");
+		JLabel adresalab =   	new JLabel("    Adresa stanovanja:    ");
 		JLabel brtellab =    	new JLabel("    Broj telefona:*    ");
 		JLabel indekslab =   	new JLabel("    Broj licne karte:*    ");
 		JLabel predmetilab =    new JLabel("    Lista predmeta:    ");
-		JLabel emaillab =       new JLabel("    E-mail adresa:    ");
+		JLabel emaillab =       new JLabel("    E-mail adresa:*    ");
 		JLabel adresaKanclab =  new JLabel("    Adresa Kancelarije:    ");
 		//JLabel zvanjelab =  	new JLabel("    Zvanje:    ");
 		JLabel titulalab = 		new JLabel("    Titula:    ");

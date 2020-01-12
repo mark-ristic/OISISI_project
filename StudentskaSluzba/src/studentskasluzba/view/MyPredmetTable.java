@@ -14,8 +14,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import studentskasluzba.controller.PredmetiController;
 import studentskasluzba.controller.ProfesoriController;
@@ -54,7 +58,15 @@ public class MyPredmetTable extends JTable {
 		this.setModel(mdpt);
 		this.setBackground(Color.LIGHT_GRAY);
 		this.setForeground(Color.BLACK);
-	
+		// sortiranje tabele, klikom na header kolone 
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.getModel());
+		this.setRowSorter(sorter);
+		ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+		for (int i = 0 ; i < 5; i++) {
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.ASCENDING));
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.DESCENDING));
+		}
+		
 		this.getColumnModel().getColumn(0).setPreferredWidth(240);
 		this.getColumnModel().getColumn(1).setPreferredWidth(240);
 		this.getColumnModel().getColumn(2).setPreferredWidth(240);

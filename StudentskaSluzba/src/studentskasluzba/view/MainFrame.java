@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
 		execDefaultToolkit();
 		// glavni prozor se sastoji od 3 panela => tbPanel + centerPanel + statusBar
 		// centralni panel 
-		CustomPanel centerPanel = new CustomPanel(1440, 620, new Color(69, 179, 157, 175));
+		CustomPanel centerPanel = new CustomPanel(1440, 620, new Color(69, 179, 157));
 		
 		// Toolbar paneli
 		CustomPanel tbStudent = new CustomPanel(1440, 65, Color.CYAN);
@@ -86,7 +86,7 @@ public class MainFrame extends JFrame {
 		this.add(BorderLayout.NORTH, tbProfesor);
 		this.add(BorderLayout.NORTH, tbStudent); // mora zadnje
 		this.add(BorderLayout.CENTER, centerPanel);	
-		this.add(BorderLayout.SOUTH, new MyStatusBar(1440, 45, new Color(52, 73, 94, 175)));
+		this.add(BorderLayout.SOUTH, new MyStatusBar(1440, 45, new Color(69, 179, 157)));
 		
 	}
 	

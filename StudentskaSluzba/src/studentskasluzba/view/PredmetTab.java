@@ -30,6 +30,7 @@ public class PredmetTab extends CustomPanel {
 		
 		centerPanel.setLayout(new GridLayout(1,1));
 		myPredmetTable.getTableHeader().setReorderingAllowed(false);
+		myPredmetTable.getTableHeader().setResizingAllowed(false);
 		centerPanel.add(myPredmetTable.getJScrollPane());
 		
 	}

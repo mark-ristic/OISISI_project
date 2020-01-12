@@ -10,7 +10,7 @@ public class Osoba implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5208641147102905436L;
+//	private static final long serialVersionUID = 5208641147102905436L;
 	private String ime;
 	private String prezime;
 	private Date datRodj; 
